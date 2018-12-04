@@ -1,0 +1,16 @@
+cmake_minimum_required(VERSION 3.12)
+project(code_cpp)
+
+set(CMAKE_CXX_STANDARD 11)
+
+add_executable(first main.cpp)
+add_executable(second second.cpp)
+add_executable(BAPC10I BAPC10I.cpp)
+add_executable(EAPC05H EAPC05H.cpp)
+add_executable(B10D B10D.cpp)
+add_executable(EAPC13C EAPC13C.cpp)
+add_executable(BAPC12E BAPC12E.cpp)
+add_executable(EAPC12C EAPC12C.cpp)
+add_executable(NWERC05 NWERC05.cpp)
+add_executable(EAPC14D EAPC14D.cpp)
+add_executable(BAPC12F BAPC12F.cpp)
