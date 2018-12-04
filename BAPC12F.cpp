@@ -44,22 +44,22 @@ void oneRun()
     /** Spreading the fire
      *  Calculating the time it takes for a cell to become burning */
     bool done_spreading = false;
-    int time = 0;
+    int time = 1;
     while (not done_spreading) {
-        time++;
         // Step for the fire
         vector<Node*> new_fire;
         for (auto f: fire) {
             for (auto neighbour: (*f).adj) {
-                if (!(*neighbour).on_fire && ((*neighbour).state == '.' || (*neighbour).state == '@')) {
+                if (!(*neighbour).on_fire && (*neighbour).state != '#' && (*neighbour).state != 'F') {
                     (*neighbour).on_fire = true;
                     (*neighbour).fire_time = time;
                     new_fire.push_back(neighbour);
                 }
             }
         }
-        fire.insert(fire.end(), new_fire.begin(), new_fire.end());
         if (not new_fire.size()) done_spreading = true;
+        fire = new_fire;
+        time++;
     }
 
     /** BFS */
@@ -70,7 +70,7 @@ void oneRun()
             if ((*neighbour).dist > 0 || ((*neighbour).state != '.' && (*neighbour).state != 'F')) continue; // node already found
 
             (*neighbour).dist = (*node).dist + 1;
-            if ((*neighbour).dist < (*neighbour).fire_time) {
+            if ((*neighbour).dist < (*neighbour).fire_time || !(*neighbour).on_fire) {
                 queue.push_back(neighbour);
             }
 
@@ -120,5 +120,14 @@ int main()
 ###
 #@#
 ###
+
+
+1
+6 5
+******
+######
+#@....
+######
+******
 
  */
