@@ -35,8 +35,8 @@ void oneRun()
             if (y != n - 1) nodes[x][y].adj.push_back(&nodes[x][y + 1]);
             if (x != 0)     nodes[x][y].adj.push_back(&nodes[x - 1][y]);
             if (x != n - 1) nodes[x][y].adj.push_back(&nodes[x + 1][y]);
-            if (y != n - 1 && x > 0 && x < n) nodes[x][y].adj.push_back(&nodes[x - 1][y + 1]);
-            if (y != 0 && x > 0 && x < n)     nodes[x][y].adj.push_back(&nodes[x + 1][y - 1]);
+            if (y != n - 1 && x > 0) nodes[x][y].adj.push_back(&nodes[x - 1][y + 1]);
+            if (y != 0 && x < n)     nodes[x][y].adj.push_back(&nodes[x + 1][y - 1]);
         }
     }
 
