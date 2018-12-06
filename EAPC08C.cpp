@@ -54,13 +54,13 @@ void oneRun()
         }
     }
 
-    /** Print the array */
-    for (int y = 0; y < height; y++) {
-        for (int x = 0; x < width; x++) {
-            cout << nodes[x][y].state;
-        }
-        cout << endl;
-    }
+//    /** Print the array */
+//    for (int y = 0; y < height; y++) {
+//        for (int x = 0; x < width; x++) {
+//            cout << nodes[x][y].state;
+//        }
+//        cout << endl;
+//    }
 
     /** Non recursive DFS from source to construct the TREE */
     vector<Node*> queue {root};
@@ -152,7 +152,7 @@ output: 8.00
 s.....t
 #######
 
-output: 6.0
+output: 6.00
 
 1
 6 3
@@ -163,7 +163,7 @@ output: 6.0
 #.#
 #t#
 
-output: 5.0
+output: 5.00
 
 1
 4 7
@@ -172,5 +172,33 @@ output: 5.0
 #.#.#.#
 ###t###
 
-output: 7.0
+output: 7.00
+
+1
+4 11
+###########
+#...#...###
+s.#...#...#
+#########t#
+
+output: 14.00
+
+1
+4 11
+###########
+#...#...#.#
+s.#...#...#
+#########t#
+
+output: 15.00
+
+1
+4 12
+############
+#...#...#..#
+s.#...#...##
+#########t##
+
+output: 16.00
+
  */
