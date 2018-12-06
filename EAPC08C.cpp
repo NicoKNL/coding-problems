@@ -4,18 +4,33 @@
 using namespace std;
 
 struct Node {
+    Node* parent = nullptr;
     vector<Node*> adj;
+    vector<Node*> children;
     bool visited = false;
     char state;
+    int size;
     int dist = -1;
-    int choices = 0;
+    int x;
+    int y;
 };
+
+int calculateTreeProperties(Node* tree)
+{
+    int subtree_size = 1;
+    for (auto child : (*tree).children) {
+        subtree_size += calculateTreeProperties(child);
+    }
+    (*tree).size = subtree_size;
+    return subtree_size;
+}
 
 void oneRun()
 {
     int height, width;
     cin >> height >> width;
     Node nodes[width][height];
+    Node* root;
     Node* target;
 
     // Fill the grid from console input
@@ -24,7 +39,9 @@ void oneRun()
         for (int x = 0; x < width; x++) {
             cin >> state;
             nodes[x][y].state = state;
-
+            nodes[x][y].x = x;
+            nodes[x][y].y = y;
+            if (state == 's') root = &nodes[x][y];
             if (state == 't') target = &nodes[x][y];
 
             if (state == '.' || state == 's' || state == 't') {
@@ -37,21 +54,28 @@ void oneRun()
         }
     }
 
-    /** Non recursive DFS (backwards) from target to source */
-    double sum = 0;
-    (*target).dist = 0;
-    vector<Node*> queue {target};
+    /** Print the array */
+    for (int y = 0; y < height; y++) {
+        for (int x = 0; x < width; x++) {
+            cout << nodes[x][y].state;
+        }
+        cout << endl;
+    }
+
+    /** Non recursive DFS from source to construct the TREE */
+    vector<Node*> queue {root};
 
     for (int i = 0; i < queue.size(); i++) {
-        Node *next = queue.at(i);
+        Node* next = queue.at(i);
         while (next) {
             (*next).visited = true;
             Node *new_next = nullptr;
             char state;
             for (auto adj : (*next).adj) {
                 state = (*adj).state;
-                if ((state == '.' || state == 's' ) && !(*adj).visited) {
-                    (*next).choices++;
+                if ((state == '.' || state == 't' ) && !(*adj).visited) {
+                    (*adj).parent = next;           // Store parent
+                    (*next).children.push_back(adj);// Store child
                     if (new_next == nullptr) {
                         new_next = adj;
                     } else {
@@ -62,8 +86,36 @@ void oneRun()
             next = new_next;
         }
     }
-    /** If we haven't returned yet, then the game is undecided */
-    cout << "Not finished" << endl;
+
+    /** Calculate subtree sizes */
+    calculateTreeProperties(root);
+
+    /** Traverse from target up the tree to the source */
+    double expected_cost = 0.00;
+    int steps = 0; // To track steps between 'intersections' in the graph
+    Node* next = target;
+    Node* parent = (*next).parent;
+    while (next != root) {
+        steps++;
+        int child_count = (*parent).children.size();
+        if (child_count > 1) {
+            for (auto child : (*parent).children) {
+                if (child == next) {
+                    expected_cost += steps * 1/(double)child_count;
+                } else {
+                    expected_cost += (steps + (*child).size * 2) * 1/(double)child_count;
+                }
+            }
+            steps = 0; // Reset steps to track them until next intersection
+        }
+        next = parent;
+        parent = (*next).parent;
+    }
+    expected_cost += steps;// + 1.0; // Also add the final step to the entrance
+
+    /** set output to 2 decimals and pipe into cout */
+    cout.precision(2);
+    cout << fixed << expected_cost << endl;
 }
 
 int main()
@@ -82,4 +134,43 @@ int main()
 #t####
 
 output: 5.00
+
+1
+5 5
+#s###
+#...#
+#.###
+#...#
+#t###
+
+output: 8.00
+
+
+1
+3 7
+#######
+s.....t
+#######
+
+output: 6.0
+
+1
+6 3
+#s#
+#.#
+#.#
+#.#
+#.#
+#t#
+
+output: 5.0
+
+1
+4 7
+###s###
+#.....#
+#.#.#.#
+###t###
+
+output: 7.0
  */
