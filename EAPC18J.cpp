@@ -2,26 +2,42 @@
 #include <vector>
 #include <string>
 #include <queue>
+#include <utility>
 
 using namespace std;
 
 struct Node; // Predefinition
 
 struct Edge {
+    Node* source;
     Node* target;
     int weight;
+    Edge(){};
+    Edge(Node* s, Node* t, int w) {
+        source = s;
+        target = t;
+        weight = w;
+    }
 
-    bool operator<(const Edge& rhs) const
-    {
-        return weight < rhs.weight;
+    bool operator<(const Edge& other) const {
+        return (weight > other.weight); // Watch out! Dirty hack :-)
     }
 };
 
 struct Node {
+    int index;
     string chars;
-    vector<Edge*> edges;
-    bool in_tree;
+    vector<Edge> edges;
+    bool in_tree = false;
 };
+
+template<typename T> void print_queue(T& q) {
+    while(!q.empty()) {
+        std::cout << q.top().weight << " ";
+        q.pop();
+    }
+    std::cout << '\n';
+}
 
 void oneRun()
 {
@@ -32,6 +48,7 @@ void oneRun()
     // Read in all character sequences into the nodes.
     for (int i = 0; i < n; i++) {
         cin >> nodes[i].chars;
+        nodes[i].index = i;
     }
 
     // Construct the fully connected graph including all edge weights
@@ -43,30 +60,47 @@ void oneRun()
             for (int k = 0; k < length; k++) {
                 if (nodes[i].chars.at(k) != nodes[j].chars.at(k)) diff++;
             }
-            Edge i2j; // i to j
-            i2j.target = &nodes[i];
-            i2j.weight = diff;
+            nodes[i].edges.push_back(Edge(&nodes[i], &nodes[j], diff));
         }
     }
 
-    queue<Edge*> queue1;
-    queue1.
-    vector<Node*> queue {&nodes[0]};
+    // Construct the MST
+    vector<pair<int, int>> connect;
+    int cost = 0;
+    priority_queue<Edge> e_queue;
+    vector<Node*> v_queue {&nodes[0]};
     Node* next;
-    for (int i = 0; i < queue.size(); i++) {
-        next = queue.at(i);
+    for (int i = 0; i < v_queue.size(); i++) {
+        next = v_queue.at(i);
         next->in_tree = true;
-        Edge* best_edge;
         for (auto edge: next->edges) {
-            if (not edge->target->in_tree) {
-                if (not best_edge or edge->weight < best_edge->weight) best_edge = edge;
+            e_queue.push(edge);
+        }
+    }
+
+    Edge best_edge;
+    while(not e_queue.empty()) {
+        best_edge = e_queue.top();
+        e_queue.pop();
+
+        if (not best_edge.target->in_tree) {
+            pair<int, int> ab (best_edge.source->index, best_edge.target->index);
+            cost += best_edge.weight;
+            connect.push_back(ab);
+            v_queue.push_back(best_edge.target);
+            for (auto edge: best_edge.target->edges) {
+                e_queue.push(edge);
             }
         }
-        queue.push_back(best_edge->target);
     }
 
-    /** set output to 2 decimals and pipe into cout */
-    cout << expected_cost << endl;
+    /** Finally return the answer */
+    cout << cost << endl;
+    for (auto c : connect) {
+        cout << get<0>(c) << " " << get<1>(c) << endl;
+    }
+
+
 }
 
 int main()
@@ -78,78 +112,31 @@ int main()
 }
 
 /** Test cases
+input:
 1
-3 6
-##s###
-#....#
-#t####
+4 2
+AA
+AT
+TT
+TC
 
-output: 5.00
+output:
+3
+0 1
+1 2
+2 3
 
+input:
 1
-5 5
-#s###
-#...#
-#.###
-#...#
-#t###
+4 1
+A
+A
+G
+T
 
-output: 8.00
-
-
-1
-3 7
-#######
-s.....t
-#######
-
-output: 6.00
-
-1
-6 3
-#s#
-#.#
-#.#
-#.#
-#.#
-#t#
-
-output: 5.00
-
-1
-4 7
-###s###
-#.....#
-#.#.#.#
-###t###
-
-output: 7.00
-
-1
-4 11
-###########
-#...#...###
-s.#...#...#
-#########t#
-
-output: 14.00
-
-1
-4 11
-###########
-#...#...#.#
-s.#...#...#
-#########t#
-
-output: 15.00
-
-1
-4 12
-############
-#...#...#..#
-s.#...#...##
-#########t##
-
-output: 16.00
-
+output:
+2
+0 1
+0 2
+0 3
  */
