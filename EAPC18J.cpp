@@ -20,7 +20,7 @@ struct Edge {
     }
 
     bool operator<(const Edge& other) const {
-        return (weight > other.weight); // Watch out! Dirty hack :-)
+        return (weight > other.weight); // Watch out! Dirty priority queue hack :-) as it uses std::less as default comparison
     }
 };
 
@@ -30,14 +30,6 @@ struct Node {
     vector<Edge> edges;
     bool in_tree = false;
 };
-
-template<typename T> void print_queue(T& q) {
-    while(!q.empty()) {
-        std::cout << q.top().weight << " ";
-        q.pop();
-    }
-    std::cout << '\n';
-}
 
 void oneRun()
 {
@@ -68,27 +60,30 @@ void oneRun()
     vector<pair<int, int>> connect;
     int cost = 0;
     priority_queue<Edge> e_queue;
-    vector<Node*> v_queue {&nodes[0]};
-    Node* next;
-    for (int i = 0; i < v_queue.size(); i++) {
-        next = v_queue.at(i);
-        next->in_tree = true;
-        for (auto edge: next->edges) {
-            e_queue.push(edge);
-        }
+    nodes[0].in_tree = true;
+    for (auto edge: nodes[0].edges) {
+        e_queue.push(edge);
     }
 
-    Edge best_edge;
+    Edge e;
     while(not e_queue.empty()) {
-        best_edge = e_queue.top();
+        // Pick and consume shortest edge in queue
+        e = e_queue.top();
         e_queue.pop();
 
-        if (not best_edge.target->in_tree) {
-            pair<int, int> ab (best_edge.source->index, best_edge.target->index);
-            cost += best_edge.weight;
-            connect.push_back(ab);
-            v_queue.push_back(best_edge.target);
-            for (auto edge: best_edge.target->edges) {
+        if (not e.target->in_tree) {
+            if (e.source->index > e.target->index) {
+                pair<int, int> ab (e.target->index, e.source->index);   // Register edge in MST
+                connect.push_back(ab);
+            } else {
+                pair<int, int> ab (e.source->index, e.target->index);   // Register edge in MST
+                connect.push_back(ab);
+            }
+
+            cost += e.weight;           // Add the length of the edge to the cost sum
+            e.target->in_tree = true;   // Mark the target node of the edge as being in the MST
+
+            for (auto edge: e.target->edges) {  // Update the queue with the newly reachable edges
                 e_queue.push(edge);
             }
         }
@@ -139,4 +134,31 @@ output:
 0 1
 0 2
 0 3
+
+
+
+input:
+1
+5 6
+GAACAG
+AAAAAA
+AACATA
+GAAAAG
+ATAAAT
+
+output:
+7
+0 3
+1 2
+1 3
+1 4
+
+input:
+1
+3 1
+A
+A
+A
+
+
  */
