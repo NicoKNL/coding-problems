@@ -101,9 +101,9 @@ void oneRun()
         if (child_count > 1) {
             for (auto child : (*parent).children) {
                 if (child == next) {
-                    expected_cost += steps * 1/(double)child_count;
+                    expected_cost += steps;
                 } else {
-                    expected_cost += (steps + (*child).size * 2) * 1/(double)child_count;
+                    expected_cost += child->size;
                 }
             }
             steps = 0; // Reset steps to track them until next intersection
@@ -172,7 +172,7 @@ output: 5.00
 #.#.#.#
 ###t###
 
-output: 7.00
+output: 9.00
 
 1
 4 11
