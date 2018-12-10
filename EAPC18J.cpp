@@ -37,6 +37,7 @@ void oneRun()
     cin >> n >> length;
     Node nodes[n];
 
+    /** Reading input and calculating weights */
     // Read in all character sequences into the nodes.
     for (int i = 0; i < n; i++) {
         cin >> nodes[i].chars;
@@ -52,14 +53,18 @@ void oneRun()
             for (int k = 0; k < length; k++) {
                 if (nodes[i].chars.at(k) != nodes[j].chars.at(k)) diff++;
             }
-            nodes[i].edges.push_back(Edge(&nodes[i], &nodes[j], diff));
+            nodes[i].edges.emplace_back(Edge(&nodes[i], &nodes[j], diff));
         }
     }
 
-    // Construct the MST
-    vector<pair<int, int>> connect;
-    int cost = 0;
-    priority_queue<Edge> e_queue;
+
+    int cost = 0; // For storing the sum weight of the MST
+
+    /** Construct the MST */
+    vector<pair<int, int>> connect; // To store the resulting edges
+    priority_queue<Edge> e_queue;   // Edges to consider next using a priority queue
+
+    // Register starting node and add its edges to the queue
     nodes[0].in_tree = true;
     for (auto edge: nodes[0].edges) {
         e_queue.push(edge);
@@ -71,21 +76,24 @@ void oneRun()
         e = e_queue.top();
         e_queue.pop();
 
-        if (not e.target->in_tree) {
-            if (e.source->index > e.target->index) {
-                pair<int, int> ab (e.target->index, e.source->index);   // Register edge in MST
-                connect.push_back(ab);
-            } else {
-                pair<int, int> ab (e.source->index, e.target->index);   // Register edge in MST
-                connect.push_back(ab);
-            }
+        // Check if the target is already in the tree
+        if (e.target->in_tree) continue;
 
-            cost += e.weight;           // Add the length of the edge to the cost sum
-            e.target->in_tree = true;   // Mark the target node of the edge as being in the MST
+        // If not...
+        e.target->in_tree = true;   // Mark the target node of the edge as being in the MST
+        cost += e.weight;           // Add the length of the edge to the cost sum
 
-            for (auto edge: e.target->edges) {  // Update the queue with the newly reachable edges
-                e_queue.push(edge);
-            }
+        if (e.source->index > e.target->index) {
+            pair<int, int> ab (e.target->index, e.source->index);   // Register edge in MST
+            connect.push_back(ab);
+        } else {
+            pair<int, int> ab (e.source->index, e.target->index);   // Register edge in MST
+            connect.push_back(ab);
+        }
+
+
+        for (auto edge: e.target->edges) {  // Update the queue with the newly reachable edges
+            e_queue.push(edge);
         }
     }
 
@@ -94,8 +102,6 @@ void oneRun()
     for (auto c : connect) {
         cout << get<0>(c) << " " << get<1>(c) << endl;
     }
-
-
 }
 
 int main()
