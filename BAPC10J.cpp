@@ -40,15 +40,22 @@ void oneRun()
 
     Node source;
     Node sink;
-    // Read in all horizontal words
+
+    /** Read in all horizontal words and connect edges:
+     *      from source to horizontal
+     */
     for (int i = 0; i < h; i++) {
         cin >> horizontal[i].x;
         cin >> horizontal[i].y;
         cin >> horizontal[i].word;
-        Edge from_sink(&horizontal[i]);
-        source.adj.push_back(&from_sink);
+        Edge from_source(&horizontal[i]);
+        source.adj.push_back(&from_source);
     }
 
+    /** Read in all vertical words and connect edges:
+     *      from horizontal to vertical
+     *      from vertical to sink
+     */
     for (int i = 0; i < v; i++) {
         cin >> vertical[i].x;
         cin >> vertical[i].y;
@@ -62,10 +69,20 @@ void oneRun()
 
             // Check if the words cross with each other
             if (min_y <= h.y && h.y <= max_y && min_x <= vertical[i].x && vertical[i].x <= max_x) {
-                
+                Edge intersection(&vertical[i]);
+                h.adj.push_back(&intersection);
             }
         }
+
+        Edge to_sink(&sink);
+        vertical[i].adj.push_back(&to_sink);
     }
+    
+    int i = 0;
+    i = 1;
+    i++;
+
+
 
 
 
