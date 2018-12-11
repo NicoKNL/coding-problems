@@ -3,44 +3,68 @@
 #include <string>
 #include <queue>
 #include <utility>
+#include <string>
 
 using namespace std;
 
 struct Node; // Predefinition
 
 struct Edge {
-    Node* source;
-    Node* target;
-    int weight;
-    Edge(){};
-    Edge(Node* s, Node* t, int w) {
-        source = s;
+    Edge(){}
+    Edge(Node* t) {
         target = t;
-        weight = w;
     }
 
-    bool operator<(const Edge& other) const {
-        return (weight > other.weight); // Watch out! Dirty priority queue hack :-) as it uses std::less as default comparison
-    }
+    Node* target;
+    int capacity = 1;
+    int flow;   // residual capacity can be derived from flow and capacity
+    Edge* back; // Needed to update flow in reverse direction
 };
 
 struct Node {
-    int index;
-    string chars;
-    vector<Edge> edges;
-    bool in_tree = false;
+    int x;
+    int y;
+    string word;
+    vector<Edge*> adj;
+    bool visited;
+    Edge parent; // Reference to edge to parent to update flow
+    int flow;    // Only for Edmonds-Karp
 };
 
 void oneRun()
 {
-    int n, length;
-    cin >> n >> length;
-    Node nodes[n];
+    int h, v; // Number of horizontal, and vertical words
+    cin >> h >> v;
+    Node horizontal[h];
+    Node vertical[v];
 
-    // Read in all character sequences into the nodes.
-    for (int i = 0; i < n; i++) {
-        cin >> nodes[i].chars;
-        nodes[i].index = i;
+    Node source;
+    Node sink;
+    // Read in all horizontal words
+    for (int i = 0; i < h; i++) {
+        cin >> horizontal[i].x;
+        cin >> horizontal[i].y;
+        cin >> horizontal[i].word;
+        Edge from_sink(&horizontal[i]);
+        source.adj.push_back(&from_sink);
+    }
+
+    for (int i = 0; i < v; i++) {
+        cin >> vertical[i].x;
+        cin >> vertical[i].y;
+        cin >> vertical[i].word;
+        int min_y = vertical[i].y;
+        int max_y = vertical[i].y + vertical[i].word.length();
+
+        for (auto h: horizontal) {
+            int min_x = h.x;
+            int max_x = h.x + h.word.size();
+
+            // Check if the words cross with each other
+            if (min_y <= h.y && h.y <= max_y && min_x <= vertical[i].x && vertical[i].x <= max_x) {
+                
+            }
+        }
     }
 
 
@@ -57,4 +81,24 @@ int main()
 
 /** Test cases
 
+
+1
+2 2
+0 1 BAPC
+0 2 LEIDEN
+0 0 SOLUTION
+2 1 WINNER
+
+output: 3
+
+
+1
+1 4
+0 1 HELLO
+1 0 HI
+2 0 BYE
+3 0 GOODBYE
+4 0 FAREWELL
+
+output: 4
  */
