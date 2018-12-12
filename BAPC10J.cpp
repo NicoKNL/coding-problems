@@ -22,12 +22,12 @@ struct Edge {
 };
 
 struct Node {
-    int x;
-    int y;
+    int x = -1;
+    int y = -1;
     string word;
     vector<Edge*> adj;
-    bool visited;
-    Edge parent; // Reference to edge to parent to update flow
+    bool visited = false;
+    Edge* parent = nullptr; // Reference to edge to parent to update flow
     int flow;    // Only for Edmonds-Karp
 };
 
@@ -44,11 +44,12 @@ void oneRun()
     /** Read in all horizontal words and connect edges:
      *      from source to horizontal
      */
+    Edge from_source;
     for (int i = 0; i < h; i++) {
         cin >> horizontal[i].x;
         cin >> horizontal[i].y;
         cin >> horizontal[i].word;
-        Edge from_source(&horizontal[i]);
+        from_source(&horizontal[i]);
         source.adj.push_back(&from_source);
     }
 
@@ -61,16 +62,20 @@ void oneRun()
         cin >> vertical[i].y;
         cin >> vertical[i].word;
         int min_y = vertical[i].y;
-        int max_y = vertical[i].y + vertical[i].word.length();
+        int max_y = vertical[i].y + vertical[i].word.length() - 1;
 
         for (auto h: horizontal) {
             int min_x = h.x;
             int max_x = h.x + h.word.size();
 
             // Check if the words cross with each other
-            if (min_y <= h.y && h.y <= max_y && min_x <= vertical[i].x && vertical[i].x <= max_x) {
-                Edge intersection(&vertical[i]);
-                h.adj.push_back(&intersection);
+            if (not(min_y <= h.y && h.y <= max_y && min_x <= vertical[i].x && vertical[i].x <= max_x)) continue;
+
+            for (int j = 0; j < vertical[i].word.size(); j++) {
+                if (vertical[i].word.at(i) != h.word.at(vertical[i].x)) {
+                    Edge intersection(&vertical[i]);
+                    h.adj.push_back(&intersection);
+                }
             }
         }
 
