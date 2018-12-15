@@ -1,122 +1,101 @@
-//#include <iostream>
-//#include <vector>
-//#include <cmath>
-//
-//using namespace std;
-//
-//void oneRun()
-//{
-//    int n;
-//    cin >> n;
-//    int s[n];
-//
-//    int students = 0;
-//    for (int i = 0; i < n; i++) {
-//        cin >> s[i];
-//        students += s[i];
-//    }
-//
-//    int solution[n];
-//
-//    for (int i = 0; i < n; i++) {
-//        int students_above = students;
-//        int minimum_anger = 0;
-//        for (int j = 0; j <= i; j++) {
-//            students_above -= s[j];
-//
-//            if (i == j) {
-//                // At the end of the "recursion"
-//                solution[i] = min(minimum_anger, solution[j-1]+s[j-1]) + students_above;
-//            } else {
-//                minimum_anger = min(minimum_anger, students_above);
-//            }
-//        }
-//    }
-//
-//    cout << solution[n-1] << endl;
-//}
-//
-//int main()
-//{
-//    int n_cases;
-//    cin >> n_cases;
-//    while (n_cases--) oneRun();
-//    return 0;
-//}
-
 #include <iostream>
+#include <vector>
+#include <algorithm>
+#include <climits>
 
 using namespace std;
 
-void test() {
-    int nfloors; // number of floors
-    cin >> nfloors;
-    int students[nfloors + 1]; // number of students per floor
-    students[0] = 0;
-    for (int i = 1; i <= nfloors; i++) {
-        cin >> students[i];
+void oneRun() {
+    int floors;
+    cin >> floors;
+
+    /** Construct array to store how many want to exit at floor N */
+    int people[floors+1]; // + 1 so we can start at 1 for this DP solution
+    people[0] = 0;
+    for (int i = 1; i <= floors; i++) {
+        cin >> people[i];
     }
 
-    //creating table who needs to go to a floor on or below
-    int till[nfloors + 1];
-    till[0] = 0;
-    for (int i = 1; i <= nfloors; i++) {
-        till[i] = till[i - 1] + students[i];
-    }
-    //creating table who needs to go to a floor on or above
-    int from[nfloors + 2];
-    from[nfloors + 1] = 0;
-    for (int i = nfloors; i >= 0; i--) {
-        from[i] = from[i + 1] + students[i];
+    /** Construct array storing the number of people above a floor N */
+    int people_above[floors+1] = {0};
+    for (int i = floors - 1; i >= 0; i--) {
+        people_above[i] = people_above[i+1] + people[i+1];
     }
 
+    int result[floors+1] = {0};  // Floor 0 does not exist, hence we never stop here. Used as check to see if not stopping before a current floor N is more effective than stopping somewhere else in between.
+    result[1] = people_above[1]; // Floor 1 trivially has all people above it getting angry
+    for (int floor = 2; floor <= floors; floor++) {
+        int minimum_anger = INT_MAX - 1;
 
+        for (int prev_floor = floor - 1; prev_floor >= 0; prev_floor--)
+        {
+            /** Counting the anger from walking people in between the previous and current floor */
+            int anger_from_to = 0;
+            int people_walking = 0;
+            for (int i = prev_floor + 1; i < floor; i++)
+            {
+                people_walking += people[i];
+                anger_from_to += people_walking;
+            }
 
-    int table[nfloors + 1][nfloors + 1]; // x , y
-
-    table[0][0] = 0;
-
-    for (int x = 1; x <= nfloors; x++) {
-        for (int y = 0; y < x; y++) {
-            if (x == y + 1) {
-                int miny = table[y][0];
-                for (int z = 1; z < y; z++) {
-                    if (table[y][z] < miny) {
-                        miny = table[y][z];
-                    }
-                }
-                table[x][y] = miny + from[x+1];
-            } else {
-                table[x][y] = table[x - 1][y] - students[x] + till[x - 1] - till[y];
+            /** Calculating a new possible minimum anger */
+            int anger = result[prev_floor] + people_above[floor] + anger_from_to;
+            if (anger < minimum_anger) {
+                minimum_anger = anger;
             }
         }
+        result[floor] = minimum_anger;
     }
 
-    for (int x = 0; x <= nfloors; x++) {
-        cout << "x = " << x << " : ";
-        for (int y = 0; y < x; y++) {
-            cout << table[x][y] << "  ";
-        }
-        cout << endl;
-    }
-
-
-    int minres = table[nfloors][0]; // minimum total lift anger
-    for (int y = 1; y < nfloors; y++) {
-        if (table[nfloors][y] < minres) {
-            minres = table[nfloors][y];
-        }
-    }
-
-    cout << minres << endl;
-
+    cout << result[floors] << endl;
 }
 
-
-int main() {
-    int testcases;
-    cin >> testcases;
-    for (int i = 0; i < testcases; i++) {
-        test();
-    }
+int main()
+{
+    int n_cases;
+    cin >> n_cases;
+    while (n_cases--) oneRun();
+    return 0;
 }
+
+/** TEST CASES
+ *
+1
+5
+0 3 0 0 7
+
+ output: 7
+
+
+1
+5
+0 0 3 0 7
+
+ output: 6
+
+
+1
+10
+3 1 4 1 5 9 2 6 5 3
+
+ output: 67
+
+
+1
+10
+1 2 3 4 5 6 7 8 9 10
+
+ output: 101
+
+1
+9
+1 0 1 0 1 0 1 0 1
+
+ output: 8
+
+1
+1
+100
+
+ output: 0
+ */
