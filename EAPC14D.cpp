@@ -27,19 +27,25 @@ void oneRun() {
     for (int floor = 2; floor <= floors; floor++) {
         int minimum_anger = INT_MAX - 1;
 
-        for (int prev_floor = floor - 1; prev_floor >= 0; prev_floor--)
+        /** For counting the anger from walking people in between the previous and current floor */
+        int max_anger_between = 0;
+        int people_walking = 0;
+
+        for (int i = 1; i < floor; i++)
         {
-            /** Counting the anger from walking people in between the previous and current floor */
-            int anger_from_to = 0;
-            int people_walking = 0;
-            for (int i = prev_floor + 1; i < floor; i++)
-            {
-                people_walking += people[i];
-                anger_from_to += people_walking;
-            }
+            people_walking += people[i];
+            max_anger_between += people_walking;
+        }
+
+        int dist;
+        for (int prev_floor = 0; prev_floor < floor; prev_floor++)
+        {
+            /** Removing people we went past, they have already been serviced and don't have to walk down `dist` times*/
+            dist = floor - prev_floor;
+            max_anger_between -= dist * people[prev_floor];
 
             /** Calculating a new possible minimum anger */
-            int anger = result[prev_floor] + people_above[floor] + anger_from_to;
+            int anger = result[prev_floor] + people_above[floor] + max_anger_between;
             if (anger < minimum_anger) {
                 minimum_anger = anger;
             }
