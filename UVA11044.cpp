@@ -18,7 +18,7 @@ void run()
 
     cout << n_divs * m_divs << endl;
 }
-
+`
 int main()
 {
     int n;
