@@ -3,6 +3,27 @@
 
 using namespace std;
 
+int withouts;
+
+
+vector<bool> recurse(vector<bool> in) {
+    vector<bool> front(in.begin(), in.begin() + in.size() / 2);
+    vector<bool> back(in.begin() + in.size() / 2, in.end());
+
+    if (front.size() > 1 && back.size() > 1) {
+        front = recurse(front);
+        back = recurse(back);
+    }
+
+    if (front.at(0) ^ back.at(0)) withouts++;
+    if (front.at(0) || back.at(0)) {
+        return vector<bool> {1};
+    } else {
+        return vector<bool> {0};
+    }
+
+}
+
 void run() {
     int n, m, players;
     cin >> n >> m;
@@ -19,19 +40,12 @@ void run() {
         tournament[p - 1] = 0;
     }
 
-    int withouts = 0;
-    while (tournament.size() > 1) {
-        for (int i = 0; i < players; i+=2) {
-            if (tournament[i] ^ tournament[i + 1]) withouts++;
-            if (tournament[i] | tournament[i + 1]) tournament[i] = 1;
-        }
+    withouts = 0;
+    vector<bool> front(tournament.begin(), tournament.begin() + tournament.size() / 2 - 1);
+    vector<bool> back(tournament.begin() + tournament.size() / 2, tournament.end());
+    recurse(tournament);
 
-        for (int i = tournament.size() - 1; i > 0; i-=2) {
-            tournament.erase(tournament.begin() + i);
-        }
-    }
     cout << withouts << endl;
-
 }
 
 int main() {
