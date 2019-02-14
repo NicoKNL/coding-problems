@@ -4,30 +4,18 @@
 using namespace std;
 
 void run() {
-    int n, k;
+    long n, k;
     cin >> n >> k;
 
-    vector<vector<bool>> codes;
-    codes.push_back(vector<bool>{0});
-    codes.push_back(vector<bool>{1});
-
-    while (codes.at(0).size() < n) {
-        for (int i = codes.size() - 1; i >= 0; i--) {
-            codes.push_back(codes.at(i));
-        }
-
-        for (int i = 0; i < codes.size(); i++) {
-            if (i < codes.size() / 2) codes.at(i).insert(codes.at(i).begin(), 0);
-            else codes.at(i).insert(codes.at(i).begin(), 1);
-        }
+    long sum = 0;
+    long k_mod;
+    for (int i = 1; i <= n; i++) {
+        k_mod = k % (1 << i + 1);
+        int low = (1 << i - 1);
+        int high = (1 << (i + 1) ) - (1 << (i - 1)) - 1;
+        if (low <= k_mod && k_mod <= high) sum += (1 << i - 1);
     }
-
-    long result = 0;
-    for (int i = 0; i < n; i++) {
-        result += (1 << (n-i-1)) * codes.at(k).at(i);
-    }
-
-    cout << result << endl;
+    cout << sum << endl;
 }
 
 int main() {
