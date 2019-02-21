@@ -22,28 +22,38 @@ int main() {
         ss_in.str(s);
 
         unordered_map<char, int> umap;
+        vector<char> acesuits;
         vector<char> kingsuits;
         vector<char> queensuits;
         vector<char> jacksuits;
+        vector<char> stoppedSuits = vector<char>();
+
         char type, suit;
         while (ss_in >> card) {
             type = card.at(0);
             suit = card.at(1);
 
-            if (umap.find(type) == umap.end()) {
-                umap[type] = 1;
-            } else {
-                umap[type] += 1;
-            }
+            if (umap.find(type) == umap.end()) umap[type] = 1;
+            else umap[type] += 1;
 
-            if (umap.find(suit) == umap.end()) {
-                umap[suit] = 1;
-            } else {
-                umap[suit] += 1;
-            }
+            if (umap.find(suit) == umap.end()) umap[suit] = 1;
+            else umap[suit] += 1;
 
-            if (type == 'K') kingsuits.push_back(suit);
-            if (type == 'Q') queensuits.push_back(suit);
+            if (type == 'A') {
+                acesuits.push_back(suit);
+                if (umap.find('S' + suit) == umap.end()) umap['S' + suit] = 1;
+                else umap['S' + suit] = min(umap['S' + suit], 1);
+            }
+            if (type == 'K') {
+                kingsuits.push_back(suit);
+                if (umap.find('S' + suit) == umap.end()) umap['S' + suit] = 2;
+                else umap['S' + suit] = min(umap['S' + suit], 2);
+            }
+            if (type == 'Q') {
+                queensuits.push_back(suit);
+                if (umap.find('S' + suit) == umap.end()) umap['S' + suit] = 3;
+                else umap['S' + suit] = min(umap['S' + suit], 3);
+            }
             if (type == 'J') jacksuits.push_back(suit);
         }
 
@@ -77,9 +87,25 @@ int main() {
 
         }
 
+        for (char s: suits) {
+            char lookup = 'S' + s;
+            int stopValue = find(umap, lookup) > 0 ? find(umap, lookup) : 52;
+            int value = find(umap, s);
+            if (value >= stopValue) stoppedSuits.push_back(s);
+        }
 
-        if (points < 14) {
+        if (points + points567 < 14) {
             cout << "PASS" << endl;
+        } else if (stoppedSuits.size() == 4 && points >= 16) {
+            cout << "BID NO-TRUMP" << endl;
+        } else {
+            char biggestSuit = 'S'; // default to first
+            for (char s: suits) {
+                if (find(umap, s) > find(umap, biggestSuit)) {
+                    biggestSuit = s;
+                }
+            }
+            cout << "BID " << biggestSuit << endl;
         }
 
     }
