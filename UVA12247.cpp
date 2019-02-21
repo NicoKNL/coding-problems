@@ -2,8 +2,6 @@
 #include <algorithm>
 #include <vector>
 
-// TODO: finish
-
 using namespace std;
 
 int main() {

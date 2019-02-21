@@ -17,7 +17,7 @@ int main() {
     cin >> n;
     string s;
     char value, suit;
-
+    int case_number = 1;
     while (n--) {
         vector<string> cardpile;
         vector<string> hand;
@@ -51,49 +51,8 @@ int main() {
             cardpile.insert(cardpile.end(), hand.begin(), hand.end());
         }
 
-        cout << cardpile[Y - 1] << endl;
-        cout << cardpile[Y] << endl;
-        cout << cardpile[Y + 1] << endl;
+        cout << "Case " << case_number << ": " << cardpile[Y + 2] << endl;
+        case_number++;
     }
     return 0;
 }
-
-// TODO: finish
-
-/*
- * 52
- * 25 -
- * ------
- * 27
- * 1 -
- * ------
- * 26
- * 8 -
- * ------
- * 18
- * 25 +
- * ----
- * 43
- * 25 -
- * ----
- * 18
- * 1 -
- * ----
- * 17
- * 8 -
- * ----
- * 9
- * 25 +
- * ----
- * 34
- * 25 -
- * ----
- * 9
- * 1 -
- * ----
- * 8
- * 8 -
- * ----
- * 0
- *
- */
