@@ -29,19 +29,20 @@ ABA
 ABA
      */
     int l = m.size() % 2 == 1 ? m.size() / 2 + 1 : m.size() / 2;
+    int size = m.size();
     int offset = 0;
-    for (int row = 0; row < l - 1; row++) {
-        for (int col = offset; col < l - offset - 1; col++) {
+    for (int row = 0; row < l; row++) {
+        for (int col = offset; col < l; col++) {
+            cout << "." << endl;
             tmpA = m[row][col];
-            tmpB = m[row][l - col - 1];
-            tmpC = m[l - row - 1][l - col - 1];
-            tmpD = m[l - row - 1][col];
-
+            tmpB = m[size - col - 1][row];
+            tmpC = m[size - row - 1][size - col - 1];
+            tmpD = m[col][size - row - 1];
+            cout << tmpA << tmpB << tmpC << tmpD << endl;
             m[row][col] = tmpD;
-            m[row][l - col - 1] = tmpA;
-            m[l - row - 1][l - col - 1] = tmpB;
-            m[l - row - 1][col] = tmpC;
-
+            m[col][size - row - 1] = tmpA;
+            m[size - row - 1][size - col - 1] = tmpB;
+            m[size - col - 1][size - row - 1] = tmpC;
         }
         offset++;
     }
