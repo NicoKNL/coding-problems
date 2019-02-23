@@ -5,44 +5,22 @@
 using namespace std;
 
 vector<vector<char>> rotate90(vector<vector<char>> m) {
-    cout << "M:::::::::::" << endl;
-    for (int row = 0; row < m.size(); row++) {
-        for (int col = 0; col < m.size(); col++) {
-            cout << m[row][col] << " ";
-        }
-        cout << endl;
-    }
-    cout << endl << endl;
     char tmpA, tmpB, tmpC, tmpD;
-    // TODO: fix rotation
-    /*
-     *
-     * TESTCASE:
-5 3
-ABABA
-ABABA
-ABABA
-ABABA
-ABABA
-ABA
-ABA
-ABA
-     */
+
     int l = m.size() % 2 == 1 ? m.size() / 2 + 1 : m.size() / 2;
     int size = m.size();
     int offset = 0;
     for (int row = 0; row < l; row++) {
         for (int col = offset; col < l; col++) {
-            cout << "." << endl;
             tmpA = m[row][col];
-            tmpB = m[size - col - 1][row];
+            tmpB = m[col][size - row - 1];
             tmpC = m[size - row - 1][size - col - 1];
-            tmpD = m[col][size - row - 1];
-            cout << tmpA << tmpB << tmpC << tmpD << endl;
+            tmpD = m[size - col - 1][row];
+
             m[row][col] = tmpD;
             m[col][size - row - 1] = tmpA;
             m[size - row - 1][size - col - 1] = tmpB;
-            m[size - col - 1][size - row - 1] = tmpC;
+            m[size - col - 1][row] = tmpC;
         }
         offset++;
     }
