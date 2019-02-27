@@ -1,24 +1,27 @@
 #include <iostream>
 #include <map>
+#include <vector>
+#include <algorithm>
 
 using namespace std;
-// TODO: Test using uDebug
+
 int main() {
     int n;
     while (cin >> n) {
         if (n == 0) break;
-        map<int, int> m;
+        map<vector<int>, int> m;
         for (int i = 0; i < n; i++) {
-            int hash = 0;
             int tmp;
+            vector<int> values;
             for (int j = 0; j < 5; j++) {
                 cin >> tmp;
-                hash ^= tmp;
+                values.push_back(tmp);
             }
-            if (m.find(hash) == m.end()) {
-                m[hash] = 1;
+            sort(values.begin(), values.end());
+            if (m.find(values) == m.end()) {
+                m[values] = 1;
             } else {
-                m[hash] += 1;
+                m[values] += 1;
             }
         }
 
