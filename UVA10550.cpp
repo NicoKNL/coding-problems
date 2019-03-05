@@ -14,6 +14,8 @@ int main()
         int a, b, c, d;
         input >> a >> b >> c >> d;
 
+        if (a == 0 && b == 0 && c == 0 && d == 0) break;
+
         int degrees = 0;
         int marks = 360 / 40;
 
@@ -24,7 +26,9 @@ int main()
         int dist = 0;
         while (mark != b)
         {
-            mark = (mark + 1) % 40;
+            mark = (mark - 1);
+            if (mark < 0) mark += 40;
+
             dist++;
         } ;
 
@@ -38,8 +42,7 @@ int main()
 
         while (mark != c)
         {
-            mark = (mark - 1);
-            if (mark < 0) mark += 40;
+            mark = (mark + 1) % 40;
 
             dist++;
         } ;
@@ -51,7 +54,9 @@ int main()
         dist = 0;
         while (mark != d)
         {
-            mark = (mark + 1) % 40;
+            mark = (mark - 1);
+            if (mark < 0) mark += 40;
+
             dist++;
         } ;
 
