@@ -140,8 +140,6 @@ int main() {
 
         count = 0;
         for (int i = 0; i < 64; i++) {
-//            cout << safe_spots[i] << " ";
-//            if (i % 8 == 7) cout << endl;
             if (board[i] == 0 && safe_spots[i] == 1) count++;
         }
         cout << count << endl;
