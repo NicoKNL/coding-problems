@@ -2,21 +2,43 @@
 
 using namespace std;
 
-vector<string> split_string(string);
+string ltrim(const string &);
+string rtrim(const string &);
+vector<string> split(const string &);
 
-// Complete the birthdayCakeCandles function below.
-int birthdayCakeCandles(vector<int> ar) {
-    int top = ar.at(0); // Condition: ar.size() >= 1
+/*
+ * Complete the 'getTotalX' function below.
+ *
+ * The function is expected to return an INTEGER.
+ * The function accepts following parameters:
+ *  1. INTEGER_ARRAY a
+ *  2. INTEGER_ARRAY b
+ */
+
+int getTotalX(vector<int> a, vector<int> b) {
     int count = 0;
-    for (int val : ar) {
-        if (val > top) {
-            top = val;
-            count = 1;
-        } else if (val == top) {
-            count += 1;
-        } else {
-
+    for (int n = 1; n <= 100; n++) {
+        bool condition1 = true;
+        bool condition2 = true;
+        for (int val1 : a) {
+            if (n % val1 != 0) {
+                condition1 = false;
+            }
+            if (!condition1) break;
         }
+
+        if (!condition1) continue;
+
+        for (int val2 : b) {
+            if (val2 % n != 0) {
+                condition2 = false;
+            }
+            if (!condition2) break;
+        }
+
+        if (!condition2) continue;
+
+        count++;
     }
     return count;
 }
@@ -25,57 +47,85 @@ int main()
 {
     ofstream fout(getenv("OUTPUT_PATH"));
 
-    int ar_count;
-    cin >> ar_count;
-    cin.ignore(numeric_limits<streamsize>::max(), '\n');
+    string first_multiple_input_temp;
+    getline(cin, first_multiple_input_temp);
 
-    string ar_temp_temp;
-    getline(cin, ar_temp_temp);
+    vector<string> first_multiple_input = split(rtrim(first_multiple_input_temp));
 
-    vector<string> ar_temp = split_string(ar_temp_temp);
+    int n = stoi(first_multiple_input[0]);
 
-    vector<int> ar(ar_count);
+    int m = stoi(first_multiple_input[1]);
 
-    for (int i = 0; i < ar_count; i++) {
-        int ar_item = stoi(ar_temp[i]);
+    string arr_temp_temp;
+    getline(cin, arr_temp_temp);
 
-        ar[i] = ar_item;
+    vector<string> arr_temp = split(rtrim(arr_temp_temp));
+
+    vector<int> arr(n);
+
+    for (int i = 0; i < n; i++) {
+        int arr_item = stoi(arr_temp[i]);
+
+        arr[i] = arr_item;
     }
 
-    int result = birthdayCakeCandles(ar);
+    string brr_temp_temp;
+    getline(cin, brr_temp_temp);
 
-    fout << result << "\n";
+    vector<string> brr_temp = split(rtrim(brr_temp_temp));
+
+    vector<int> brr(m);
+
+    for (int i = 0; i < m; i++) {
+        int brr_item = stoi(brr_temp[i]);
+
+        brr[i] = brr_item;
+    }
+
+    int total = getTotalX(arr, brr);
+
+    fout << total << "\n";
 
     fout.close();
 
     return 0;
 }
 
-vector<string> split_string(string input_string) {
-    string::iterator new_end = unique(input_string.begin(), input_string.end(), [] (const char &x, const char &y) {
-        return x == y and x == ' ';
-    });
+string ltrim(const string &str) {
+    string s(str);
 
-    input_string.erase(new_end, input_string.end());
+    s.erase(
+            s.begin(),
+            find_if(s.begin(), s.end(), not1(ptr_fun<int, int>(isspace)))
+    );
 
-    while (input_string[input_string.length() - 1] == ' ') {
-        input_string.pop_back();
+    return s;
+}
+
+string rtrim(const string &str) {
+    string s(str);
+
+    s.erase(
+            find_if(s.rbegin(), s.rend(), not1(ptr_fun<int, int>(isspace))).base(),
+            s.end()
+    );
+
+    return s;
+}
+
+vector<string> split(const string &str) {
+    vector<string> tokens;
+
+    string::size_type start = 0;
+    string::size_type end = 0;
+
+    while ((end = str.find(" ", start)) != string::npos) {
+        tokens.push_back(str.substr(start, end - start));
+
+        start = end + 1;
     }
 
-    vector<string> splits;
-    char delimiter = ' ';
+    tokens.push_back(str.substr(start));
 
-    size_t i = 0;
-    size_t pos = input_string.find(delimiter);
-
-    while (pos != string::npos) {
-        splits.push_back(input_string.substr(i, pos - i));
-
-        i = pos + 1;
-        pos = input_string.find(delimiter, i);
-    }
-
-    splits.push_back(input_string.substr(i, min(pos, input_string.length()) - i + 1));
-
-    return splits;
+    return tokens;
 }

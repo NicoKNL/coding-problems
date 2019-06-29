@@ -1,131 +1,119 @@
 #include <bits/stdc++.h>
-
+#include <algorithm>
 using namespace std;
 
-string ltrim(const string &);
-string rtrim(const string &);
-vector<string> split(const string &);
+vector<string> split_string(string);
 
-/*
- * Complete the 'getTotalX' function below.
- *
- * The function is expected to return an INTEGER.
- * The function accepts following parameters:
- *  1. INTEGER_ARRAY a
- *  2. INTEGER_ARRAY b
- */
+// Complete the icecreamParlor function below.
+vector<int> icecreamParlor(int m, vector<int> arr) {
+    int start = 0;
+    int end = arr.size() - 1;
+    int sum;
 
-int getTotalX(vector<int> a, vector<int> b) {
-    int count = 0;
-    for (int n = 1; n <= 100; n++) {
-        bool condition1 = true;
-        bool condition2 = true;
-        for (int val1 : a) {
-            if (n % val1 != 0) {
-                condition1 = false;
-            }
-            if (!condition1) break;
+    vector<int>sorted_arr = arr;
+    sort(sorted_arr.begin(), sorted_arr.end());
+
+    bool found = false;
+    while (!found) {
+        sum = sorted_arr.at(start) + sorted_arr.at(end);
+        if (sum == m) {
+            found = true;
+        } else if (sum > m) {
+            end--;
+        } else { // sum < m
+            start++;
         }
-
-        if (!condition1) continue;
-
-        for (int val2 : b) {
-            if (val2 % n != 0) {
-                condition2 = false;
-            }
-            if (!condition2) break;
-        }
-
-        if (!condition2) continue;
-
-        count++;
     }
-    return count;
+
+    bool start_found = false;
+    bool end_found = false;
+    vector<int> indices;
+    for (int i = 0; i < arr.size(); i++) {
+        if (arr.at(i) == sorted_arr.at(start) && !start_found) {
+            indices.push_back(i + 1);
+        } else if (arr.at(i) == sorted_arr.at(end) && !end_found) {
+            indices.push_back(i + 1);
+        } else {
+
+        }
+    }
+    sort(indices.begin(), indices.end());
+    return indices;
 }
 
 int main()
 {
     ofstream fout(getenv("OUTPUT_PATH"));
 
-    string first_multiple_input_temp;
-    getline(cin, first_multiple_input_temp);
+    int t;
+    cin >> t;
+    cin.ignore(numeric_limits<streamsize>::max(), '\n');
 
-    vector<string> first_multiple_input = split(rtrim(first_multiple_input_temp));
+    for (int t_itr = 0; t_itr < t; t_itr++) {
+        int m;
+        cin >> m;
+        cin.ignore(numeric_limits<streamsize>::max(), '\n');
 
-    int n = stoi(first_multiple_input[0]);
+        int n;
+        cin >> n;
+        cin.ignore(numeric_limits<streamsize>::max(), '\n');
 
-    int m = stoi(first_multiple_input[1]);
+        string arr_temp_temp;
+        getline(cin, arr_temp_temp);
 
-    string arr_temp_temp;
-    getline(cin, arr_temp_temp);
+        vector<string> arr_temp = split_string(arr_temp_temp);
 
-    vector<string> arr_temp = split(rtrim(arr_temp_temp));
+        vector<int> arr(n);
 
-    vector<int> arr(n);
+        for (int i = 0; i < n; i++) {
+            int arr_item = stoi(arr_temp[i]);
 
-    for (int i = 0; i < n; i++) {
-        int arr_item = stoi(arr_temp[i]);
+            arr[i] = arr_item;
+        }
 
-        arr[i] = arr_item;
+        vector<int> result = icecreamParlor(m, arr);
+
+        for (int i = 0; i < result.size(); i++) {
+            fout << result[i];
+
+            if (i != result.size() - 1) {
+                fout << " ";
+            }
+        }
+
+        fout << "\n";
     }
-
-    string brr_temp_temp;
-    getline(cin, brr_temp_temp);
-
-    vector<string> brr_temp = split(rtrim(brr_temp_temp));
-
-    vector<int> brr(m);
-
-    for (int i = 0; i < m; i++) {
-        int brr_item = stoi(brr_temp[i]);
-
-        brr[i] = brr_item;
-    }
-
-    int total = getTotalX(arr, brr);
-
-    fout << total << "\n";
 
     fout.close();
 
     return 0;
 }
 
-string ltrim(const string &str) {
-    string s(str);
+vector<string> split_string(string input_string) {
+    string::iterator new_end = unique(input_string.begin(), input_string.end(), [] (const char &x, const char &y) {
+        return x == y and x == ' ';
+    });
 
-    s.erase(
-            s.begin(),
-            find_if(s.begin(), s.end(), not1(ptr_fun<int, int>(isspace)))
-    );
+    input_string.erase(new_end, input_string.end());
 
-    return s;
-}
-
-string rtrim(const string &str) {
-    string s(str);
-
-    s.erase(
-            find_if(s.rbegin(), s.rend(), not1(ptr_fun<int, int>(isspace))).base(),
-            s.end()
-    );
-
-    return s;
-}
-
-vector<string> split(const string &str) {
-    vector<string> tokens;
-
-    string::size_type start = 0;
-    string::size_type end = 0;
-
-    while ((end = str.find(" ", start)) != string::npos) {
-        tokens.push_back(str.substr(start, end - start));
-
-        start = end + 1;
+    while (input_string[input_string.length() - 1] == ' ') {
+        input_string.pop_back();
     }
 
-    tokens.push_back(str.substr(start));
+    vector<string> splits;
+    char delimiter = ' ';
 
-    return tokens;
+    size_t i = 0;
+    size_t pos = input_string.find(delimiter);
+
+    while (pos != string::npos) {
+        splits.push_back(input_string.substr(i, pos - i));
+
+        i = pos + 1;
+        pos = input_string.find(delimiter, i);
+    }
+
+    splits.push_back(input_string.substr(i, min(pos, input_string.length()) - i + 1));
+
+    return splits;
 }
