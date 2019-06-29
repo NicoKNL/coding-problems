@@ -7,6 +7,10 @@ set(CMAKE_CXX_STANDARD 11)
 add_executable(unique_digits gists/unique_digits.cpp)
 add_executable(all_digits gists/all_digits.cpp)
 
+# For quick tests
+add_executable(test test.cpp)
+
+
 #add_executable(UVA00230 UVA00230.cpp)
 add_executable(B10D B10D.cpp)
 add_executable(BAPC10I BAPC10I.cpp)
