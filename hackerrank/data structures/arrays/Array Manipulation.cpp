@@ -4,16 +4,13 @@
 using namespace std;
 
 vector<string> split_string(string);
-// TODO: Runtime getting close to being correct, answer has some issues in current version.
+
 // Complete the arrayManipulation function below.
 long arrayManipulation(int n, vector<vector<int>> queries) {
     vector<vector<int>> start;
     vector<vector<int>> end;
-    vector<int> results {0};
-    vector<vector<int>> counter;
-    for (int i = 0; i < n; i++) {
-        counter.push_back(vector<int>{});
-    }
+    vector<long> results {0};
+    results.reserve(2*n);
 
     for (vector<int> query : queries) {
         start.push_back(vector<int>{query[0], query[2]});
@@ -23,42 +20,23 @@ long arrayManipulation(int n, vector<vector<int>> queries) {
     sort(start.begin(), start.end());
     sort(end.begin(), end.end());
 
-    int max = -1;
-    int count = 0;
     int i = 0, j = 0;
+    long current_result = 0;
     while (i < queries.size()) {
-        if (start[i][0] < end[j][0]) {
-            results.push_back(results[results.size() - 1] + start[i][1]);
-            // count++;
-            // counter[count].push_back(start[i]);
-            // max = count > max ? count : max;
+        if (start[i][0] <= end[j][0]) {
+            current_result += start[i][1];
             i++;
-        } else if (start[i][0] > end[j][0]) {
-            results.push_back(results[results.size() - 1] - end[i][1]);
-            j++;
-        } else {
-            results.push_back(results[results.size() - 1] + start[i][1]);
-            results.push_back(results[results.size() - 1] - end[i][1]);
-            i++;
+        } else {// if (start[i][0] > end[j][0]) {
+            current_result -= end[j][1];
             j++;
         }
+        results.push_back(current_result);
     }
 
     long max_sum = 0;
     for (long sum : results) {
         max_sum = sum > max_sum ? sum : max_sum;
     }
-    // for (int subcounter = counter.size(); subcounter >= 0; subcounter--) {
-    //     for (int i : counter[subcounter]) {
-    //         sum = 0;
-    //         for (vector<int> query : queries) {
-    //             if (query[0] <= i && i <= query[1]) {
-    //                 sum += query[2];
-    //             }
-    //         }
-    //         max_sum = sum > max_sum ? sum : max_sum;
-    //     }
-    // }
 
     return max_sum;
 }
