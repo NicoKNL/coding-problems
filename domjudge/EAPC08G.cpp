@@ -1,0 +1,121 @@
+#include <iostream>
+#include <vector>
+#include <string>
+#include <queue>
+#include <utility>
+//todo: finish. MST might not be best approach
+using namespace std;
+
+struct Node; // Predefinition
+
+struct Edge {
+    Node* source;
+    Node* target;
+    int weight;
+    Edge(){};
+    Edge(Node* s, Node* t, int w) {
+        source = s;
+        target = t;
+        weight = w;
+    }
+
+    bool operator<(const Edge& other) const {
+        return (weight > other.weight); // Watch out! Dirty priority queue hack :-) as it uses std::less as default comparison
+    }
+};
+
+struct Node {
+    int index;
+    string chars;
+    vector<Edge> edges;
+    bool in_tree = false;
+};
+
+void oneRun()
+{
+    int n, length;
+    cin >> n >> length;
+    Node nodes[n];
+
+    /** Reading input and calculating weights */
+    // Read in all character sequences into the nodes.
+    for (int i = 0; i < n; i++) {
+        cin >> nodes[i].chars;
+        nodes[i].index = i;
+    }
+
+    // Construct the fully connected graph including all edge weights
+    for (int i = 0; i < n; i++) {
+        for (int j = 0; j < n; j++) {
+            if (i == j) continue; // Don't compare and connect from node X to node X
+
+            int diff = 0;
+            for (int k = 0; k < length; k++) {
+                if (nodes[i].chars.at(k) != nodes[j].chars.at(k)) diff++;
+            }
+            nodes[i].edges.emplace_back(Edge(&nodes[i], &nodes[j], diff));
+        }
+    }
+
+
+    int cost = 0; // For storing the sum weight of the MST
+
+    /** Construct the MST */
+    vector<pair<int, int>> connect; // To store the resulting edges
+    priority_queue<Edge> e_queue;   // Edges to consider next using a priority queue
+
+    // Register starting node and add its edges to the queue
+    nodes[0].in_tree = true;
+    for (auto edge: nodes[0].edges) {
+        e_queue.push(edge);
+    }
+
+    Edge e;
+    while(not e_queue.empty()) {
+        // Pick and consume shortest edge in queue
+        e = e_queue.top();
+        e_queue.pop();
+
+        // Check if the target is already in the tree
+        if (e.target->in_tree) continue;
+
+        // If not...
+        e.target->in_tree = true;   // Mark the target node of the edge as being in the MST
+        cost += e.weight;           // Add the length of the edge to the cost sum
+
+        if (e.source->index > e.target->index) {
+            pair<int, int> ab (e.target->index, e.source->index);   // Register edge in MST
+            connect.push_back(ab);
+        } else {
+            pair<int, int> ab (e.source->index, e.target->index);   // Register edge in MST
+            connect.push_back(ab);
+        }
+
+
+        for (auto edge: e.target->edges) {  // Update the queue with the newly reachable edges
+            e_queue.push(edge);
+        }
+    }
+
+    /** Finally return the answer */
+    cout << cost << endl;
+}
+
+int main()
+{
+    int n;
+    cin >> n;
+    while (n--) oneRun();
+    return 0;
+}
+
+/**
+2
+2 12
+SSSAATTTBBBB
+SSSAAATTTBBB
+3 8
+SATBSATB
+SABTSTAB
+SABTSATB
+ */
