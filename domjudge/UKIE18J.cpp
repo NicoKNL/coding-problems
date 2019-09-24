@@ -13,7 +13,7 @@ int main() {
     }
 
     int L, ML, MR, R;
-    double EL, EML, EMR, ER;
+    double EL, EML, EMR;
     L = 1;
     R = n;
     ML = n / 3;
@@ -23,16 +23,12 @@ int main() {
         EL = 1.0 / (n - L) * ((double) m - pow(L * f, 2));
         EML = 1.0 / (n - ML) * ((double) m - pow(ML * f, 2));
         EMR = 1.0 / (n - MR) * ((double) m - pow(MR * f, 2));
-        ER = 1.0 / (n - R) * ((double) m - pow(R * f, 2));
-        if (EL > EMR && EML > EMR && EL > ER && EML > ER) { // left section
+        if (EL <= EML && EML >= EMR) { // left 2
             L = L;
-            R = ML;
-        } else if (EL < EMR && EML < EMR && EL < ER && EML < ER) { // right section
-            L = MR;
-            R = R;
-        } else { // center section
-            L = ML;
             R = MR;
+        } else {// right 2
+            L = ML;
+            R = R;
         }
         ML = L + (R - L) / 3;
         MR = L + 2 * (R - L) / 3;
