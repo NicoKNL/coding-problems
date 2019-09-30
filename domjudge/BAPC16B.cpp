@@ -16,12 +16,14 @@ int main() {
     string out;
     vector<int> matches;
     int i = 0;
-    while (i < s.length() - 2) {
-        if (check(s.at(i), s.at(i+1), s.at(i+2))) {
-            matches.push_back(i);
-            i += 3;
-        } else {
-            i++;
+    if (s.length() >= 3) {
+        while (i < s.length() - 2) {
+            if (check(s.at(i), s.at(i+1), s.at(i+2))) {
+                matches.push_back(i);
+                i += 3;
+            } else {
+                i++;
+            }
         }
     }
 

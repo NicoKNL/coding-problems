@@ -17,12 +17,8 @@ bool evenDigits(int a, int b, int c, int d) {
     if (b > 9) {
         digits[b/10]++;
     }
-    if (c > 9) {
-        digits[c/10]++;
-    }
-    if (d > 9) {
-        digits[d/10]++;
-    }
+    digits[c/10]++;
+    digits[d/10]++;
 
 //    for (int i = 0; i < 10; i++) {
 //        cout << digits[i] << endl;
