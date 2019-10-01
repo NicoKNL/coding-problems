@@ -1,8 +1,4 @@
-#include <iostream>
-#include <vector>
-#include <string>
-#include <queue>
-#include <utility>
+#include<bits/stdc++.h>
 
 using namespace std;
 
@@ -13,63 +9,14 @@ void oneRun()
 
     double length = 0.0;
     int note;
-    for (int i = 0; i < 500; i++) {
+    for (int i = 0; i < N; i++) {
         cin >> note;
         if (note == 0) length += 2.0;
         else if (note == 1) length += 1.0;
-        else length += 1.0 / note;
+        else length += 1.0 / (double) note;
     }
 
-    for (int i = 500; i < 1000; i++) {
-        cin >> note;
-        if (note == 0) length += 2.0;
-        else if (note == 1) length += 1.0;
-        else length += 1.0 / note;
-    }
-
-    for (int i = 1000; i < 1100; i++) {
-        cin >> note;
-        if (note == 0) length += 2.0;
-        else if (note == 1) length += 1.0;
-        else length += 1.0 / note;
-    }
-
-    for (int i = 1100; i < 1200; i++) {
-        cin >> note;
-        if (note == 0) length += 2.0;
-        else if (note == 1) length += 1.0;
-        else length += 1.0 / note;
-    }
-
-    for (int i = 1200; i < 1300; i++) {
-        cin >> note;
-        if (note == 0) length += 2.0;
-        else if (note == 1) length += 1.0;
-        else length += 1.0 / note;
-    }
-
-    for (int i = 1300; i < 1350; i++) {
-        cin >> note;
-        if (note == 0) length += 2.0;
-        else if (note == 1) length += 1.0;
-        else length += 1.0 / note;
-    }
-
-    for (int i = 1350; i < 1400; i++) {
-        cin >> note;
-        if (note == 0) length += 2.0;
-        else if (note == 1) length += 1.0;
-        else length += 1.0 / note;
-    }
-
-    for (int i = 1400; i < N; i++) {
-        cin >> note;
-        if (note == 0) length += 2.0;
-        else if (note == 1) length += 1.0;
-        else length += 1.0 / note;
-    }
-
-    cout << length;
+    cout << fixed << setprecision(12) << length << endl;
 }
 
 int main()
