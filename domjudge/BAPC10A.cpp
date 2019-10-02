@@ -10,8 +10,7 @@ int main() {
         cin >> seq;
         vector<int> seqA(seq);
         vector<int> seqB(seq);
-        int sumA = 0;
-        int sumB = 0;
+        vector<bool> counter(seq);
         set<int> A;
         set<int> B;
         vector<pair<int, int>> result;
@@ -23,17 +22,26 @@ int main() {
         }
         int i = 1;
         int j = 1;
+        int mismatches = 0;
         for (int k = 0; k < seq; k++) {
-            A.insert(seqA[k]);
-            B.insert(seqB[k]);
-            sumA += seqA[k];
-            sumB += seqB[k];
-            if (sumA == sumB) { // potentially equal
-                if (A == B) { // O(n) check
-                    result.push_back(make_pair(i, j));
-                    j++;
-                    i = j;
-                }
+            if (counter[seqA[k]]) {
+                mismatches--;
+            } else {
+                counter[seqA[k]] = true;
+                mismatches++;
+            }
+
+            if (counter[seqB[k]]) {
+                mismatches--;
+            } else {
+                mismatches++;
+                counter[seqB[k]] = true;
+            }
+
+            if (mismatches == 0) {
+                result.push_back(make_pair(i, j));
+                j++;
+                i = j;
             } else {
                 j++;
             }
