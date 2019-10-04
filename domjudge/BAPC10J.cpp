@@ -49,7 +49,7 @@ void oneRun()
         cin >> horizontal[i].x;
         cin >> horizontal[i].y;
         cin >> horizontal[i].word;
-        from_source(&horizontal[i]);
+        from_source = (&horizontal[i]);
         source.adj.push_back(&from_source);
     }
 
