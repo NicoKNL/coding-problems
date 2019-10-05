@@ -1,93 +1,73 @@
-#include <iostream>
-#include <vector>
-#include <algorithm>
-#include <cmath>
+#include <bits/stdc++.h>
 
 using namespace std;
 
-struct Bowl {
-    int i;
-    double height;
-    double radius_bottom;
-    double radius_top;
+// todo debug stackAB, fully nested bowls are tricky, see 2nd example
+double stackAB(vector<double> const & height,
+        vector<double> const & bottom,
+        vector<double> const & top, int a, int b) { // b on a
+    if (bottom[b] >= top[a]) {
+        return height[b];
+    } else {
+        // check for angle/slope
+        double angle_a = (top[a] - bottom[a]) / height[a];
+        double angle_b = (top[b] - bottom[b]) / height[b];
 
-    bool operator<(const Bowl&a) const {
-        return i < a.i;
-    }
-};
-
-int stack(vector<Bowl> bowls) {
-    double height = bowls[0].height;
-
-
-    // TODO: Stacking logic nog function yet...  slope comparisons vs base comparisons and the mix of the options..
-    Bowl bottom;
-    Bowl top;
-    double bottom_slope;
-    double top_slope;
-    double base_offset;
-    double rim_offset;
-    for (int i = 1; i < bowls.size(); i++) {
-        bottom = bowls[i - 1];
-        top = bowls[i];
-
-        if (bottom.radius_top <= top.radius_bottom) {  // They can only stack on top of eachother
-            height += top.height;
-        } else { // They stack with overlap
-            bottom_slope = bottom.height / (bottom.radius_top - bottom.radius_bottom);
-            top_slope = top.height / (top.radius_top - top.radius_bottom);
-
-            if (bottom_slope < top_slope && bottom.radius_bottom > top.radius_bottom) { // They fully stack inside of eachother
-                height -= bottom.height;
-                height += top.height;
+        if (angle_a > angle_b) { // b fits in a without rims touching
+            if (bottom[b] <= bottom[a]) {
+                return max(0.0, height[b] - height[a]);
             } else {
-                base_offset = min(bottom.height, (top.radius_bottom - bottom.radius_bottom) * bottom_slope); // First shift bases
-                rim_offset = min(bottom.height, top_slope / bottom_slope * bottom.height);
-                height += max(base_offset, rim_offset);
+                return max(0.0, height[b] - (height[a] - ((bottom[b] - bottom[a]) * angle_a)));
             }
+        } else if (top[b] > top[a]){
+            double x = (top[a] - bottom[b]) / angle_b;
+            return max(0.0, height[b] - angle_b * x);
+        } else { // top[b] fits inside a
+            return 0.0;
         }
     }
-    return (int) height;
 }
 
-void oneRun()
-{
-    int n_bowls;
-    cin >> n_bowls;
+int main() {
+    int n;
+    cin >> n;
+    while (n--) {
+        int bowls;
+        cin >> bowls;
 
-    vector<Bowl> bowls;
-
-    int i = 0;
-    while (n_bowls--) {
-        Bowl b;
-        b.i = i;
-        cin >> b.height;
-        cin >> b.radius_bottom;
-        cin >> b.radius_top;
-        bowls.push_back(b);
-        i++;
-    }
-
-    sort(bowls.begin(), bowls.end()); // Ensure Bowl vector is sorted
-
-    int min_height;
-    int iter_index = 0;
-    do {
-        cout << "iter index: " << iter_index << endl;
-        if (iter_index == 0) {
-            min_height = stack(bowls);
-        } else {
-            min_height = min(min_height, stack(bowls));
+        vector<double> height(bowls);
+        vector<double> bottom(bowls);
+        vector<double> top(bowls);
+        vector<int> order(bowls);
+        for (int i = 0; i < bowls; i++) {
+            cin >> height[i] >> bottom[i] >> top[i];
+            order[i] = i;
         }
-        iter_index++;
-    } while (next_permutation(bowls.begin(), bowls.end()));
-    cout << min_height << endl;
-}
 
-int main()
-{
-    int n_cases;
-    cin >> n_cases;
-    while (n_cases--) oneRun();
+        double min_height = INT_MAX;
+        do { // stacking here
+            double current_height = 0;
+            int b; // bowl
+            for (int i = 0; i < bowls; i++) {
+                if (current_height > min_height) {
+                    break;
+                }
+                b = order[i];
+                if (i == 0) {
+                    current_height = height[b];
+                    cout << "first: " << height[b] << endl;
+                } else {
+                    current_height += stackAB(height, bottom, top, order[i-1], b);
+                    cout << "update: " << current_height << endl;
+                }
+            }
+            cout << "--------------" << endl;
+            cout << "current: " << current_height << endl;
+            cout << "min: " << min_height << endl;
+            cout << "--------------" << endl;
+            min_height = min(current_height, min_height);
+        } while (next_permutation(order.begin(), order.end()));
+        cout << min_height << endl;
+    }
     return 0;
 }
