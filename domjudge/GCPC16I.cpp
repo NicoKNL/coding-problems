@@ -1,5 +1,4 @@
 #include <bits/stdc++.h>
-//todo: finish
 using namespace std;
 
 int main() {
@@ -7,7 +6,7 @@ int main() {
     cin >> n;
     long long sum = 0;
     sum = (long long) pow(4, n);
-    sum *= n;
+    sum *= (long long) pow(2, n);
     cout << sum << endl;
     return 0;
 }
