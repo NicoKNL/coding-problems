@@ -99,7 +99,7 @@ int main() {
             current = pq.top().id;
             pq.pop();
             for (auto const & e: V[current].adj) {
-                if (V[e.target].dist > V[current].dist + e.w) { // todo; swap around
+                if (V[e.target].dist > V[current].dist + e.w) {
                     V[e.target].dist = V[current].dist + e.w;
                     pq.push(V[e.target]); // Re-add to queue
                 }
