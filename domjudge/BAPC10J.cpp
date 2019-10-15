@@ -1,96 +1,96 @@
-#include <iostream>
-#include <vector>
-#include <string>
-#include <queue>
-#include <utility>
-#include <string>
+#include<bits/stdc++.h>
 
 using namespace std;
 
-struct Node; // Predefinition
-
-struct Edge {
-    Edge(){}
-    Edge(Node* t) {
-        target = t;
-    }
-
-    Node* target;
-    int capacity = 1;
-    int flow;   // residual capacity can be derived from flow and capacity
-    Edge* back; // Needed to update flow in reverse direction
-};
-
-struct Node {
+struct Vertex {
     int x = -1;
     int y = -1;
     string word;
-    vector<Edge*> adj;
-    bool visited = false;
-    Edge* parent = nullptr; // Reference to edge to parent to update flow
-    int flow;    // Only for Edmonds-Karp
+    vector<int> adj;
+    int parent;
 };
+
+bool search(vector<Vertex> & V, vector<vector<int>> & capacity, vector<vector<int>> & flow, int source, int sink) {
+    for (int i = 0; i < V.size(); i++) {
+        V[i].parent = -1;
+    }
+    stack<int> STK;
+    STK.push(source);
+    V[source].parent = -2;
+    while (!STK.empty()) {
+        int id = STK.top(); STK.pop();
+        for (int i = 0; i < V[id].adj.size(); i++) {
+            int t_id = V[id].adj[i];
+            if (V[t_id].parent == -1 && )
+        }
+    }
+}
+
+int maxflow() {
+    while (searching()) {
+        int k = sink;
+    }
+}
 
 void oneRun()
 {
     int h, v; // Number of horizontal, and vertical words
     cin >> h >> v;
-    Node horizontal[h];
-    Node vertical[v];
+    vector<Vertex> V(h+v+2); // h horizontal followed by v vertical
+    int source = h + v, sink = h + v + 1;
 
-    Node source;
-    Node sink;
-
-    /** Read in all horizontal words and connect edges:
-     *      from source to horizontal
+    /*
+     * General construction:
+     *         SOURCE -1- V-WORD -1- H-WORD -1- SINK
      */
-    Edge from_source;
-    for (int i = 0; i < h; i++) {
-        cin >> horizontal[i].x;
-        cin >> horizontal[i].y;
-        cin >> horizontal[i].word;
-        from_source = (&horizontal[i]);
-        source.adj.push_back(&from_source);
+
+    // set up capacity/flow matrices
+    vector<vector<int>> capacity(h+v+2)(h+v+2);
+    vector<vector<int>> flow(h+v+2)(h+v+2);
+    for (int i = 0; i < h+v; i++) {
+        for (int j = 0; j < h+v; j++) {
+            capacity[i][j] = 0;
+            flow[i][j] = 0;
+        }
     }
 
-    /** Read in all vertical words and connect edges:
-     *      from horizontal to vertical
-     *      from vertical to sink
-     */
-    for (int i = 0; i < v; i++) {
-        cin >> vertical[i].x;
-        cin >> vertical[i].y;
-        cin >> vertical[i].word;
-        int min_y = vertical[i].y;
-        int max_y = vertical[i].y + vertical[i].word.length() - 1;
+    // read in horizontal words
+    for (int i = 0; i < h; i++) {
+        cin >> V[i].x;
+        cin >> V[i].y;
+        cin >> V[i].word;
+        capacity[i][sink] = 1; // h-word to sink
+    }
 
-        for (auto h: horizontal) {
-            int min_x = h.x;
-            int max_x = h.x + h.word.size();
+    // read in vertical words
+    for (int i = h; i < h + v; i++) {
+        cin >> V[i].x;
+        cin >> V[i].y;
+        cin >> V[i].word;
+        capacity[source][i] = 1; // source to v-word
+    }
+
+    // set up bipartite edges. Going from vertical words to horizontal words, capacity = 1;
+    for (int i = v; i < h+v; i++) {
+        int min_y = V[i].y;
+        int max_y = V[i].y + V[i].word.length() - 1;
+
+        for (int j = 0; j < h; j++) {
+            int min_x = V[j].x;
+            int max_x = V[j].x + V[j].word.size();
 
             // Check if the words cross with each other
-            if (not(min_y <= h.y && h.y <= max_y && min_x <= vertical[i].x && vertical[i].x <= max_x)) continue;
+            if (!(min_y <= V[j].y && V[j].y <= max_y && min_x <= V[i].x && V[i].x <= max_x)) continue;
 
-            for (int j = 0; j < vertical[i].word.size(); j++) {
-                if (vertical[i].word.at(i) != h.word.at(vertical[i].x)) {
-                    Edge intersection(&vertical[i]);
-                    h.adj.push_back(&intersection);
+            for (int j = 0; j < V[i].word.size(); j++) {
+                if (V[i].word.at(i) != V[j].word.at(V[i].x)) {
+                    V[i].adj.push_back(j);
+                    V[j].adj.push_back(i);
+                    capacity[i][j] = 1;
                 }
             }
         }
-
-        Edge to_sink(&sink);
-        vertical[i].adj.push_back(&to_sink);
     }
-    
-    int i = 0;
-    i = 1;
-    i++;
-
-
-
-
-
 }
 
 int main()

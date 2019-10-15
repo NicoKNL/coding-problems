@@ -1,5 +1,5 @@
 #include <bits/stdc++.h>
-// todo: runerror
+
 using namespace std;
 
 bool check(char a, char b, char c) {
