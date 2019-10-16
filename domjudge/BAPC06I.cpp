@@ -20,7 +20,7 @@ void dfs(vector<Vertex> & V, int id, int target, int length) {
         return;
     }
 
-    if (length > shortest_path_length + 1) {
+    if (length > shortest_path_length + 1 || length > V[id].dist + 1) {
         return;
     }
 
