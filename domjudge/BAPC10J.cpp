@@ -37,7 +37,7 @@ int maxflow(vector<Vertex> & V, vector<vector<int>> & capacity, vector<vector<in
         int id = sink;  // target
         int t_id = V[id].parent; // source
         int m = capacity[t_id][id] - flow[t_id][id];
-        while (t_id != -2) {
+        while (t_id != -2) { // find bottle neck on path
             m = min(m, capacity[t_id][id] - flow[t_id][id]);
             id = t_id;
             t_id = V[id].parent;
@@ -74,12 +74,6 @@ void oneRun()
     // set up capacity/flow matrices
     vector<vector<int>> capacity(h+v+2, vector<int>(h+v+2, 0));
     vector<vector<int>> flow(h+v+2, vector<int>(h+v+2, 0));
-    for (int i = 0; i < h+v; i++) {
-        for (int j = 0; j < h+v; j++) {
-            capacity[i][j] = 0;
-            flow[i][j] = 0;
-        }
-    }
 
     // read in horizontal words
     for (int i = 0; i < h; i++) {
