@@ -4,71 +4,59 @@
 using namespace std;
 
 struct Vertex {
-    int index = -1;
-    int lowlink = -1;
-    vector<int> adj;
-    int comp = -1; // To check if on stack
+    vector<pair<int, int>> adj; // target, edge-lengt
+    long dist = INT_MAX;
+    int parent = -1;
 };
 
 vector<Vertex> V;
-stack<int> STK;
-int id = 0;
-int comp = 0;
 
-void Tarjan(int v) {
-    V[v].index = id++;
-    V[v].lowlink = V[v].index;
-
-    // Set the depth index for v
-    STK.push(v);
-    for (int i = 0; i < V[v].adj.size(); i++) {
-        int t_id = V[v].adj[i];
-        if (V[t_id].index == -1) {
-            Tarjan(t_id);
-            V[v].lowlink = min(V[v].lowlink, V[t_id].lowlink);
-        } else if (V[t_id].comp == -1) {
-            V[v].lowlink = min(V[v].lowlink, V[t_id].index);
+void BellmanFord(int source) {
+    V[source].dist = 0;
+    for (int j = 0; j <= V.size(); j++) {
+        for (int v = 0; v < V.size(); v++) {
+            for (pair<int, int> edge : V[v].adj) {
+                long new_dist = V[v].dist + edge.second;
+                if (new_dist < V[edge.first].dist) {
+                    if (j == V.size()) { // N-th iteration, but we can still relax!
+                        cout << "negative-weight cycle" << endl;
+                        return;
+                    }
+                    V[edge.first].dist = V[v].dist + edge.second;
+                    V[edge.first].parent = v;
+                }
+            }
         }
     }
-    if (V[v].lowlink == V[v].index) { // SCC found, v = root
-        cout << "SSC: ";
-        int j;
-        do {
-            j = STK.top(); STK.pop();
-            cout << j << " ";
-            V[j].comp = comp;
-        } while (j != v);
-        comp++;
-        cout << endl;
-    }
 }
+
 
 int main() {
     Vertex v0, v1, v2, v3, v4, v5, v6, v7, v8;
 //    v0.adj.emplace_back(1);
 
-    v1.adj.emplace_back(2);
-    v1.adj.emplace_back(0);
+    v1.adj.emplace_back(make_pair(2, 1));
+    v1.adj.emplace_back(make_pair(0, 1));
 
-    v2.adj.emplace_back(5);
-    v2.adj.emplace_back(6);
-    v2.adj.emplace_back(3);
+    v2.adj.emplace_back(make_pair(5, 1));
+    v2.adj.emplace_back(make_pair(6, 1));
+    v2.adj.emplace_back(make_pair(3, 1));
 
-    v3.adj.emplace_back(7);
-    v3.adj.emplace_back(4);
+    v3.adj.emplace_back(make_pair(7, 1));
+    v3.adj.emplace_back(make_pair(4, 1));
 
-    v4.adj.emplace_back(3);
-    v4.adj.emplace_back(8);
+    v4.adj.emplace_back(make_pair(3, 1));
+    v4.adj.emplace_back(make_pair(8, -1));
 
-    v5.adj.emplace_back(1);
-    v5.adj.emplace_back(6);
+    v5.adj.emplace_back(make_pair(1, 1));
+    v5.adj.emplace_back(make_pair(6, 1));
 
-    v6.adj.emplace_back(7);
+    v6.adj.emplace_back(make_pair(7, 1));
 
-    v7.adj.emplace_back(6);
+    v7.adj.emplace_back(make_pair(6, 1));
 
-    v8.adj.emplace_back(4);
-    v8.adj.emplace_back(7);
+    v8.adj.emplace_back(make_pair(4, -1));
+    v8.adj.emplace_back(make_pair(7, 1));
 
     V.push_back(v0);
     V.push_back(v1);
@@ -80,8 +68,7 @@ int main() {
     V.push_back(v7);
     V.push_back(v8);
 
-    for (int i = 0; i < V.size(); i++) {
-        if (V[i].index == -1) Tarjan(i);
-    }
+    BellmanFord(1);
+    cout << "success" << endl;
     return 0;
 }
