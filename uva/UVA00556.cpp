@@ -5,27 +5,24 @@
 
 using namespace std;
 
-vector<vector<int>> ML {
-        {0, -1},
-        {1, 0}
-};
+vector<int> south = {0, 1};
+vector<int> north = {0, -1};
+vector<int> west = {-1, 0};
+vector<int> east = {1, 0};
 
-vector<vector<int>> MR {
-        {0, 1},
-        {-1, 0}
-};
-
-vector<int> rotate(vector<int> dir, vector<vector<int>> rotation) {
-    vector<int> new_dir;
-    int tmp;
-    for (int r = 0; r < rotation.size(); r++) {
-        tmp = 0;
-        for (int c = 0; c < rotation[0].size(); c++) {
-            tmp += rotation[r][c] * dir[c];
-        }
-        new_dir.push_back(tmp);
+vector<int> rotate(vector<int> dir, bool left) {
+    if (left) {
+        if (dir == north) dir = west;
+        else if (dir == west) dir = south;
+        else if (dir == south) dir = east;
+        else dir = north;
+    } else { // right
+        if (dir == north) dir = east;
+        else if (dir == east) dir = south;
+        else if (dir == south) dir = west;
+        else dir = north;
     }
-    return new_dir;
+    return dir;
 }
 
 bool in_bounds(vector<int> pos, int rows, int cols) {
@@ -63,16 +60,17 @@ int main() {
 
         while (true) {
             // step
+            // todo: in-order traversel?
             // Rotate right check
-            dir = rotate(dir, MR);
-            next_pos = {pos[0] + dir[0], pos[1] - dir[1]};
-            if (in_bounds(next_pos, rows, cols) && maze[next_pos[1]][next_pos[0]] == 0) {
+            dir = rotate(dir, false);
+            next_pos = {pos[0] + dir[0], pos[1] + dir[1]};
+            if (!in_bounds(next_pos, rows, cols) || maze[next_pos[1]][next_pos[0]] == 0) {
                 book[next_pos[1]][next_pos[0]] += 1;
-                dir = rotate(dir, ML);
+                dir = rotate(dir, true);
                 pos = next_pos;
             } else {
-                dir = rotate(dir, ML);
-                dir = rotate(dir, ML);
+                dir = rotate(dir, true);
+                dir = rotate(dir, true);
                 continue;
             }
             if (pos[0] == 0 && pos[1] == rows - 1) break;
