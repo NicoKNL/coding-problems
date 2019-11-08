@@ -14,9 +14,9 @@ typedef vector<vc> vvc;
 vii adj(int r, int c, int rows, int cols) {
     vii result;
     if (r > 0) result.push_back({r-1, c});
-    if (c > 0) result.push_back({r, c-1});
+    result.push_back({r, (c-1+cols)%cols});
     if (r != rows - 1) result.push_back({r+1, c});
-    if (c != cols - 1) result.push_back({r, c+1});
+    result.push_back({r, (c+1)%cols});
     return result;
 }
 
@@ -37,24 +37,25 @@ int main() {
 
         int R, C;
         cin >> R >> C;
+        char L = grid[R][C];
         vector<int> sizes;
         int count;
         loop(r, rows) loop(c, cols) {
-            if (!visited[r][c] && grid[r][c] == 'l') {
+            if (!visited[r][c] && grid[r][c] == L) {
                 bool own_continent = false;
-                count = 0;
+                count = 1;
                 queue<ii> Q;
                 Q.push({r, c});
                 visited[r][c] = true;
                 while (!Q.empty()) {
-                    count++;
                     ii cell = Q.front(); Q.pop();
                     if (cell.first == R && cell.second == C) own_continent = true;
                     vii neighbours = adj(cell.first, cell.second, rows, cols);
                     loop(i, neighbours.size()) {
                         ii t_cell = neighbours[i];
-                        if (!visited[t_cell.first][t_cell.second] && grid[t_cell.first][t_cell.second] == 'l') {
+                        if (!visited[t_cell.first][t_cell.second] && grid[t_cell.first][t_cell.second] == L) {
                             visited[t_cell.first][t_cell.second] = true;
+                            count++;
                             Q.push(t_cell);
                         }
                     }
@@ -62,10 +63,13 @@ int main() {
                 if (!own_continent) sizes.push_back(count);
             }
         }
-        sort(sizes.begin(), sizes.end(), greater<int>());
-        printf("%d\n", sizes[0]);
 
-        // todo: finish
+        if (sizes.empty()) {
+            printf("0\n");
+        } else {
+            sort(sizes.begin(), sizes.end(), greater<int>());
+            printf("%d\n", sizes[0]);
+        }
     }
     return 0;
 }
