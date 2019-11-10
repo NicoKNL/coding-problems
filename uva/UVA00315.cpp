@@ -1,7 +1,5 @@
 #include <bits/stdc++.h>
 
-// TODO: hand in
-
 using namespace std;
 typedef vector<int> vi;
 typedef pair<int, int> ii;
