@@ -3,7 +3,7 @@ using namespace std;
 
 typedef vector<int> vi;
 #define loop(i, n) for (int i = 0; i < n; i++)
-// todo: hand in
+
 int main() {
     int n;
     int cases = 1;
