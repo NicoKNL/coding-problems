@@ -1,36 +1,13 @@
-#include <iostream>
-#define UPPER 1000001
+#include <bits/stdc++.h>
 using namespace std;
 
-int main() {
-    long* tracker = new long[UPPER];
-    tracker[1] = 1;
-    long i, j, low, high;
-    while (cin >> i >> j) {
-        low = min(i, j);
-        high = max(i, j);
+#define loop(i, n) for (int i = 0; i < n; i++)
 
-        long longest = 0;
-        long index, count;
-        for (long k = low; k <= high; k++) {
-            index = k;
-            count = 0;
-cycle:
-            if (index < UPPER && tracker[index] != 0) {
-                longest = max(longest, count + tracker[index]);
-                tracker[k] = count + tracker[index];
-            } else {
-                if (index % 2 == 1) {
-                    index = (3 * index + 1) / 2;
-                    count += 2;
-                } else {
-                    index /= 2;
-                    count++;
-                }
-                goto cycle;
-            }
-        }
-        cout << i << " " << j << " " << longest << endl;
-    }
+typedef vector<int> vi;
+typedef vector<vi> vvi;
+typedef pair<int, int> ii;
+typedef vector<ii> vii;
+
+int main() {
     return 0;
 }
