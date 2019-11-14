@@ -1,127 +1,109 @@
 #include<bits/stdc++.h>
 
 using namespace std;
+typedef vector<int> vi;
+typedef vector<vi> vvi;
 
-struct Vertex {
-    int x = -1;
-    int y = -1;
-    string word;
-    vector<int> adj;
-    int parent;
+int MAX_V = 1010;
+vvi residual;
+int max_flow, flow, s, t;
+vi parent;
+
+struct Word {
+    int i; // id
+    int x;
+    int y;
+    string w; // word
 };
 
-bool search(vector<Vertex> & V, vector<vector<int>> & capacity, vector<vector<int>> & flow, int source, int sink) {
-    for (int i = 0; i < V.size(); i++) {
-        V[i].parent = -1;
-    }
-    stack<int> STK;
-    STK.push(source);
-    V[source].parent = -2;
-    while (!STK.empty()) {
-        int id = STK.top(); STK.pop();
-        for (int i = 0; i < V[id].adj.size(); i++) {
-            int t_id = V[id].adj[i];
-//            cout << t_id << ", " << id << "-----" << flow[id][t_id] << " " << capacity[id][t_id] << " parent: " << V[t_id].parent << endl;
-            if (V[t_id].parent == -1 && flow[id][t_id] < capacity[id][t_id]) {
-                V[t_id].parent = id;
-                if (t_id == sink) return true;
-                STK.push(t_id);
-            }
-        }
-    }
-    return false;
-}
+// assumes s, t, and residual are initialized
+void read_graph(int h, int v) {
+    vector<Word> h_words;
+    vector<Word> v_words;
 
-int maxflow(vector<Vertex> & V, vector<vector<int>> & capacity, vector<vector<int>> & flow, int source, int sink) {
-    while (search(V, capacity, flow, source, sink)) {
-        int id = sink;  // target
-        int t_id = V[id].parent; // source
-        int m = capacity[t_id][id] - flow[t_id][id];
-        while (t_id != -2) { // find bottle neck on path
-            m = min(m, capacity[t_id][id] - flow[t_id][id]);
-            id = t_id;
-            t_id = V[id].parent;
-        }
-
-        id = sink;
-        t_id = V[id].parent;
-        while (t_id != -2) {
-            flow[t_id][id] += m;
-            flow[id][t_id] -= m;
-            id = t_id;
-            t_id = V[id].parent;
-        }
-    }
-    int sum = 0;
-    for (int i = 0; i < V.size(); i++) {
-        sum += flow[source][i];
-    }
-    return sum;
-}
-
-void oneRun()
-{
-    int h, v; // Number of horizontal, and vertical words
-    cin >> h >> v;
-    vector<Vertex> V(h+v+2); // h horizontal followed by v vertical
-    int source = h + v, sink = h + v + 1;
-
-    /*
-     * General construction:
-     *         SOURCE -1- V-WORD -1- H-WORD -1- SINK
-     */
-
-    // set up capacity/flow matrices
-    vector<vector<int>> capacity(h+v+2, vector<int>(h+v+2, 0));
-    vector<vector<int>> flow(h+v+2, vector<int>(h+v+2, 0));
+    int x, y;
+    string w;
 
     // read in horizontal words
     for (int i = 0; i < h; i++) {
-        cin >> V[i].x;
-        cin >> V[i].y;
-        cin >> V[i].word;
-        V[i].adj.emplace_back(sink);
-        capacity[i][sink] = 1; // h-word to sink
+        cin >> x >> y >> w;
+        h_words.push_back({i, x, y, w});
+        residual[i][t] = 1; // h-word to sink
     }
 
     // read in vertical words
     for (int i = h; i < h + v; i++) {
-        cin >> V[i].x;
-        cin >> V[i].y;
-        cin >> V[i].word;
-        V[source].adj.emplace_back(i);
-        capacity[source][i] = 1; // source to v-word
+        cin >> x >> y >> w;
+        v_words.push_back({i, x, y, w});
+        residual[s][i] = 1; // source to v-word
     }
 
     // set up bipartite edges. Going from vertical words to horizontal words, capacity = 1;
-    for (int i = v; i < h+v; i++) { // for verticals
-        int min_y = V[i].y;
-        int max_y = V[i].y + V[i].word.length() - 1;
-
-        for (int j = 0; j < h; j++) { // for horizontals
-            int min_x = V[j].x;
-            int max_x = V[j].x + V[j].word.size();
-
-            // Check if the words cross with each other
-            if (!(min_y <= V[j].y && V[j].y <= max_y && min_x <= V[i].x && V[i].x <= max_x)) continue;
-
-            if (V[i].word.at(V[j].y - V[i].y) != V[j].word.at(V[i].x - V[j].x)) {
-//                cout << V[i].word << " - " << V[j].word << " " << V[i].word.at(V[j].y - V[i].y) << " and " << V[j].word.at(V[i].x - V[j].x) << endl;
-                V[i].adj.push_back(j);
-                V[j].adj.push_back(i);
-                capacity[i][j] = 1;
+    for (Word h_word : h_words) {
+        for (Word v_word : v_words) {
+            if (h_word.x <= v_word.x && v_word.x <= h_word.x + h_word.w.size() - 1) {
+                if (v_word.y <= h_word.y && h_word.y <= v_word.y + v_word.w.size() - 1) {
+                    // Then they intersect at (v_word.x, h_word.y)
+                    char a = h_word.w[v_word.x - h_word.x];
+                    char b = v_word.w[h_word.y - v_word.y];
+//                    printf("[%s] [%s] [%c] [%c]\n", h_word.w.c_str(), v_word.w.c_str(), a, b);
+                    if (a != b) {
+                        residual[v_word.i][h_word.i] = 1;
+                    }
+                }
             }
         }
     }
-    int total_flow = maxflow(V, capacity, flow, source, sink);
-    cout << h + v - total_flow << endl;
+}
+
+void augment(int v, int min_edge) {
+    if (v == s) {
+        flow = min_edge;
+        return;
+    } else if (parent[v] != -1) {
+        augment(parent[v], min(min_edge, residual[parent[v]][v]));
+        residual[parent[v]][v] -= flow;
+        residual[v][parent[v]] += flow;
+    }
 }
 
 int main()
 {
     int n_cases;
     cin >> n_cases;
-    while (n_cases--) oneRun();
+    while (n_cases--) {
+        int h, v; // Number of horizontal, and vertical words
+        cin >> h >> v;
+
+        residual = vector<vector<int>> (MAX_V, vector<int>(MAX_V));
+        s = h + v;
+        t = h + v + 1;
+
+        read_graph(h, v); // construct initial capacity values etc
+
+        max_flow = 0;
+        while (true) {
+            flow = 0;
+            vi dist(MAX_V, INT_MAX); dist[s] = 0;
+            queue<int> Q; Q.push(s);
+            parent.assign(MAX_V, -1);
+            while (!Q.empty()) {
+                int u = Q.front(); Q.pop();
+                if (u == t) break; // reached sink
+                for (int v = 0; v < MAX_V; v++) {
+                    if (residual[u][v] > 0 && dist[v] == INT_MAX) {
+                        dist[v] = dist[u] + 1;
+                        Q.push(v);
+                        parent[v] = u;
+                    }
+                }
+            }
+            augment(t, INT_MAX);
+            if (flow == 0) break;
+            max_flow += flow;
+        }
+        printf("%d\n", h + v - max_flow);
+    }
     return 0;
 }
 
