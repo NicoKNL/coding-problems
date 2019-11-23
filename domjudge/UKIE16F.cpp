@@ -1,63 +1,38 @@
 #include <bits/stdc++.h>
-
 using namespace std;
 
-void increment(string & s, int i) {
-    if (i < 0) {
-        s = "1" + s;
-        return;
-    }
+#define loop(i, n) for (int i = 0; i < n; i++)
 
-    if (s.at(i) == '9') {
-        s.at(i) = '0';
-        increment(s, --i);
-    } else {
-        s.at(i) = s.at(i) + 1;
-    }
-}
+typedef vector<int> vi;
+typedef vector<vi> vvi;
+typedef pair<int, int> ii;
+typedef vector<ii> vii;
 
 int main() {
     string s;
     cin >> s;
-    vector<int> digits(10); // 0 - 9
-    for (char c: s) {
-        digits[c - '0']++;
-    }
 
-    int minval = INT_MAX;
-    int mindigit = -1;
+    unordered_map<int, int> m;
+    for (char c : s) m[c - '0']++;
+
+    int min_digit = -1;
+    int count = INT_MAX;
     for (int i = 0; i < 10; i++) {
-        if (digits[i] < minval) {
-            minval = digits[i];
-            mindigit = i;
+        if (m[i] < count || (m[i] == count && min_digit == 0)) {
+            count = m[i];
+            min_digit = i;
         }
     }
-
-    bool all_same = true;
-    for (int i = 0; i < 10; i++) {
-        if (digits[i] != minval) {
-            all_same = false;
-            break;
-        }
-    }
-
-    if (all_same) minval++;
 
     string result;
-    while (result.length() < minval) {
-        for (int i = 1; i < 10; i++) {
-            if (digits[i] > 0) {
-                result += '0' + i;
-                digits[i]--;
-                break;
-            }
-        }
+    if (min_digit == 0) {
+        result = "1";
+        loop(i, count) result += '0';
+        result += '0';
+    } else {
+        loop(i, count) result += to_string(min_digit);
+        result += to_string(min_digit);
     }
-
-
-    cout << result << endl;
-    //  increment(s, s.length() - 1);
-    // todo: every digit has some count, form numbers based on that and use increment()
-    cout << s;
+    printf("%s\n", result.c_str());
     return 0;
 }
