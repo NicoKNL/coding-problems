@@ -30,7 +30,12 @@ int main() {
         if (s == "END") break;
         if (s == "SHELVE") {
             /* shelving logic */
-        } else {
+
+        } else if (s == "BORROW"){
+            /* borrow logic */
+
+        } else if (s == "RETURN") {
+            /* return logic */
 
         }
     }
