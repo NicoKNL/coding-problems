@@ -1,99 +1,97 @@
-#include <iostream>
-#include <vector>
-#include <iomanip>
-#include <string>
-
+#include <bits/stdc++.h>
 using namespace std;
 
-vector<int> south = {0, 1};
-vector<int> north = {0, -1};
-vector<int> west = {-1, 0};
-vector<int> east = {1, 0};
+#define loop(i, n) for (int i = 0; i < n; i++)
 
-vector<int> rotate(vector<int> dir, bool left) {
-    if (left) {
-        if (dir == north) dir = west;
-        else if (dir == west) dir = south;
-        else if (dir == south) dir = east;
-        else dir = north;
-    } else { // right
-        if (dir == north) dir = east;
-        else if (dir == east) dir = south;
-        else if (dir == south) dir = west;
-        else dir = north;
-    }
-    return dir;
+typedef vector<int> vi;
+typedef vector<vi> vvi;
+typedef pair<int, int> ii;
+typedef vector<ii> vii;
+
+int rows, cols;
+
+
+ii operator+(const ii & a, const ii & b) {
+    return {a.first + b.first, a.second + b.second};
 }
 
-bool in_bounds(vector<int> pos, int rows, int cols) {
-    return 0 <= pos[0] && pos[0] < cols && 0 <= pos[1] && pos[1] < rows;
+ii turnLeft(ii dir) {
+    return {-dir.second, dir.first};
+}
+
+ii turnRight(ii dir) {
+    return {dir.second, -dir.first};
+}
+
+bool inBounds(ii pos, ii dir, const vvi & grid) {
+    ii next_pos = pos + dir;
+    return (0 <= next_pos.first && next_pos.first < rows) && (0 <= next_pos.second && next_pos.second < cols) && grid[next_pos.first][next_pos.second] == 0;
+}
+
+void printGrid(ii pos, const vvi & grid) {
+    cout << "---------------------------\n";
+    loop(r, rows) {
+        loop(c, cols) {
+            if (r == pos.first && c == pos.second) {
+                cout << 'X';
+            } else {
+                cout << grid[r][c];
+            }
+        }
+        cout << '\n';
+    }
 }
 
 int main() {
-    int rows, cols, tmp;
-    string s_tmp;
-    vector<vector<int>> maze;
-    vector<vector<int>> book;
-
-    vector<int> dir = {0, 1};
-
     while (cin >> rows >> cols) {
         if (rows == 0 && cols == 0) break;
-        maze.clear();
 
-        for (int r = 0; r < rows; r++) {
-            vector<int> maze_row;
-            vector<int> book_row;
-            cin >> s_tmp;
-            for (int c = 0; c < cols; c++) {
-                tmp = s_tmp.at(c) - '0';
-                maze_row.push_back(tmp);
-                book_row.push_back(0);
+        vvi grid(rows, vi(cols));
+        vvi count(rows, vi(cols, 0));
+
+        string rowstr;
+        loop(r, rows) {
+            cin >> rowstr;
+            loop(c, cols) {
+                grid[r][c] = rowstr[c] - '0';
             }
-            maze.push_back(maze_row);
-            book.push_back(book_row);
         }
 
-        vector<int> pos {0, rows - 1};
-        vector<int> dir {1, 0};
-        vector<int> next_pos;
+        ii base_pos = {rows - 1, 0};
+        ii pos = {rows - 1, 0};
+        ii dir = {0, 1};
+        ii new_pos = {-1, -1};
 
-        while (true) {
-            // step
-            // todo: in-order traversel?
-            // Rotate right check
-            dir = rotate(dir, false);
-            next_pos = {pos[0] + dir[0], pos[1] + dir[1]};
-            if (!in_bounds(next_pos, rows, cols) || maze[next_pos[1]][next_pos[0]] == 0) {
-                book[next_pos[1]][next_pos[0]] += 1;
-                dir = rotate(dir, true);
-                pos = next_pos;
+        while (count[base_pos.first][base_pos.second] == 0) {
+            if (inBounds(pos, turnRight(dir), grid)) {
+                // try going right
+                dir = turnRight(dir);
+            } else if (inBounds(pos, dir, grid)) {
+                // then try going forward
             } else {
-                dir = rotate(dir, true);
-                dir = rotate(dir, true);
+                // otherwise turn left and restart
+                dir = turnLeft(dir);
                 continue;
             }
-            if (pos[0] == 0 && pos[1] == rows - 1) break;
+            new_pos = pos + dir;
+            count[new_pos.first][new_pos.second]++;
+            pos = new_pos;
+//            printGrid(pos, grid);
         }
 
-        // Start counting
-        int counter[5] = {0};
-        for (int r = 0; r < rows; r++) {
-            for (int c = 0; c < cols; c++) {
-                if (maze[r][c] == 0) {
-                    counter[book[r][c]]++;
-                }
+        vi book(5);
+
+        loop(r, rows) loop(c, cols) {
+            if (grid[r][c] == 0) {
+                book[count[r][c]]++;
             }
         }
 
-        // Output
-        for (int i = 0; i < 5; i++) {
-            cout << setw(3) << counter[i];
-            if (i < 4) cout << " ";
+        loop(i, 5) {
+            cout << setw(3) << book[i];
         }
-        cout << endl;
+        cout << '\n';
     }
-
 
     return 0;
 }
