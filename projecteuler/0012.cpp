@@ -5,6 +5,8 @@ int main()
 {
     unordered_map<long long, int> triangular_divs = {{0, 0}};
 
+    // TODO: Improve using formula for total number of divisors of any given n, and the fact that n and n+1 are coprime. (gcd(n, n+1) = 1)
+
     int i = 12000;
     bool found = false;
     while (!found) {
