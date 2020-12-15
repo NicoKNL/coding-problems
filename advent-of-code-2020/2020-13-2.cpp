@@ -47,7 +47,6 @@ int main()
 
     // Sieve
     bigint t = busses[0].first;
-    cout << "first: " << t << endl;
     bigint M = busses[0].second;   
     for (bigint i = 0; i < busses.size() - 1; ++i) {
         bigint a2 = busses[i + 1].first;
