@@ -21,8 +21,8 @@ private:
             right += m_data[i][m_data.size() - 1];
             left += m_data[i][0];
         }
-        // reverse(bottom.begin(), bottom.end());
-        // reverse(left.begin(), left.end());
+        reverse(bottom.begin(), bottom.end());
+        reverse(left.begin(), left.end());
         edges.emplace_back(top);
         edges.emplace_back(right);
         edges.emplace_back(bottom);
@@ -82,21 +82,11 @@ int main()
 
     vector<string> edges;
     for (Tile tile_a : tiles) {
-        cout << tile_a.getId() << endl;
         for (string edge : tile_a.getEdges()) {
             edges.emplace_back(edge);
         }
     }
 
-    cout << edges.size() << endl;
-    sort(edges.begin(), edges.end());
-    cout << edges.size() << endl;
-
-    for (int i = 0; i < edges.size(); ++i) {
-        cout << "edge: " << edges[i] << endl;
-    }
-
-    cout << "Starting matching" << endl;
     for (int i = 0; i < edges.size(); ++i) {
         string edge_a = edges[i];
         for (int j = 0; j < edges.size(); ++j) {
@@ -117,12 +107,10 @@ int main()
         }
     }
 
-    cout << "Starting count" << endl;
     uint64_t result = 1;
     for (Tile tile : tiles) {
         if (tile.count / 2 == 2) {
             result *= (uint64_t) tile.getId(); 
-            cout << tile.getId() << endl;
         }
     }
     cout << result << endl;
