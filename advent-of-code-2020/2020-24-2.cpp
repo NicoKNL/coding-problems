@@ -1,8 +1,9 @@
 #include <bits/stdc++.h>
 using namespace std;
 
-vector<vector<int>> grid(501, vector<int>(501));
-vector<vector<int>> next_grid(501, vector<int>(501));
+#define GRID_SIZE 1001
+vector<vector<int>> grid(GRID_SIZE, vector<int>(GRID_SIZE));
+vector<vector<int>> next_grid(GRID_SIZE, vector<int>(GRID_SIZE));
 string line = "";
 string dir = "";
 int row;
@@ -66,9 +67,20 @@ void visit()
     }
 }
 
+int countAll()
+{
+    int count = 0;
+    for (int r = 0; r < GRID_SIZE; ++r) {
+        for (int c = 0; c < GRID_SIZE; ++c) {
+            count += grid[r][c];
+        }
+    }
+    return count;
+}
+
 int count(int r, int c)
 {
-    bool even = row % 2 == 0;
+    bool even = (r % 2 == 0);
     int result = 0;
     result += grid[r][c + 1]; // e
     result += grid[r][c - 1]; // w
@@ -91,15 +103,14 @@ int count(int r, int c)
 int main() 
 {
     // grab input file
-    ifstream infile ("../advent-of-code-2020/input/24 copy.txt");
+    ifstream infile ("../advent-of-code-2020/input/24.txt");
     if (!infile.is_open()) {
         return -1;
     }
 
-
     while (getline(infile, line)) {
-        row = 250;
-        col = 250;
+        row = GRID_SIZE / 2;
+        col = GRID_SIZE / 2;
         while (line.length() > 0) {
             extractMove();
             visit();
@@ -108,40 +119,20 @@ int main()
     }
 
     for (int i = 0; i < 100; ++i) {
-        next_grid = vector<vector<int>>(501, vector<int>(501)); 
+        next_grid = grid; 
 
-        for (int r = 1; r < 500; ++r) {
-            for (int c = 1; c < 500; ++c) {
+        for (int r = 1; r < GRID_SIZE - 1; ++r) {
+            for (int c = 1; c < GRID_SIZE - 1; ++c) {
                 int black_count = count(r, c);
-                if (grid[r][c] == 1) {
-                    if (black_count == 0 || black_count > 2) {
-                        next_grid[r][c] = 0;
-                    } else {
-                        next_grid[r][c] = 1;
-                    }
-                } else {
-                    if (black_count == 2) {
-                        next_grid[r][c] = 1;
-                    }
+                if (grid[r][c] == 1 && (black_count == 0 || black_count > 2)) { // black
+                    next_grid[r][c] = 0;
+                } else if (grid[r][c] == 0 && black_count == 2) { // white
+                    next_grid[r][c] = 1;
                 }
             }
         }
-
         grid = next_grid;
-        int count = 0;
-        for (int r = 0; r < 501; ++r) {
-            for (int c = 0; c < 501; ++c) {
-                count += grid[r][c];
-            }
-        }
-        cout << count << endl;
     }
 
-    int count = 0;
-    for (int r = 0; r < 501; ++r) {
-        for (int c = 0; c < 501; ++c) {
-            count += grid[r][c];
-        }
-    }
-    cout << count << endl;
+    cout << countAll() << endl;
 }
