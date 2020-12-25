@@ -1,6 +1,8 @@
 #include <bits/stdc++.h>
 using namespace std;
 
+#define MAX_DEPTH 5
+
 int a_key = 97;
 int b_key = 2;
 
@@ -10,12 +12,12 @@ const int ior = -3;
 const int ileft = -4;
 const int iright = -5;
 
-
 unordered_map<int, vector<vector<int>>> rules;
 int max_word_length = 0;
 set<string> words;
 list<int> super_rule;
 string r;
+map<int, string> replacements;
 
 void generateSuperRegex()
 {
@@ -70,8 +72,26 @@ void convertToString()
             case iright:
                 r += ')';
                 break;
+            case 8:
+                r += "(";
+                r += replacements[8];
+                r += ")+"; 
+                break;
+            case 11:
+                r += "(";
+                r += replacements[11];
+                r += ")";
+                break;
         }  
     }
+}
+
+string generateRegex(int start)
+{
+    super_rule = {start};
+    generateSuperRegex();
+    convertToString();
+    return r;
 }
 
 int main() 
@@ -120,9 +140,38 @@ int main()
         }
     }
 
+    vector<vector<int>> rule_override;
+    for (int i = 1; i <= MAX_DEPTH; ++i) {
+        vector<int> rule;
+        for (int j = 1; j <= i; ++j) {
+            rule.push_back(42);
+        }
+        for (int j = 1; j <= i; ++j) {
+            rule.push_back(31);
+        }
+        rule_override.push_back(rule);
+    }
+    rules[11] = rule_override;
+
+    rule_override = {};
+    for (int i = 1; i <= MAX_DEPTH; ++i) {
+        vector<int> rule;
+        for (int j = 1; j <= i; ++j) {
+            rule.push_back(42);
+        }
+        rule_override.push_back(rule);
+    }
+    rules[8] = rule_override;
+
+    // rules[8] = {{42}, {42, 8}};           // 42
+    // rules[11] = {{42, 31}, {42, 11, 31}}; // 42, 31
+
+
     super_rule.push_back(0);
     generateSuperRegex();
     convertToString();
+
+    cout << "built regexp" << endl;
 
     regex regexp(r);
     smatch m;
