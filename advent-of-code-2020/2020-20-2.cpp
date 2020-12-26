@@ -72,6 +72,134 @@ public:
 
 vector<Tile> tiles;
 
+vector<vector<char>> rotateLeft(vector<vector<char>> & grid)
+{
+    vector<vector<char>> new_grid = grid;
+    int w = grid.size();
+    for (int r = 0; r < w; ++r) {
+        for (int c = 0; c < w; ++c) {
+            new_grid[w - c - 1][r] = grid[r][c];
+        }
+    }
+    return new_grid;
+}
+
+vector<vector<char>> flip(vector<vector<char>> & grid)
+{
+    vector<vector<char>> new_grid = grid;
+    int w = grid.size();
+    for (int r = 0; r < w; ++r) {
+        for (int c = 0; c < w; ++c) {
+            new_grid[r][w - c - 1] = grid[r][c];
+        }
+    }
+    return new_grid;
+}
+
+bool markDragon(vector<vector<char>> & grid, int r, int c)
+{
+    if (r > grid.size() - 3) return false;
+    if (c > grid[0].size() - 20) return false;
+
+    //   01234567890123456789
+    // 0 ,,,,,,,,,,,,,,,,,,#,
+    // 1 #,,,,##,,,,##,,,,###
+    // 2 ,#,,#,,#,,#,,#,,#,,,
+    vector<pair<int, int>> dragon = {
+        {0, 18},
+        {1, 0}, {1, 5}, {1, 6}, {1, 11}, {1, 12}, {1, 17}, {1, 18}, {1, 19},
+        {2, 1}, {2, 4}, {2, 7}, {2, 10}, {2, 13}, {2, 16}
+    };
+
+    for (auto offset : dragon) {
+        int ro = offset.first;
+        int co = offset.second;
+        if (grid[r + ro][c + co] != '#') return false;        
+    }
+
+    for (auto offset : dragon) {
+        int ro = offset.first;
+        int co = offset.second;
+        grid[r + ro][c + co] = 'O';        
+    }
+    return true;
+}
+
+vector<vector<char>> mergeGrid(vector<vector<Tile>> & grid)
+{
+    vector<vector<char>> image;
+    for (int r = 0; r < grid.size(); ++r) {
+        for (int j = 0; j < grid[r][0].m_data.size(); ++j) {
+            image.push_back({});
+        }
+
+        for (int c = 0; c < grid[r].size(); ++c) {
+            for (int ir = 0; ir < grid[r][c].m_data.size(); ++ir) {
+                for (int ic = 0; ic < grid[r][c].m_data[0].size(); ++ic) {
+                    image[r * 10 + ir].push_back(grid[r][c].m_data[ir][ic]);
+                }
+            }
+        }
+    }
+    return image;
+}
+
+void markDragons(vector<vector<char>> & grid)
+{
+    bool stop = false;
+    for (int i = 0; i < 4; ++i) {
+        for (int r = 0; r < grid.size(); ++r) {
+            for (int c = 0; c < grid[0].size(); ++c) {
+                if (markDragon(grid, r, c)) {
+                    stop = true;
+                }
+            }
+        }
+        if (stop) return;
+        grid = rotateLeft(grid);
+    }
+    grid = flip(grid);
+    for (int i = 0; i < 4; ++i) {
+        for (int r = 0; r < grid.size(); ++r) {
+            for (int c = 0; c < grid[0].size(); ++c) {
+                if (markDragon(grid, r, c)) {
+                    stop = true;
+                }
+            }
+        }
+        if (stop) return;
+        grid = rotateLeft(grid);
+    }
+}
+
+void eraseBorders(vector<vector<char>> & image)
+{
+    for (int r = image.size() - 1; r >= 0; --r) {
+        if (r % 10 == 9 || r % 10 == 0) {
+            image.erase(image.begin() + r);
+        }
+    }
+
+    for (int c = image[0].size() - 1; c >= 0; --c) {
+        if (c % 10 == 9 || c % 10 == 0) {
+            for (int r = 0; r < image.size(); ++r) {
+                image[r].erase(image[r].begin() + c);
+            }
+        }
+    } 
+}
+
+int roughness(vector<vector<char>> & grid)
+{
+    int result = 0;
+    for (int r = 0; r < grid.size(); ++r) {
+        for (int c = 0; c < grid.size(); ++c) {
+            if (grid[r][c] == '#') ++result;
+        }
+    }
+    return result;
+}
+
 int main() 
 {
     // grab input file
@@ -134,10 +262,7 @@ int main()
     for (Tile tile : tiles) {
         if (tile.count / 2 == 2) {
             cout << tile.m_id << endl;
-            // 2521
-            // 2633
-            // 3067
-            // 1061
+            // 2521, 2633, 3067, 1061
         }
     }
 
@@ -163,7 +288,6 @@ int main()
         }
 
         if (right && bottom) {
-            cout << "found" << endl;
             break;
         } else {
             if (i == 4) grid[0][0].flip();
@@ -174,6 +298,7 @@ int main()
 
     // Complete first row 
     string right = grid[0][0].right;
+    reverse(right.begin(), right.end());
     bool found = true;
     while (found) {
         found = false;
@@ -184,6 +309,7 @@ int main()
                 if (tile.left == right) {
                     found = true;
                     right = tile.right;
+                    reverse(right.begin(), right.end());
                     tile.taken = true;
                     grid[0].push_back(tile);
                 } 
@@ -195,6 +321,7 @@ int main()
                 if (tile.left == right) {
                     found = true;
                     right = tile.right;
+                    reverse(right.begin(), right.end());
                     tile.taken = true;
                     grid[0].push_back(tile);
                 } 
@@ -203,12 +330,10 @@ int main()
             if (found) break;
         }
     }
-    cout << "tiles: " << tiles.size() << endl;
-    cout << "first row: " << grid[0].size() << endl;
 
     for (int r = 1; r < 12; ++r) {
-        cout << "starting: " << r << endl;
         string bottom = grid[r - 1][0].bottom;
+        reverse(bottom.begin(), bottom.end());
         // Place first of new row
         found = false;
         for (Tile & tile : tiles) {
@@ -219,6 +344,7 @@ int main()
                 if (tile.top == bottom) {
                     found = true;
                     right = tile.right;
+                    reverse(right.begin(), right.end());
                     tile.taken = true;
                     grid.push_back({tile});
                 } 
@@ -231,19 +357,18 @@ int main()
                 if (tile.top == bottom) {
                     found = true;
                     right = tile.right;
+                    reverse(right.begin(), right.end());
                     tile.taken = true;
                     grid.push_back({tile});
                 } 
             }
         }
 
-        cout << "first found" << endl;
-
         // Complete row 
         right = grid[r][0].right;
+        reverse(right.begin(), right.end());
         found = true;
         while (found) {
-            cout << "add..." << endl;
             found = false;
             for (Tile & tile : tiles) {
                 if (tile.taken) continue;
@@ -252,6 +377,7 @@ int main()
                     if (tile.left == right) {
                         found = true;
                         right = tile.right;
+                        reverse(right.begin(), right.end());
                         tile.taken = true;
                         grid[r].push_back(tile);
                     } 
@@ -264,6 +390,7 @@ int main()
                     if (tile.left == right) {
                         found = true;
                         right = tile.right;
+                        reverse(right.begin(), right.end());
                         tile.taken = true;
                         grid[r].push_back(tile);
                     } 
@@ -274,21 +401,8 @@ int main()
         }
     }
 
-    cout << grid.size() << " " << grid[0].size() << endl;
-
-    // construct final grid
-    vector<vector<char>> image;
-    for (int r = 0; r < grid.size(); ++r) {
-        cout << "r: " << r << " " << "max c: " << grid[r].size() << endl;
-        for (int j = 0; j < grid[0][0].m_data.size(); ++j) {
-            image.push_back({});
-        }
-        for (int c = 0; c < grid[r].size(); ++c) {
-            for (int ir = 0; ir < grid[r][c].m_data.size(); ++ir) {
-                // image[r + ir].insert(image[r + ir].end(), grid[r][c].m_data.begin(), grid[r][c].m_data.end());
-            }
-        }
-    }
-
-    cout << image.size() << "x" << image[0].size() << endl;
+    vector<vector<char>> image = mergeGrid(grid);
+    eraseBorders(image);
+    markDragons(image);
+    cout << "roughness: " << roughness(image) << endl;
 }
