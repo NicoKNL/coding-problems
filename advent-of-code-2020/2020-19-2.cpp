@@ -102,7 +102,6 @@ int main()
         return -1;
     }
 
-
     string line = "";
     while (getline(infile, line)) {
         if (line[0] == 'a' || line[0] == 'b') {
@@ -163,15 +162,9 @@ int main()
     }
     rules[8] = rule_override;
 
-    // rules[8] = {{42}, {42, 8}};           // 42
-    // rules[11] = {{42, 31}, {42, 11, 31}}; // 42, 31
-
-
     super_rule.push_back(0);
     generateSuperRegex();
     convertToString();
-
-    cout << "built regexp" << endl;
 
     regex regexp(r);
     smatch m;
