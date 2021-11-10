@@ -4,9 +4,12 @@ using namespace std;
 
 typedef unsigned long long T;
 
+vector<T> PALINDROMES{0};
+vector<T> SUM{0};
+
 T mod = 1000000007;
 
-T createPalindrome(T const &input)
+T createPalindrome(T input)
 {
 	T n = input;
 	T base = 10;
@@ -23,7 +26,27 @@ T createPalindrome(T const &input)
 	return palin;
 }
 
-T modpow(T &a, T &b)
+void initializePalindromes()
+{
+	int i = 1;
+	while (i <= 100000)
+	{
+		PALINDROMES.push_back(createPalindrome(i));
+		++i;
+	}
+}
+
+void initializeSum()
+{
+	int i = 1;
+	while (i <= 100000)
+	{
+		SUM.push_back(SUM[i - 1] + PALINDROMES[i]);
+		++i;
+	}
+}
+
+T modpow(T a, T b)
 {
 	T result = 1;
 	a %= mod;
@@ -51,19 +74,19 @@ void solve()
 
 	cin >> L >> R;
 
-	T base = createPalindrome(L);
-	T exp = 0;
-
-	for (int i = L + 1; i <= R; ++i)
-	{
-		exp += createPalindrome(i);
-	}
+	T base = PALINDROMES[L];
+	T exp = SUM[R] - SUM[L];
 
 	cout << modpow(base, exp) << endl;
 }
 
 int main()
 {
+	initializePalindromes();
+	// for_each(PALINDROMES.begin(), PALINDROMES.begin() + 500, [](T const &p)
+	// 		 { cout << p << endl; });
+	initializeSum();
+
 	T Q;
 
 	cin >> Q;
