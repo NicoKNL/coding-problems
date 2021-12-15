@@ -24,7 +24,16 @@ struct Cave
     }
 };
 
-ostream &operator<<(ostream &os, vector<vector<Cave *>> C)
+struct comp
+{
+    bool operator()(Cave *a, Cave *b)
+    {
+        return a->dist <= b->dist && a != b;
+    }
+};
+
+ostream &
+operator<<(ostream &os, vector<vector<Cave *>> C)
 {
     for (int r = 0; r < C.size(); ++r)
     {
@@ -77,6 +86,7 @@ int main()
         }
         caves.push_back(row);
     }
+
     int init_size = caves.size();
     for (int i = 1; i <= 4; ++i)
     {
@@ -103,25 +113,24 @@ int main()
                 caves[r - 1][c]->adj.push_back(caves[r][c]);
             if (c - 1 >= 0)
                 caves[r][c - 1]->adj.push_back(caves[r][c]);
-            // if (r + 1 < caves.size())
-            //     caves[r + 1][c]->adj.push_back(caves[r][c]);
-            // if (c + 1 < caves[0].size())
-            //     caves[r][c + 1]->adj.push_back(caves[r][c]);
+            if (r + 1 < caves.size())
+                caves[r + 1][c]->adj.push_back(caves[r][c]);
+            if (c + 1 < caves[0].size())
+                caves[r][c + 1]->adj.push_back(caves[r][c]);
         }
     }
 
-    priority_queue<pair<int, Cave *>> PQ;
+    set<Cave *, comp> S;
     caves[0][0]->dist = 0;
-    PQ.push({caves[0][0]->dist, caves[0][0]});
-    int n = caves.size() - 1;
-    while (!PQ.empty())
-    {
-        Cave *u = PQ.top().second;
-        int cost_u = PQ.top().first;
-        PQ.pop();
+    S.insert(caves[0][0]);
 
-        if (cost_u != u->dist)
-            continue;
+    int n = caves.size() - 1;
+
+    while (!S.empty())
+    {
+        Cave *u = *S.begin();
+        int cost_u = u->dist;
+        S.erase(S.begin());
 
         for (Cave *v : u->adj)
         {
@@ -129,9 +138,10 @@ int main()
 
             if (alt < v->dist)
             {
+                S.erase(v);
                 v->dist = alt;
                 v->prev = u;
-                PQ.push({v->dist, v});
+                S.insert(v);
             }
         }
     }
