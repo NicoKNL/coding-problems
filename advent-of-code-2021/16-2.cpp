@@ -66,10 +66,11 @@ int extractN(string &s, int n)
     return version;
 }
 
-int extractLiteral(string &s)
+unsigned long long extractLiteral(string &s)
 {
     vector<string> blocks;
     string tmp;
+
     int i = 0;
     for (; i < s.length(); ++i)
     {
@@ -84,6 +85,11 @@ int extractLiteral(string &s)
         tmp += s[i];
     }
 
+    if (tmp.length() == 5 && blocks.size() == 0)
+    {
+        blocks.push_back(tmp);
+    }
+
     s = s.substr(i);
 
     string s_num;
@@ -93,24 +99,65 @@ int extractLiteral(string &s)
         s_num += block.substr(1);
     }
 
-    int n = 0;
+    unsigned long long n = 0;
 
     reverse(s_num.begin(), s_num.end());
-    for (int i = 0; i < s_num.length(); ++i)
+    for (unsigned long long i = 0; i < s_num.length(); ++i)
     {
+        unsigned long long one = 1;
         if (s_num[i] == '1')
-            n += (1 << i);
+            n += (one << i);
     }
 
     return n;
 }
 
-void parse(string &bitstring)
+unsigned long long applyOp(int op, vector<unsigned long long> nums)
+{
+    unsigned long long result;
+    switch (op)
+    {
+    case 0:
+        result = 0;
+
+        for (auto n : nums)
+            result += n;
+
+        return result;
+
+    case 1:
+        result = 1;
+
+        for (auto n : nums)
+            result *= n;
+
+        return result;
+
+    case 2:
+        sort(nums.begin(), nums.end());
+        return *nums.begin();
+
+    case 3:
+        sort(nums.begin(), nums.end());
+        return *nums.rbegin();
+
+    case 5:
+        return nums[0] > nums[1];
+
+    case 6:
+        return nums[0] < nums[1];
+
+    case 7:
+        return nums[0] == nums[1];
+    }
+}
+
+unsigned long long parse(string &bitstring)
 {
     MODE mode = VERSION;
     int version;
     int type;
-    int literal_value;
+    unsigned long long literal_value;
     int length_type_id;
     int total_length;
     int num_packs;
@@ -126,7 +173,6 @@ void parse(string &bitstring)
         else if (mode == TYPE)
         {
             type = extractN(bitstring, 3);
-
             if (type == 4)
             {
                 mode = LITERAL;
@@ -139,7 +185,7 @@ void parse(string &bitstring)
         else if (mode == LITERAL)
         {
             literal_value = extractLiteral(bitstring);
-            return;
+            return literal_value;
         }
         else if (mode == NONLITERAL)
         {
@@ -157,22 +203,29 @@ void parse(string &bitstring)
         {
             total_length = extractN(bitstring, 15);
             int init_length = bitstring.length();
+            vector<unsigned long long> nums;
+
             while (total_length)
             {
-                parse(bitstring);
+                unsigned long long v = parse(bitstring);
+                nums.push_back(v);
                 total_length -= (init_length - bitstring.length());
                 init_length = bitstring.length();
             }
-            return;
+
+            return applyOp(type, nums);
         }
         else if (mode == NUMPACKS)
         {
             num_packs = extractN(bitstring, 11);
+            vector<unsigned long long> nums;
             for (int i = 0; i < num_packs; ++i)
             {
-                parse(bitstring);
+                unsigned long long v = parse(bitstring);
+                nums.push_back(v);
             }
-            return;
+
+            return applyOp(type, nums);
         }
     }
 }
@@ -183,8 +236,7 @@ int main()
     getline(cin, line);
 
     string bitstring = parseHex(line);
-    parse(bitstring);
-
-    cout << version_sum << endl;
+    unsigned long long v = parse(bitstring);
+    cout << v << endl;
     return 0;
 }
