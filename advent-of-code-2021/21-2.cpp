@@ -70,11 +70,18 @@ void dfs(Game g, int roll1, int roll2, unsigned long long &wins1, unsigned long 
         return;
     }
 
-    for (int i = 1; i <= 3; ++i)
+    for (int _ = 0; _ < 3; ++_)
     {
-        for (int ii = 1; ii <= 3; ++ii)
+        for (int __ = 0; __ < 3; ++__)
         {
-            dfs(g, i, ii, wins1, wins2);
+
+            for (int i = 1; i <= 3; ++i)
+            {
+                for (int ii = 1; ii <= 3; ++ii)
+                {
+                    dfs(g, i, ii, wins1, wins2);
+                }
+            }
         }
     }
 }
