@@ -2,20 +2,6 @@
 
 using namespace std;
 
-ostream &operator<<(ostream &os, vector<vector<int>> &V)
-{
-    for (int r = 0; r < V.size(); ++r)
-    {
-
-        for (int c = 0; c < V[0].size(); ++c)
-        {
-            os << V[r][c];
-        }
-        os << endl;
-    }
-    return os;
-}
-
 vector<pair<int, int>> adj(int r, int c, int nrows, int ncols)
 {
     vector<pair<int, int>> offsets = {
@@ -48,20 +34,22 @@ void bfsFloodFill(vector<vector<int>> &G, vector<vector<int>> &id, int r, int c,
 
     queue<pair<int, int>> Q;
     Q.push({r, c});
+    id[r][c] = cid;
 
     while (!Q.empty())
     {
         tie(r, c) = Q.front();
         Q.pop();
 
-        id[r][c] = cid;
-
         for (auto each : adj(r, c, nrows, ncols))
         {
             int ro, co;
             tie(ro, co) = each;
             if (G[ro][co] == target && id[ro][co] == 0)
+            {
+                id[ro][co] = cid;
                 Q.push({ro, co});
+            }
         }
     }
 }
@@ -91,7 +79,6 @@ int main()
             if (id[r][c] == 0)
                 bfsFloodFill(G, id, r, c, current_id++);
 
-    cout << id << endl;
     int queries;
     cin >> queries;
 
