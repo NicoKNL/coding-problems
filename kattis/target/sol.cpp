@@ -48,6 +48,14 @@ T orient(point a, point b, point c)
     return cross(b - a, c - a);
 }
 
+double ccw(const point &a, const point &b, const point &o)
+{
+    point x = {a.x - o.x, a.y - o.y};
+    point y = {b.x - o.x, b.y - o.y};
+
+    return cross(x, y);
+}
+
 struct line
 {
     point v;
@@ -97,6 +105,42 @@ pair<pair<point, point>, double> getClosestDistanceToPolyEdge(const vector<point
     return {closest, closest_dist};
 }
 
+bool contains(const vector<point> &V, const point pt)
+{
+    int winding_nr = 0;
+
+    for (int i = 0; i < V.size() - 1; ++i)
+    {
+        const point &seg_start = V[i];
+        const point &seg_end = V[i + 1];
+
+        if (seg_start == pt)
+            return true;
+        else if (seg_start.y == pt.y && seg_end.y == pt.y)
+        {
+            if ((min(seg_start.x, seg_end.x) <= pt.x) && (pt.x <= max(seg_start.x, seg_end.x)))
+                return true;
+        }
+        else
+        {
+            bool below = seg_start.y < pt.y;
+
+            if (below != (seg_end.y < pt.y))
+            {
+                double orientation = ccw(pt, seg_end, seg_start);
+
+                if (orientation == 0)
+                    return true;
+
+                if (below == (orientation > 0))
+                    winding_nr += below ? 1 : -1;
+            }
+        }
+    }
+
+    return (winding_nr != 0);
+}
+
 void shoot(const vector<point> &V)
 {
     point shot;
@@ -104,11 +148,11 @@ void shoot(const vector<point> &V)
 
     auto [edge, dist] = getClosestDistanceToPolyEdge(V, shot);
 
-    if (dist == 0)
+    if (dist <= 0.001)
         cout << "Winged!" << endl;
     else
     {
-        if (orient(edge.first, shot, edge.second) > 0)
+        if (contains(V, shot))
             cout << "Hit! " << dist << endl;
         else
             cout << "Miss! " << dist << endl;
