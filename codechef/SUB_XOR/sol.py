@@ -1,26 +1,21 @@
-CACHE = dict()
+CACHE = [0]
 
 
-def string_to_num(s):
-    result = 0
-
-    for i in range(len(s)):
-        if s[i] == "1":
-            result += pow(2, len(s) - i - 1)
-
-    return result
+def n_ones(n):
+    return CACHE[n]
 
 
-def all_substrings(s):
-    for i in range(len(s)):
-        for ii in range(i + 1, len(s) + 1):
-            sub = s[i:ii]
+def contribution(s, i):
+    subsequences = i + 1
+    digit = int(s[i])
 
-            if sub not in CACHE:
-                num = string_to_num(sub)
-                CACHE[sub:30] = num
-
-            yield CACHE[sub]
+    if digit == 0:
+        return 0
+    else:  # 1
+        if subsequences % 2 == 0:
+            return 0
+        else:
+            return n_ones(len(s) - i)
 
 
 def solve():
@@ -29,17 +24,24 @@ def solve():
 
     result = -1
 
-    for each in all_substrings(s):
+    for i in range(len(s)):
         if result == -1:
-            result = each
+            result = contribution(s, i)
         else:
-            result = result ^ each
+            result = result ^ contribution(s, i)
 
     print(result % 998244353)
 
 
+def generate_cache():
+    while len(CACHE) <= 100000:
+        CACHE.append(CACHE[-1] * 2 + 1)
+
+
 if __name__ == "__main__":
     T = int(input())
+
+    generate_cache()
 
     for _ in range(T):
         solve()

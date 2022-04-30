@@ -1,0 +1,11 @@
+10
+push_front 4 
+push_front 3
+push_back 7
+push_back 8
+push_middle 5
+push_middle 6
+push_front 2
+push_front 1
+push_back 9
+push_back 10
