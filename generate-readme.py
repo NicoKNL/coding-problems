@@ -65,7 +65,7 @@ class AdventOfCodeProblem(Problem):
                 self.day,
                 self.location1,
                 self.location2,
-                f"[link]({self.url})",
+                f"[![Advent of Code](https://adventofcode.com/favicon.png =24x24)]({self.url})",
             ]
         )
 
@@ -84,7 +84,7 @@ class CodeChefProblem(Problem):
             [
                 self.title,
                 f"[{self.language_icon}]({self.location})",
-                f"[link]({self.url})",
+                f"[![CodeChef](https://cdn.codechef.com/favicon.ico)]({self.url})",
             ]
         )
 
@@ -103,7 +103,7 @@ class KattisProblem(Problem):
             [
                 self.title,
                 f"[{self.language_icon}]({self.location})",
-                f"[link]({self.url})",
+                f"[![Kattis](https://open.kattis.com/favicon)]({self.url})",
             ]
         )
 
