@@ -65,7 +65,7 @@ class AdventOfCodeProblem(Problem):
                 self.day,
                 self.location1,
                 self.location2,
-                f"[![Advent of Code](https://adventofcode.com/favicon.png =24x24)]({self.url})",
+                f"[<img src='https://adventofcode.com/favicon.png' width='24' height='24'>]({self.url})",
             ]
         )
 
