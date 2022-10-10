@@ -481,4 +481,5 @@ This repository contains my solutions for various competitive programming proble
 |zoo|[![C++](.github/icons/c++.svg)](problems/kattis/zoo/sol.cpp)|[link](https://open.kattis.com/problems/zoo)|
 |zoom|[![C++](.github/icons/c++.svg)](problems/kattis/zoom/sol.cpp)|[link](https://open.kattis.com/problems/zoom)|
 |zyxab|[![C++](.github/icons/c++.svg)](problems/kattis/zyxab/sol.cpp)|[link](https://open.kattis.com/problems/zyxab)|
+
 Icons from [Icons8](https://icons8.com)

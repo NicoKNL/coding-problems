@@ -201,6 +201,7 @@ def generate():
         problemsAsTable("Advent of Code", problems["advent-of-code"]),
         problemsAsTable("Codechef", problems["codechef"]),
         problemsAsTable("Kattis", problems["kattis"]),
+        "",
         "Icons from [Icons8](https://icons8.com)",
     ]
     print(content)
