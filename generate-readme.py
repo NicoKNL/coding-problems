@@ -34,7 +34,13 @@ class Problem:
         return markdownRow(self.header)
 
     def __str__(self):
-        return markdownRow([self.title, self.language, self.location])
+        return markdownRow(
+            [
+                self.title,
+                self.language,
+                f"[{self.language_icon}]({self.location})",
+            ]
+        )
 
 
 class AdventOfCodeProblem(Problem):
@@ -44,7 +50,7 @@ class AdventOfCodeProblem(Problem):
         self.location2 = f"[{self.language_icon}]({location2})" if location2 else "N/A"
         self.year = location1.parts[-3]
         self.day = location1.parts[-2]
-        self.url = f"[{self.language_icon}](https://adventofcode.com/{self.year}/day/{self.day.lstrip('0')})"
+        self.url = f"https://adventofcode.com/{self.year}/day/{self.day.lstrip('0')}"
         self.header = ["year", "day", "part1", "part2", "url"]
 
     def getHeader(self):
@@ -62,18 +68,41 @@ class AdventOfCodeProblem(Problem):
         )
 
 
-class KattisProblem(Problem):
+class CodeChefProblem(Problem):
     def __init__(self, location: Path):
         super().__init__(location)
-        self.url = f"https://open.kattis.com/problems/{self.title}"
-        self.header = ["title", "language", "location", "url"]
+        self.url = f"https://www.codechef.com/submit/{self.title}"
+        self.header = ["title", "solution", "url"]
 
     def getHeader(self):
         return markdownRow(self.header)
 
     def __str__(self):
         return markdownRow(
-            [self.title, self.language, self.location, f"[link]({self.url})"]
+            [
+                self.title,
+                f"[{self.language_icon}]({self.location})",
+                f"[link]({self.url})",
+            ]
+        )
+
+
+class KattisProblem(Problem):
+    def __init__(self, location: Path):
+        super().__init__(location)
+        self.url = f"https://open.kattis.com/problems/{self.title}"
+        self.header = ["title", "solution", "url"]
+
+    def getHeader(self):
+        return markdownRow(self.header)
+
+    def __str__(self):
+        return markdownRow(
+            [
+                self.title,
+                f"[{self.language_icon}]({self.location})",
+                f"[link]({self.url})",
+            ]
         )
 
 
@@ -92,6 +121,16 @@ def collectKattisProblems():
     for language in LANGUAGES:
         problems_in_language = ROOTS["kattis"].glob(f"*/*.{language}")
         problems.extend([KattisProblem(p) for p in problems_in_language])
+
+    problems.sort(key=lambda p: p.title)
+    return problems
+
+
+def collectCodeChefProblems():
+    problems = []
+    for language in LANGUAGES:
+        problems_in_language = ROOTS["codechef"].glob(f"*/*.{language}")
+        problems.extend([CodeChefProblem(p) for p in problems_in_language])
 
     problems.sort(key=lambda p: p.title)
     return problems
@@ -124,7 +163,7 @@ def collectAdventOfCodeProblems():
 def collectProblems():
     return {
         "advent-of-code": collectAdventOfCodeProblems(),
-        "codechef": collectProblemsWithRoot(ROOTS["codechef"]),
+        "codechef": collectCodeChefProblems(),
         "kattis": collectKattisProblems(),
     }
 
@@ -142,11 +181,23 @@ def problemsAsTable(section, problems):
     return "\n".join(table)
 
 
+def generateStatistics(problems, keys):
+    HEADER = "|Provider|Problem count|"
+    DIVIDER = "|-|-|"
+
+    table = [HEADER, DIVIDER]
+    for k in keys:
+        table.append(f"|[{k}](#{k})|{len(problems[k])}|")
+
+    return "\n".join(table)
+
+
 def generate():
     problems = collectProblems()
 
     content = [
         INTRODUCTION,
+        generateStatistics(problems, ["advent-of-code", "codechef", "kattis"]),
         problemsAsTable("Advent of Code", problems["advent-of-code"]),
         problemsAsTable("Codechef", problems["codechef"]),
         problemsAsTable("Kattis", problems["kattis"]),
