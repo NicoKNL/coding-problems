@@ -24,6 +24,12 @@ class Problem:
         self.location = location
         self.header = ["day", "language", "location"]
 
+        self.language_icon = ""
+        if self.language == ".py":
+            self.language_icon = f"![Python](.github/icons/python.svg)"
+        elif self.language == ".cpp":
+            self.language_icon = f"![C++](.github/icons/c++.svg)"
+
     def getHeader(self):
         return markdownRow(self.header)
 
@@ -34,12 +40,12 @@ class Problem:
 class AdventOfCodeProblem(Problem):
     def __init__(self, location1: Path, location2: Path):
         super().__init__(location1)
-        self.location1 = location1
-        self.location2 = location2
+        self.location1 = f"[{self.language_icon}]({location1})"
+        self.location2 = f"[{self.language_icon}]({location2})" if location2 else "N/A"
         self.year = location1.parts[-3]
         self.day = location1.parts[-2]
-        self.url = f"https://adventofcode.com/{self.year}/day/{self.day.lstrip('0')}"
-        self.header = ["year", "day", "language", "part1", "part2", "url"]
+        self.url = f"[{self.language_icon}](https://adventofcode.com/{self.year}/day/{self.day.lstrip('0')})"
+        self.header = ["year", "day", "part1", "part2", "url"]
 
     def getHeader(self):
         return markdownRow(self.header)
@@ -49,7 +55,6 @@ class AdventOfCodeProblem(Problem):
             [
                 self.year,
                 self.day,
-                self.language,
                 self.location1,
                 self.location2,
                 f"[link]({self.url})",
@@ -145,6 +150,7 @@ def generate():
         problemsAsTable("Advent of Code", problems["advent-of-code"]),
         problemsAsTable("Codechef", problems["codechef"]),
         problemsAsTable("Kattis", problems["kattis"]),
+        "Icons from [Icons8](https://icons8.com)",
     ]
     print(content)
 
