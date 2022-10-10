@@ -1,5 +1,7 @@
 INTRODUCTION = """# Coding Problems
 This repository contains my solutions for various competitive programming problems.
+
+Note: Not all source code offers a valid solution (yet). Most code does.
 """
 
 from pathlib import Path
