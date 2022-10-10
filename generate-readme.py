@@ -1,0 +1,156 @@
+INTRODUCTION = """# Coding Problems
+This repository contains my solutions for various competitive programming problems.
+"""
+
+from pathlib import Path
+import re
+
+ROOTS = {
+    "advent-of-code": Path("./problems/advent-of-code"),
+    "codechef": Path("./problems/codechef"),
+    "kattis": Path("./problems/kattis"),
+}
+LANGUAGES = ["cpp", "py"]
+
+
+def markdownRow(cells):
+    return "|" + "|".join(map(str, cells)) + "|"
+
+
+class Problem:
+    def __init__(self, location: Path):
+        self.title = location.parts[-2]
+        self.language = location.suffix
+        self.location = location
+        self.header = ["day", "language", "location"]
+
+    def getHeader(self):
+        return markdownRow(self.header)
+
+    def __str__(self):
+        return markdownRow([self.title, self.language, self.location])
+
+
+class AdventOfCodeProblem(Problem):
+    def __init__(self, location1: Path, location2: Path):
+        super().__init__(location1)
+        self.location1 = location1
+        self.location2 = location2
+        self.year = location1.parts[-3]
+        self.day = location1.parts[-2]
+        self.url = f"https://adventofcode.com/{self.year}/day/{self.day.lstrip('0')}"
+        self.header = ["year", "day", "language", "part1", "part2", "url"]
+
+    def getHeader(self):
+        return markdownRow(self.header)
+
+    def __str__(self):
+        return markdownRow(
+            [
+                self.year,
+                self.day,
+                self.language,
+                self.location1,
+                self.location2,
+                f"[link]({self.url})",
+            ]
+        )
+
+
+class KattisProblem(Problem):
+    def __init__(self, location: Path):
+        super().__init__(location)
+        self.url = f"https://open.kattis.com/problems/{self.title}"
+        self.header = ["title", "language", "location", "url"]
+
+    def getHeader(self):
+        return markdownRow(self.header)
+
+    def __str__(self):
+        return markdownRow(
+            [self.title, self.language, self.location, f"[link]({self.url})"]
+        )
+
+
+def collectProblemsWithRoot(root: Path):
+    problems = []
+    for language in LANGUAGES:
+        problems_in_language = root.glob(f"**/*.{language}")
+        problems.extend([Problem(p) for p in problems_in_language])
+
+    problems.sort(key=lambda p: p.title)
+    return problems
+
+
+def collectKattisProblems():
+    problems = []
+    for language in LANGUAGES:
+        problems_in_language = ROOTS["kattis"].glob(f"*/*.{language}")
+        problems.extend([KattisProblem(p) for p in problems_in_language])
+
+    problems.sort(key=lambda p: p.title)
+    return problems
+
+
+def collectAdventOfCodeProblems():
+    problems = []
+    for language in LANGUAGES:
+        problems_in_language = ROOTS["advent-of-code"].glob(f"**/*.{language}")
+        grouped_problems = {}
+        for p in problems_in_language:
+            root = p.parent
+            if root not in grouped_problems:
+                grouped_problems[root] = [p]
+            else:
+                grouped_problems[root].append(p)
+
+        for key, value in grouped_problems.items():
+            if len(value) == 1:
+                grouped_problems[key].append(None)
+            else:
+                grouped_problems[key].sort()
+
+        problems.extend([AdventOfCodeProblem(*v) for k, v in grouped_problems.items()])
+
+    problems.sort(key=lambda p: int(p.year + p.day))
+    return problems
+
+
+def collectProblems():
+    return {
+        "advent-of-code": collectAdventOfCodeProblems(),
+        "codechef": collectProblemsWithRoot(ROOTS["codechef"]),
+        "kattis": collectKattisProblems(),
+    }
+
+
+def problemsAsTable(section, problems):
+    SECTION = f"# {section}"
+    HEADER = problems[0].getHeader()
+    DIVIDER = re.sub("[a-z]", "-", HEADER)
+    DIVIDER = re.sub("[0-9]", "-", DIVIDER)
+
+    table = [SECTION, HEADER, DIVIDER]
+    for p in problems:
+        table.append(str(p))
+
+    return "\n".join(table)
+
+
+def generate():
+    problems = collectProblems()
+
+    content = [
+        INTRODUCTION,
+        problemsAsTable("Advent of Code", problems["advent-of-code"]),
+        problemsAsTable("Codechef", problems["codechef"]),
+        problemsAsTable("Kattis", problems["kattis"]),
+    ]
+    print(content)
+
+    with open("README.md", "w") as fh:
+        fh.write("\n".join(content))
+
+
+if __name__ == "__main__":
+    generate()
