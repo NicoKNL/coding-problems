@@ -3,62 +3,62 @@
 using namespace std;
 
 typedef double T;
-struct point
+struct vec2
 {
     T x, y;
 
-    point operator-(const point &p)
+    vec2 operator-(const vec2 &p)
     {
         return {x - p.x, y - p.y};
     }
 };
 
-bool operator==(const point &a, const point &b)
+bool operator==(const vec2 &a, const vec2 &b)
 {
     return a.x == b.x && a.y == b.y;
 }
 
-bool operator!=(const point &a, const point &b)
+bool operator!=(const vec2 &a, const vec2 &b)
 {
     return !(a == b);
 }
 
-T square(const point &p)
+T square(const vec2 &p)
 {
     return p.x * p.x + p.y * p.y;
 }
 
-double abs(const point &p)
+double abs(const vec2 &p)
 {
     return sqrt(square(p));
 }
 
-T dot(point a, point b)
+T dot(vec2 a, vec2 b)
 {
     return a.x * b.x + a.y * b.y;
 }
 
-T cross(point a, point b)
+T cross(vec2 a, vec2 b)
 {
     return a.x * b.y - a.y * b.x;
 }
 
 struct line
 {
-    point v;
+    vec2 v;
     T c;
 
-    line(point a, point b) : v(b - a), c(cross(v, a)) {}
+    line(vec2 a, vec2 b) : v(b - a), c(cross(v, a)) {}
 
-    T side(point p) { return cross(v, p) - c; }
+    T side(vec2 p) { return cross(v, p) - c; }
 
-    double dist(point p) { return abs(side(p)) / abs(v); }
+    double dist(vec2 p) { return abs(side(p)) / abs(v); }
 
-    bool cmpProj(point a, point b) { return dot(v, a) < dot(v, b); }
+    bool cmpProj(vec2 a, vec2 b) { return dot(v, a) < dot(v, b); }
 };
 
 double
-segPoint(point a, point b, point p)
+segPoint(vec2 a, vec2 b, vec2 p)
 {
     if (a != b)
     {
@@ -82,11 +82,11 @@ int main()
     double x, y, x1, y1, x2, y2;
     cin >> x >> y >> x1 >> y1 >> x2 >> y2;
 
-    point post = {x, y};
-    point corner1 = {x1, y1};
-    point corner2 = {x1, y2};
-    point corner3 = {x2, y2};
-    point corner4 = {x2, y1};
+    vec2 post = {x, y};
+    vec2 corner1 = {x1, y1};
+    vec2 corner2 = {x1, y2};
+    vec2 corner3 = {x2, y2};
+    vec2 corner4 = {x2, y1};
 
     double result = DBL_MAX;
     result = min(result, segPoint(corner1, corner2, post));

@@ -3,75 +3,75 @@
 using namespace std;
 
 typedef double T;
-struct point
+struct vec2
 {
     T x, y;
 
-    point operator-(const point &p)
+    vec2 operator-(const vec2 &p)
     {
         return {x - p.x, y - p.y};
     }
 };
 
-bool operator==(const point &a, const point &b)
+bool operator==(const vec2 &a, const vec2 &b)
 {
     return a.x == b.x && a.y == b.y;
 }
 
-bool operator!=(const point &a, const point &b)
+bool operator!=(const vec2 &a, const vec2 &b)
 {
     return !(a == b);
 }
 
-T square(const point &p)
+T square(const vec2 &p)
 {
     return p.x * p.x + p.y * p.y;
 }
 
-double abs(const point &p)
+double abs(const vec2 &p)
 {
     return sqrt(square(p));
 }
 
-T dot(point a, point b)
+T dot(vec2 a, vec2 b)
 {
     return a.x * b.x + a.y * b.y;
 }
 
-T cross(point a, point b)
+T cross(vec2 a, vec2 b)
 {
     return a.x * b.y - a.y * b.x;
 }
 
-T orient(point a, point b, point c)
+T orient(vec2 a, vec2 b, vec2 c)
 {
     return cross(b - a, c - a);
 }
 
-double ccw(const point &a, const point &b, const point &o)
+double ccw(const vec2 &a, const vec2 &b, const vec2 &o)
 {
-    point x = {a.x - o.x, a.y - o.y};
-    point y = {b.x - o.x, b.y - o.y};
+    vec2 x = {a.x - o.x, a.y - o.y};
+    vec2 y = {b.x - o.x, b.y - o.y};
 
     return cross(x, y);
 }
 
 struct line
 {
-    point v;
+    vec2 v;
     T c;
 
-    line(point a, point b) : v(b - a), c(cross(v, a)) {}
+    line(vec2 a, vec2 b) : v(b - a), c(cross(v, a)) {}
 
-    T side(point p) { return cross(v, p) - c; }
+    T side(vec2 p) { return cross(v, p) - c; }
 
-    double dist(point p) { return abs(side(p)) / abs(v); }
+    double dist(vec2 p) { return abs(side(p)) / abs(v); }
 
-    bool cmpProj(point a, point b) { return dot(v, a) < dot(v, b); }
+    bool cmpProj(vec2 a, vec2 b) { return dot(v, a) < dot(v, b); }
 };
 
 double
-segPoint(point a, point b, point p)
+segPoint(vec2 a, vec2 b, vec2 p)
 {
     if (a != b)
     {
@@ -87,9 +87,9 @@ segPoint(point a, point b, point p)
     return min(abs(p - a), abs(p - b));
 }
 
-pair<pair<point, point>, double> getClosestDistanceToPolyEdge(const vector<point> &V, point shot)
+pair<pair<vec2, vec2>, double> getClosestDistanceToPolyEdge(const vector<vec2> &V, vec2 shot)
 {
-    pair<point, point> closest;
+    pair<vec2, vec2> closest;
     double closest_dist = INT32_MAX;
 
     for (int i = 0; i < V.size() - 1; ++i)
@@ -105,14 +105,14 @@ pair<pair<point, point>, double> getClosestDistanceToPolyEdge(const vector<point
     return {closest, closest_dist};
 }
 
-bool contains(const vector<point> &V, const point pt)
+bool contains(const vector<vec2> &V, const vec2 pt)
 {
     int winding_nr = 0;
 
     for (int i = 0; i < V.size() - 1; ++i)
     {
-        const point &seg_start = V[i];
-        const point &seg_end = V[i + 1];
+        const vec2 &seg_start = V[i];
+        const vec2 &seg_end = V[i + 1];
 
         if (seg_start == pt)
             return true;
@@ -141,9 +141,9 @@ bool contains(const vector<point> &V, const point pt)
     return (winding_nr != 0);
 }
 
-void shoot(const vector<point> &V)
+void shoot(const vector<vec2> &V)
 {
-    point shot;
+    vec2 shot;
     cin >> shot.x >> shot.y;
 
     auto [edge, dist] = getClosestDistanceToPolyEdge(V, shot);
@@ -161,7 +161,7 @@ void shoot(const vector<point> &V)
 
 void solve(int n)
 {
-    vector<point> V(n + 1);
+    vector<vec2> V(n + 1);
     for (int i = 0; i < n; ++i)
         cin >> V[i].x >> V[i].y;
 

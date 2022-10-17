@@ -2,24 +2,24 @@
 
 using namespace std;
 
-struct point
+struct vec2
 {
     double x, y;
 };
 
 struct target
 {
-    virtual bool hit(point pt) = 0;
+    virtual bool hit(vec2 pt) = 0;
 };
 
 struct rectangle : target
 {
-    point bottom_left;
-    point top_right;
+    vec2 bottom_left;
+    vec2 top_right;
 
-    rectangle(point a, point b) : bottom_left(a), top_right(b){};
+    rectangle(vec2 a, vec2 b) : bottom_left(a), top_right(b){};
 
-    bool hit(point pt) override
+    bool hit(vec2 pt) override
     {
         return bottom_left.x <= pt.x && pt.x <= top_right.x && bottom_left.y <= pt.y && pt.y <= top_right.y;
     }
@@ -27,12 +27,12 @@ struct rectangle : target
 
 struct circle : target
 {
-    point center;
+    vec2 center;
     double radius;
 
-    circle(point a, double r) : center(a), radius(r){};
+    circle(vec2 a, double r) : center(a), radius(r){};
 
-    bool hit(point pt) override
+    bool hit(vec2 pt) override
     {
         return sqrt(pow(pt.x - center.x, 2) + pow(pt.y - center.y, 2)) <= radius;
     }
@@ -52,14 +52,14 @@ int main()
 
         if (t == "rectangle")
         {
-            point a, b;
+            vec2 a, b;
             cin >> a.x >> a.y >> b.x >> b.y;
 
             V.emplace_back(new rectangle(a, b));
         }
         else
         {
-            point c;
+            vec2 c;
             double r;
             cin >> c.x >> c.y >> r;
 
@@ -72,7 +72,7 @@ int main()
 
     for (int i = 0; i < n; ++i)
     {
-        point pt;
+        vec2 pt;
         cin >> pt.x >> pt.y;
 
         int count = 0;
