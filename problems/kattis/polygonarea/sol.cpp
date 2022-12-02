@@ -2,24 +2,24 @@
 
 using namespace std;
 
-struct Point
+struct Pt
 {
     double x, y;
 
-    Point() : x(0), y(0){};
+    Pt() : x(0), y(0){};
 
-    double cross_product(const Point &b) const
+    double cross_product(const Pt &b) const
     {
         return (this->x * b.y) - (this->y * b.x);
     }
 };
 
-struct Polygon
+struct Poly
 {
-    vector<Point> points;
+    vector<Pt> points;
 
     template <class InputIterator>
-    Polygon(InputIterator first, InputIterator last) : points(first, last){};
+    Poly(InputIterator first, InputIterator last) : points(first, last){};
 
     double signedArea()
     {
@@ -44,16 +44,16 @@ int main()
 
     while (N)
     {
-        vector<Point> points;
+        vector<Pt> points;
 
         for (int i = 0; i < N; ++i)
         {
-            Point p;
+            Pt p;
             cin >> p.x >> p.y;
             points.push_back(p);
         }
 
-        Polygon poly(points.begin(), points.end());
+        Poly poly(points.begin(), points.end());
         double area = poly.signedArea();
 
         if (area < 0)

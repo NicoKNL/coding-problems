@@ -4,7 +4,7 @@
 
 using namespace std;
 
-struct point
+struct Pt
 {
     double x, y;
 };
@@ -15,10 +15,10 @@ void solve()
     int n;
     cin >> r >> n;
 
-    vector<point> points;
+    vector<Pt> points;
     for (int i = 0; i < n; ++i)
     {
-        point p;
+        Pt p;
         cin >> p.x >> p.y;
         points.push_back(p);
     }
@@ -28,8 +28,8 @@ void solve()
     double length = 0.0;
     for (int i = 0; i < points.size() - 1; ++i)
     {
-        const point &a = points[i];
-        const point &b = points[i + 1];
+        const Pt &a = points[i];
+        const Pt &b = points[i + 1];
         length += sqrt((a.x - b.x) * (a.x - b.x) + (a.y - b.y) * (a.y - b.y));
     }
 

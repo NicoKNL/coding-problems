@@ -2,16 +2,16 @@
 
 using namespace std;
 
-struct Point
+struct Pt
 {
     int x, y, z;
 
-    bool operator<(const Point &other) const
+    bool operator<(const Pt &other) const
     {
         return tie(x, y, z) < tie(other.x, other.y, other.z); //< other.x) || (x == other.x && y < other.y) || (x == other.x && y == other.y && z < other.z);
     }
 
-    bool operator==(const Point &other) const
+    bool operator==(const Pt &other) const
     {
         return (x == other.x && y == other.y && z == other.z);
     }
@@ -34,8 +34,8 @@ struct Point
 
 struct Scanner
 {
-    set<Point> S;
-    set<Point> S_default;
+    set<Pt> S;
+    set<Pt> S_default;
     bool locked;
 
     Scanner()
@@ -50,7 +50,7 @@ struct Scanner
             stringstream ss;
             ss << line;
 
-            Point p;
+            Pt p;
             char _;
             ss >> p.x >> _ >> p.y >> _ >> p.z;
 
@@ -61,7 +61,7 @@ struct Scanner
 
     bool operator==(const Scanner &other) const
     {
-        vector<Point> intersection;
+        vector<Pt> intersection;
         set_intersection(S.begin(), S.end(), other.S.begin(), other.S.end(), back_inserter(intersection));
         cout << "intersect: " << intersection.size() << endl;
         return intersection.size() >= 12;
@@ -69,8 +69,8 @@ struct Scanner
 
     void rotate90X()
     {
-        set<Point> S2;
-        for (Point p : S)
+        set<Pt> S2;
+        for (Pt p : S)
         {
             p.rotate90X();
             S2.insert(p);
@@ -80,8 +80,8 @@ struct Scanner
 
     void rotate90Y()
     {
-        set<Point> S2;
-        for (Point p : S)
+        set<Pt> S2;
+        for (Pt p : S)
         {
             p.rotate90Y();
             S2.insert(p);
@@ -91,8 +91,8 @@ struct Scanner
 
     void rotate90Z()
     {
-        set<Point> S2;
-        for (Point p : S)
+        set<Pt> S2;
+        for (Pt p : S)
         {
             p.rotate90Z();
             S2.insert(p);
@@ -111,15 +111,15 @@ struct Scanner
         int min_y = INT32_MAX;
         int min_z = INT32_MAX;
 
-        for (const Point &p : S)
+        for (const Pt &p : S)
         {
             min_x = min(min_x, p.x);
             min_y = min(min_y, p.y);
             min_z = min(min_z, p.z);
         }
 
-        set<Point> S2;
-        for (Point p : S)
+        set<Pt> S2;
+        for (Pt p : S)
         {
             if (min_x > 0)
                 p.x -= min_x;
