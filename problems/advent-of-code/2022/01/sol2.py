@@ -1,21 +1,20 @@
 import sys
 
 if __name__ == "__main__":
-    max_sum = 0
-    cursum = 0
-    sums = []
-    for line in sys.stdin:
-        line = line.strip()
+    lines = [line.strip() for line in sys.stdin]
 
-        if not line:
-            sums.append(cursum)
-            cursum = 0
+    calories_per_elf = []
+    current_sum = 0
+
+    for line in lines:
+        if not line:  # ''
+            calories_per_elf.append(current_sum)
+            current_sum = 0
         else:
-            cursum += int(line)
+            current_sum += int(line)
 
-    if cursum:
-        sums.append(cursum)
+    if current_sum > 0:
+        calories_per_elf.append(current_sum)
 
-    sums.sort(reverse=True)
-
-    print(sum(sums[:3]))
+    calories_per_elf.sort(reverse=True)  # reverse -> Sort from LARGE to small
+    print(sum(calories_per_elf[:3]))  # [:3] -> Take first three elements.

@@ -1,16 +1,19 @@
 import sys
 
 if __name__ == "__main__":
-    max_sum = 0
-    sum = 0
-    for line in sys.stdin:
-        line = line.strip()
+    lines = [line.strip() for line in sys.stdin]
 
-        if not line:
-            sum = 0
+    calories_per_elf = []
+    current_sum = 0
+
+    for line in lines:
+        if not line:  # ''
+            calories_per_elf.append(current_sum)
+            current_sum = 0
         else:
-            sum += int(line)
+            current_sum += int(line)
 
-        max_sum = max(sum, max_sum)
+    if current_sum > 0:
+        calories_per_elf.append(current_sum)
 
-    print(max_sum)
+    print(max(calories_per_elf))
