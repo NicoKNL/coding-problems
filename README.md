@@ -5,7 +5,7 @@ Note: Not all source code offers a valid solution (yet). Most code does.
 
 |Provider|Problem count|
 |-|-|
-|[advent-of-code](#advent-of-code)|69|
+|[advent-of-code](#advent-of-code)|72|
 |[codechef](#codechef)|51|
 |[kattis](#kattis)|433|
 # Advent of Code
@@ -80,6 +80,9 @@ Note: Not all source code offers a valid solution (yet). Most code does.
 |2022|06|[![Python](.github/icons/python.svg)](problems/advent-of-code/2022/06/sol1.py)|[![Python](.github/icons/python.svg)](problems/advent-of-code/2022/06/sol2.py)|[<img src='https://adventofcode.com/favicon.png' width='24' height='24'>](https://adventofcode.com/2022/day/6)|
 |2022|07|[![Python](.github/icons/python.svg)](problems/advent-of-code/2022/07/sol1.py)|[![Python](.github/icons/python.svg)](problems/advent-of-code/2022/07/sol2.py)|[<img src='https://adventofcode.com/favicon.png' width='24' height='24'>](https://adventofcode.com/2022/day/7)|
 |2022|08|[![Python](.github/icons/python.svg)](problems/advent-of-code/2022/08/sol1.py)|[![Python](.github/icons/python.svg)](problems/advent-of-code/2022/08/sol2.py)|[<img src='https://adventofcode.com/favicon.png' width='24' height='24'>](https://adventofcode.com/2022/day/8)|
+|2022|09|[![Python](.github/icons/python.svg)](problems/advent-of-code/2022/09/sol1.py)|[![Python](.github/icons/python.svg)](problems/advent-of-code/2022/09/sol2.py)|[<img src='https://adventofcode.com/favicon.png' width='24' height='24'>](https://adventofcode.com/2022/day/9)|
+|2022|10|[![Python](.github/icons/python.svg)](problems/advent-of-code/2022/10/sol1.py)|[![Python](.github/icons/python.svg)](problems/advent-of-code/2022/10/sol2.py)|[<img src='https://adventofcode.com/favicon.png' width='24' height='24'>](https://adventofcode.com/2022/day/10)|
+|2022|11|[![Python](.github/icons/python.svg)](problems/advent-of-code/2022/11/sol1.py)|[![Python](.github/icons/python.svg)](problems/advent-of-code/2022/11/sol2.py)|[<img src='https://adventofcode.com/favicon.png' width='24' height='24'>](https://adventofcode.com/2022/day/11)|
 # Codechef
 |title|solution|url|
 |-----|--------|---|
