@@ -40,5 +40,3 @@ if __name__ == "__main__":
             toggle(corner1, corner2)
 
     print(sum([sum(r) for r in GRID]))
-    # if corner1[0] > corner2[0]:
-    #     swap
