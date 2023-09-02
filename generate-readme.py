@@ -200,7 +200,9 @@ def generateAdventOfCodeTable(problems):
     table.append("<tr>")
     table.append("<th style='text-align:center'>year</th>")
     for day in range(1, 26):
-        table.append(f"<th style='text-align:center; width: 24px!important'>{day}</th>")
+        table.append(
+            f"<th style='text-align:center; width: 24px!important'>{day:02}</th>"
+        )
 
     table.append("</tr>")
     table.append("</thead>")
