@@ -5,9 +5,9 @@ Note: Not all source code offers a valid solution (yet). Most code does.
 
 |Provider|Problem count|
 |-|-|
-|[advent-of-code](#advent-of-code)|72|
+|[advent-of-code](#advent-of-code)|84|
 |[codechef](#codechef)|51|
-|[kattis](#kattis)|433|
+|[kattis](#kattis)|455|
 # Advent of Code
 |year|day|part1|part2|url|
 |----|---|-----|-----|---|
@@ -17,7 +17,19 @@ Note: Not all source code offers a valid solution (yet). Most code does.
 |2015|04|[![Python](.github/icons/python.svg)](problems/advent-of-code/2015/04/sol1.py)|[![Python](.github/icons/python.svg)](problems/advent-of-code/2015/04/sol2.py)|[<img src='https://adventofcode.com/favicon.png' width='24' height='24'>](https://adventofcode.com/2015/day/4)|
 |2015|05|[![Python](.github/icons/python.svg)](problems/advent-of-code/2015/05/sol1.py)|[![Python](.github/icons/python.svg)](problems/advent-of-code/2015/05/sol2.py)|[<img src='https://adventofcode.com/favicon.png' width='24' height='24'>](https://adventofcode.com/2015/day/5)|
 |2015|06|[![Python](.github/icons/python.svg)](problems/advent-of-code/2015/06/sol1.py)|[![Python](.github/icons/python.svg)](problems/advent-of-code/2015/06/sol2.py)|[<img src='https://adventofcode.com/favicon.png' width='24' height='24'>](https://adventofcode.com/2015/day/6)|
+|2015|07|[![Python](.github/icons/python.svg)](problems/advent-of-code/2015/07/sol1.py)|[![Python](.github/icons/python.svg)](problems/advent-of-code/2015/07/sol2.py)|[<img src='https://adventofcode.com/favicon.png' width='24' height='24'>](https://adventofcode.com/2015/day/7)|
 |2015|08|[![Python](.github/icons/python.svg)](problems/advent-of-code/2015/08/sol1.py)|[![Python](.github/icons/python.svg)](problems/advent-of-code/2015/08/sol2.py)|[<img src='https://adventofcode.com/favicon.png' width='24' height='24'>](https://adventofcode.com/2015/day/8)|
+|2015|09|[![Python](.github/icons/python.svg)](problems/advent-of-code/2015/09/sol1.py)|[![Python](.github/icons/python.svg)](problems/advent-of-code/2015/09/sol2.py)|[<img src='https://adventofcode.com/favicon.png' width='24' height='24'>](https://adventofcode.com/2015/day/9)|
+|2015|10|[![Python](.github/icons/python.svg)](problems/advent-of-code/2015/10/sol1.py)|[![Python](.github/icons/python.svg)](problems/advent-of-code/2015/10/sol2.py)|[<img src='https://adventofcode.com/favicon.png' width='24' height='24'>](https://adventofcode.com/2015/day/10)|
+|2015|11|[![Python](.github/icons/python.svg)](problems/advent-of-code/2015/11/sol1.py)|[![Python](.github/icons/python.svg)](problems/advent-of-code/2015/11/sol2.py)|[<img src='https://adventofcode.com/favicon.png' width='24' height='24'>](https://adventofcode.com/2015/day/11)|
+|2015|12|[![Python](.github/icons/python.svg)](problems/advent-of-code/2015/12/sol1.py)|[![Python](.github/icons/python.svg)](problems/advent-of-code/2015/12/sol2.py)|[<img src='https://adventofcode.com/favicon.png' width='24' height='24'>](https://adventofcode.com/2015/day/12)|
+|2015|13|[![Python](.github/icons/python.svg)](problems/advent-of-code/2015/13/sol1.py)|[![Python](.github/icons/python.svg)](problems/advent-of-code/2015/13/sol2.py)|[<img src='https://adventofcode.com/favicon.png' width='24' height='24'>](https://adventofcode.com/2015/day/13)|
+|2015|14|[![Python](.github/icons/python.svg)](problems/advent-of-code/2015/14/sol1.py)|[![Python](.github/icons/python.svg)](problems/advent-of-code/2015/14/sol2.py)|[<img src='https://adventofcode.com/favicon.png' width='24' height='24'>](https://adventofcode.com/2015/day/14)|
+|2015|15|[![Python](.github/icons/python.svg)](problems/advent-of-code/2015/15/sol1.py)|[![Python](.github/icons/python.svg)](problems/advent-of-code/2015/15/sol2.py)|[<img src='https://adventofcode.com/favicon.png' width='24' height='24'>](https://adventofcode.com/2015/day/15)|
+|2015|16|[![Python](.github/icons/python.svg)](problems/advent-of-code/2015/16/sol1.py)|[![Python](.github/icons/python.svg)](problems/advent-of-code/2015/16/sol2.py)|[<img src='https://adventofcode.com/favicon.png' width='24' height='24'>](https://adventofcode.com/2015/day/16)|
+|2015|17|[![Python](.github/icons/python.svg)](problems/advent-of-code/2015/17/sol1.py)|[![Python](.github/icons/python.svg)](problems/advent-of-code/2015/17/sol2.py)|[<img src='https://adventofcode.com/favicon.png' width='24' height='24'>](https://adventofcode.com/2015/day/17)|
+|2015|18|[![Python](.github/icons/python.svg)](problems/advent-of-code/2015/18/sol1.py)|[![Python](.github/icons/python.svg)](problems/advent-of-code/2015/18/sol2.py)|[<img src='https://adventofcode.com/favicon.png' width='24' height='24'>](https://adventofcode.com/2015/day/18)|
+|2015|19|[![Python](.github/icons/python.svg)](problems/advent-of-code/2015/19/sol1.py)|[![Python](.github/icons/python.svg)](problems/advent-of-code/2015/19/sol2.py)|[<img src='https://adventofcode.com/favicon.png' width='24' height='24'>](https://adventofcode.com/2015/day/19)|
 |2019|01|[![C++](.github/icons/c++.svg)](problems/advent-of-code/2019/01/sol2.cpp)|N/A|[<img src='https://adventofcode.com/favicon.png' width='24' height='24'>](https://adventofcode.com/2019/day/1)|
 |2019|02|[![C++](.github/icons/c++.svg)](problems/advent-of-code/2019/02/sol1.cpp)|[![C++](.github/icons/c++.svg)](problems/advent-of-code/2019/02/sol2.cpp)|[<img src='https://adventofcode.com/favicon.png' width='24' height='24'>](https://adventofcode.com/2019/day/2)|
 |2019|03|[![C++](.github/icons/c++.svg)](problems/advent-of-code/2019/03/sol1.cpp)|N/A|[<img src='https://adventofcode.com/favicon.png' width='24' height='24'>](https://adventofcode.com/2019/day/3)|
@@ -205,6 +217,7 @@ Note: Not all source code offers a valid solution (yet). Most code does.
 |bokforking|[![Python](.github/icons/python.svg)](problems/kattis/bokforking/sol.py)|[![Kattis](https://open.kattis.com/favicon)](https://open.kattis.com/problems/bokforking)|
 |bookingaroom|[![C++](.github/icons/c++.svg)](problems/kattis/bookingaroom/sol.cpp)|[![Kattis](https://open.kattis.com/favicon)](https://open.kattis.com/problems/bookingaroom)|
 |bossbattle|[![C++](.github/icons/c++.svg)](problems/kattis/bossbattle/sol.cpp)|[![Kattis](https://open.kattis.com/favicon)](https://open.kattis.com/problems/bossbattle)|
+|bottledup|[![Python](.github/icons/python.svg)](problems/kattis/bottledup/sol.py)|[![Kattis](https://open.kattis.com/favicon)](https://open.kattis.com/problems/bottledup)|
 |boundingrobots|[![C++](.github/icons/c++.svg)](problems/kattis/boundingrobots/sol.cpp)|[![Kattis](https://open.kattis.com/favicon)](https://open.kattis.com/problems/boundingrobots)|
 |breakingbranches|[![C++](.github/icons/c++.svg)](problems/kattis/breakingbranches/sol.cpp)|[![Kattis](https://open.kattis.com/favicon)](https://open.kattis.com/problems/breakingbranches)|
 |brexit|[![C++](.github/icons/c++.svg)](problems/kattis/brexit/sol.cpp)|[![Kattis](https://open.kattis.com/favicon)](https://open.kattis.com/problems/brexit)|
@@ -223,8 +236,11 @@ Note: Not all source code offers a valid solution (yet). Most code does.
 |cetvrta|[![C++](.github/icons/c++.svg)](problems/kattis/cetvrta/sol.cpp)|[![Kattis](https://open.kattis.com/favicon)](https://open.kattis.com/problems/cetvrta)|
 |chanukah|[![C++](.github/icons/c++.svg)](problems/kattis/chanukah/sol.cpp)|[![Kattis](https://open.kattis.com/favicon)](https://open.kattis.com/problems/chanukah)|
 |chopin|[![Python](.github/icons/python.svg)](problems/kattis/chopin/sol.py)|[![Kattis](https://open.kattis.com/favicon)](https://open.kattis.com/problems/chopin)|
+|cinema|[![Python](.github/icons/python.svg)](problems/kattis/cinema/sol.py)|[![Kattis](https://open.kattis.com/favicon)](https://open.kattis.com/problems/cinema)|
+|classpicture|[![Python](.github/icons/python.svg)](problems/kattis/classpicture/sol.py)|[![Kattis](https://open.kattis.com/favicon)](https://open.kattis.com/problems/classpicture)|
 |classy|[![C++](.github/icons/c++.svg)](problems/kattis/classy/sol.cpp)|[![Kattis](https://open.kattis.com/favicon)](https://open.kattis.com/problems/classy)|
 |climbingstairs|[![Python](.github/icons/python.svg)](problems/kattis/climbingstairs/sol.py)|[![Kattis](https://open.kattis.com/favicon)](https://open.kattis.com/problems/climbingstairs)|
+|clockpictures|[![Python](.github/icons/python.svg)](problems/kattis/clockpictures/sol.py)|[![Kattis](https://open.kattis.com/favicon)](https://open.kattis.com/problems/clockpictures)|
 |closingtheloop|[![C++](.github/icons/c++.svg)](problems/kattis/closingtheloop/sol.cpp)|[![Kattis](https://open.kattis.com/favicon)](https://open.kattis.com/problems/closingtheloop)|
 |coconut|[![Python](.github/icons/python.svg)](problems/kattis/coconut/sol.py)|[![Kattis](https://open.kattis.com/favicon)](https://open.kattis.com/problems/coconut)|
 |codetosavelives|[![Python](.github/icons/python.svg)](problems/kattis/codetosavelives/sol.py)|[![Kattis](https://open.kattis.com/favicon)](https://open.kattis.com/problems/codetosavelives)|
@@ -252,6 +268,7 @@ Note: Not all source code offers a valid solution (yet). Most code does.
 |deathknight|[![C++](.github/icons/c++.svg)](problems/kattis/deathknight/sol.cpp)|[![Kattis](https://open.kattis.com/favicon)](https://open.kattis.com/problems/deathknight)|
 |deathstar|[![Python](.github/icons/python.svg)](problems/kattis/deathstar/sol.py)|[![Kattis](https://open.kattis.com/favicon)](https://open.kattis.com/problems/deathstar)|
 |deceleratingjump|[![C++](.github/icons/c++.svg)](problems/kattis/deceleratingjump/sol.cpp)|[![Kattis](https://open.kattis.com/favicon)](https://open.kattis.com/problems/deceleratingjump)|
+|delftdistance|[![C++](.github/icons/c++.svg)](problems/kattis/delftdistance/sol.cpp)|[![Kattis](https://open.kattis.com/favicon)](https://open.kattis.com/problems/delftdistance)|
 |detaileddifferences|[![C++](.github/icons/c++.svg)](problems/kattis/detaileddifferences/sol.cpp)|[![Kattis](https://open.kattis.com/favicon)](https://open.kattis.com/problems/detaileddifferences)|
 |dicecup|[![C++](.github/icons/c++.svg)](problems/kattis/dicecup/sol.cpp)|[![Kattis](https://open.kattis.com/favicon)](https://open.kattis.com/problems/dicecup)|
 |dicegame|[![C++](.github/icons/c++.svg)](problems/kattis/dicegame/sol.cpp)|[![Kattis](https://open.kattis.com/favicon)](https://open.kattis.com/problems/dicegame)|
@@ -300,6 +317,7 @@ Note: Not all source code offers a valid solution (yet). Most code does.
 |flyingsafely|[![C++](.github/icons/c++.svg)](problems/kattis/flyingsafely/sol.cpp)|[![Kattis](https://open.kattis.com/favicon)](https://open.kattis.com/problems/flyingsafely)|
 |fodelsedagsmemorisering|[![C++](.github/icons/c++.svg)](problems/kattis/fodelsedagsmemorisering/sol.cpp)|[![Kattis](https://open.kattis.com/favicon)](https://open.kattis.com/problems/fodelsedagsmemorisering)|
 |forcedchoice|[![C++](.github/icons/c++.svg)](problems/kattis/forcedchoice/sol.cpp)|[![Kattis](https://open.kattis.com/favicon)](https://open.kattis.com/problems/forcedchoice)|
+|forestfires|[![C++](.github/icons/c++.svg)](problems/kattis/forestfires/sol.cpp)|[![Kattis](https://open.kattis.com/favicon)](https://open.kattis.com/problems/forestfires)|
 |freefood|[![C++](.github/icons/c++.svg)](problems/kattis/freefood/sol.cpp)|[![Kattis](https://open.kattis.com/favicon)](https://open.kattis.com/problems/freefood)|
 |fyi|[![C++](.github/icons/c++.svg)](problems/kattis/fyi/sol.cpp)|[![Kattis](https://open.kattis.com/favicon)](https://open.kattis.com/problems/fyi)|
 |gamenight|[![C++](.github/icons/c++.svg)](problems/kattis/gamenight/sol.cpp)|[![Kattis](https://open.kattis.com/favicon)](https://open.kattis.com/problems/gamenight)|
@@ -343,6 +361,7 @@ Note: Not all source code offers a valid solution (yet). Most code does.
 |interviewquestion|[![Python](.github/icons/python.svg)](problems/kattis/interviewquestion/sol.py)|[![Kattis](https://open.kattis.com/favicon)](https://open.kattis.com/problems/interviewquestion)|
 |isithalloween|[![C++](.github/icons/c++.svg)](problems/kattis/isithalloween/sol.cpp)|[![Kattis](https://open.kattis.com/favicon)](https://open.kattis.com/problems/isithalloween)|
 |islands3|[![C++](.github/icons/c++.svg)](problems/kattis/islands3/sol.cpp)|[![Kattis](https://open.kattis.com/favicon)](https://open.kattis.com/problems/islands3)|
+|islandtour|[![Python](.github/icons/python.svg)](problems/kattis/islandtour/sol.py)|[![Kattis](https://open.kattis.com/favicon)](https://open.kattis.com/problems/islandtour)|
 |iwannabe|[![Python](.github/icons/python.svg)](problems/kattis/iwannabe/sol.py)|[![Kattis](https://open.kattis.com/favicon)](https://open.kattis.com/problems/iwannabe)|
 |jabuke|[![C++](.github/icons/c++.svg)](problems/kattis/jabuke/sol.cpp)|[![Kattis](https://open.kattis.com/favicon)](https://open.kattis.com/problems/jabuke)|
 |jackolanternjuxtaposition|[![C++](.github/icons/c++.svg)](problems/kattis/jackolanternjuxtaposition/sol.cpp)|[![Kattis](https://open.kattis.com/favicon)](https://open.kattis.com/problems/jackolanternjuxtaposition)|
@@ -352,6 +371,7 @@ Note: Not all source code offers a valid solution (yet). Most code does.
 |joinstrings|[![C++](.github/icons/c++.svg)](problems/kattis/joinstrings/sol.cpp)|[![Kattis](https://open.kattis.com/favicon)](https://open.kattis.com/problems/joinstrings)|
 |jointjogjam|[![C++](.github/icons/c++.svg)](problems/kattis/jointjogjam/sol.cpp)|[![Kattis](https://open.kattis.com/favicon)](https://open.kattis.com/problems/jointjogjam)|
 |judgingmoose|[![C++](.github/icons/c++.svg)](problems/kattis/judgingmoose/sol.cpp)|[![Kattis](https://open.kattis.com/favicon)](https://open.kattis.com/problems/judgingmoose)|
+|jughard|[![Python](.github/icons/python.svg)](problems/kattis/jughard/sol.py)|[![Kattis](https://open.kattis.com/favicon)](https://open.kattis.com/problems/jughard)|
 |jumbojavelin|[![C++](.github/icons/c++.svg)](problems/kattis/jumbojavelin/sol.cpp)|[![Kattis](https://open.kattis.com/favicon)](https://open.kattis.com/problems/jumbojavelin)|
 |jurassicjigsaw|[![C++](.github/icons/c++.svg)](problems/kattis/jurassicjigsaw/sol.cpp)|[![Kattis](https://open.kattis.com/favicon)](https://open.kattis.com/problems/jurassicjigsaw)|
 |justaminute|[![C++](.github/icons/c++.svg)](problems/kattis/justaminute/sol.cpp)|[![Kattis](https://open.kattis.com/favicon)](https://open.kattis.com/problems/justaminute)|
@@ -382,6 +402,7 @@ Note: Not all source code offers a valid solution (yet). Most code does.
 |lockedtreasure|[![Python](.github/icons/python.svg)](problems/kattis/lockedtreasure/sol.py)|[![Kattis](https://open.kattis.com/favicon)](https://open.kattis.com/problems/lockedtreasure)|
 |logicfunctions|[![C++](.github/icons/c++.svg)](problems/kattis/logicfunctions/logicfunctions.cpp)|[![Kattis](https://open.kattis.com/favicon)](https://open.kattis.com/problems/logicfunctions)|
 |longestprimesum|[![Python](.github/icons/python.svg)](problems/kattis/longestprimesum/sol.py)|[![Kattis](https://open.kattis.com/favicon)](https://open.kattis.com/problems/longestprimesum)|
+|longswaps|[![Python](.github/icons/python.svg)](problems/kattis/longswaps/sol.py)|[![Kattis](https://open.kattis.com/favicon)](https://open.kattis.com/problems/longswaps)|
 |loorolls|[![Python](.github/icons/python.svg)](problems/kattis/loorolls/sol.py)|[![Kattis](https://open.kattis.com/favicon)](https://open.kattis.com/problems/loorolls)|
 |lopsidedlineup|[![C++](.github/icons/c++.svg)](problems/kattis/lopsidedlineup/sol.cpp)|[![Kattis](https://open.kattis.com/favicon)](https://open.kattis.com/problems/lopsidedlineup)|
 |lostlineup|[![C++](.github/icons/c++.svg)](problems/kattis/lostlineup/sol.cpp)|[![Kattis](https://open.kattis.com/favicon)](https://open.kattis.com/problems/lostlineup)|
@@ -405,6 +426,8 @@ Note: Not all source code offers a valid solution (yet). Most code does.
 |modulo|[![C++](.github/icons/c++.svg)](problems/kattis/modulo/sol.cpp)|[![Kattis](https://open.kattis.com/favicon)](https://open.kattis.com/problems/modulo)|
 |moscowdream|[![C++](.github/icons/c++.svg)](problems/kattis/moscowdream/sol.cpp)|[![Kattis](https://open.kattis.com/favicon)](https://open.kattis.com/problems/moscowdream)|
 |mosquito|[![C++](.github/icons/c++.svg)](problems/kattis/mosquito/sol.cpp)|[![Kattis](https://open.kattis.com/favicon)](https://open.kattis.com/problems/mosquito)|
+|mosquitoes|[![C++](.github/icons/c++.svg)](problems/kattis/mosquitoes/sol.cpp)|[![Kattis](https://open.kattis.com/favicon)](https://open.kattis.com/problems/mosquitoes)|
+|mosquitoes|[![Python](.github/icons/python.svg)](problems/kattis/mosquitoes/sol.py)|[![Kattis](https://open.kattis.com/favicon)](https://open.kattis.com/problems/mosquitoes)|
 |mult|[![C++](.github/icons/c++.svg)](problems/kattis/mult/sol.cpp)|[![Kattis](https://open.kattis.com/favicon)](https://open.kattis.com/problems/mult)|
 |musicalscales|[![C++](.github/icons/c++.svg)](problems/kattis/musicalscales/sol.cpp)|[![Kattis](https://open.kattis.com/favicon)](https://open.kattis.com/problems/musicalscales)|
 |nastyhacks|[![C++](.github/icons/c++.svg)](problems/kattis/nastyhacks/sol.cpp)|[![Kattis](https://open.kattis.com/favicon)](https://open.kattis.com/problems/nastyhacks)|
@@ -423,6 +446,7 @@ Note: Not all source code offers a valid solution (yet). Most code does.
 |ostgotska|[![Python](.github/icons/python.svg)](problems/kattis/ostgotska/sol.py)|[![Kattis](https://open.kattis.com/favicon)](https://open.kattis.com/problems/ostgotska)|
 |overdraft|[![Python](.github/icons/python.svg)](problems/kattis/overdraft/sol.py)|[![Kattis](https://open.kattis.com/favicon)](https://open.kattis.com/problems/overdraft)|
 |owlandfox|[![Python](.github/icons/python.svg)](problems/kattis/owlandfox/sol.py)|[![Kattis](https://open.kattis.com/favicon)](https://open.kattis.com/problems/owlandfox)|
+|paintball|[![Python](.github/icons/python.svg)](problems/kattis/paintball/sol.py)|[![Kattis](https://open.kattis.com/favicon)](https://open.kattis.com/problems/paintball)|
 |parking|[![C++](.github/icons/c++.svg)](problems/kattis/parking/sol.cpp)|[![Kattis](https://open.kattis.com/favicon)](https://open.kattis.com/problems/parking)|
 |parking2|[![C++](.github/icons/c++.svg)](problems/kattis/parking2/sol.cpp)|[![Kattis](https://open.kattis.com/favicon)](https://open.kattis.com/problems/parking2)|
 |patuljci|[![C++](.github/icons/c++.svg)](problems/kattis/patuljci/sol.cpp)|[![Kattis](https://open.kattis.com/favicon)](https://open.kattis.com/problems/patuljci)|
@@ -444,6 +468,7 @@ Note: Not all source code offers a valid solution (yet). Most code does.
 |popkorn|[![Python](.github/icons/python.svg)](problems/kattis/popkorn/sol.py)|[![Kattis](https://open.kattis.com/favicon)](https://open.kattis.com/problems/popkorn)|
 |popularitycontest|[![Python](.github/icons/python.svg)](problems/kattis/popularitycontest/sol.py)|[![Kattis](https://open.kattis.com/favicon)](https://open.kattis.com/problems/popularitycontest)|
 |pot|[![C++](.github/icons/c++.svg)](problems/kattis/pot/sol.cpp)|[![Kattis](https://open.kattis.com/favicon)](https://open.kattis.com/problems/pot)|
+|pravokutni|[![C++](.github/icons/c++.svg)](problems/kattis/pravokutni/sol.cpp)|[![Kattis](https://open.kattis.com/favicon)](https://open.kattis.com/problems/pravokutni)|
 |prettygoodcuberoot|[![Python](.github/icons/python.svg)](problems/kattis/prettygoodcuberoot/sol.py)|[![Kattis](https://open.kattis.com/favicon)](https://open.kattis.com/problems/prettygoodcuberoot)|
 |primecount|[![C++](.github/icons/c++.svg)](problems/kattis/primecount/sol.cpp)|[![Kattis](https://open.kattis.com/favicon)](https://open.kattis.com/problems/primecount)|
 |primesieve|[![C++](.github/icons/c++.svg)](problems/kattis/primesieve/sol.cpp)|[![Kattis](https://open.kattis.com/favicon)](https://open.kattis.com/problems/primesieve)|
@@ -463,17 +488,20 @@ Note: Not all source code offers a valid solution (yet). Most code does.
 |raggedright|[![C++](.github/icons/c++.svg)](problems/kattis/raggedright/sol.cpp)|[![Kattis](https://open.kattis.com/favicon)](https://open.kattis.com/problems/raggedright)|
 |railroad2|[![C++](.github/icons/c++.svg)](problems/kattis/railroad2/sol.cpp)|[![Kattis](https://open.kattis.com/favicon)](https://open.kattis.com/problems/railroad2)|
 |ratingproblems|[![C++](.github/icons/c++.svg)](problems/kattis/ratingproblems/sol.cpp)|[![Kattis](https://open.kattis.com/favicon)](https://open.kattis.com/problems/ratingproblems)|
+|rationalsequence|[![Python](.github/icons/python.svg)](problems/kattis/rationalsequence/sol.py)|[![Kattis](https://open.kattis.com/favicon)](https://open.kattis.com/problems/rationalsequence)|
 |rationalsequence2|[![C++](.github/icons/c++.svg)](problems/kattis/rationalsequence2/sol.cpp)|[![Kattis](https://open.kattis.com/favicon)](https://open.kattis.com/problems/rationalsequence2)|
 |rationalsequence3|[![Python](.github/icons/python.svg)](problems/kattis/rationalsequence3/sol.py)|[![Kattis](https://open.kattis.com/favicon)](https://open.kattis.com/problems/rationalsequence3)|
 |recipes|[![Python](.github/icons/python.svg)](problems/kattis/recipes/sol.py)|[![Kattis](https://open.kattis.com/favicon)](https://open.kattis.com/problems/recipes)|
 |recount|[![C++](.github/icons/c++.svg)](problems/kattis/recount/sol.cpp)|[![Kattis](https://open.kattis.com/favicon)](https://open.kattis.com/problems/recount)|
 |rectanglearea|[![C++](.github/icons/c++.svg)](problems/kattis/rectanglearea/sol.cpp)|[![Kattis](https://open.kattis.com/favicon)](https://open.kattis.com/problems/rectanglearea)|
+|reduction|[![C++](.github/icons/c++.svg)](problems/kattis/reduction/sol.cpp)|[![Kattis](https://open.kattis.com/favicon)](https://open.kattis.com/problems/reduction)|
 |refrigerator|[![C++](.github/icons/c++.svg)](problems/kattis/refrigerator/sol.cpp)|[![Kattis](https://open.kattis.com/favicon)](https://open.kattis.com/problems/refrigerator)|
 |relocation|[![C++](.github/icons/c++.svg)](problems/kattis/relocation/sol.cpp)|[![Kattis](https://open.kattis.com/favicon)](https://open.kattis.com/problems/relocation)|
 |reverse|[![C++](.github/icons/c++.svg)](problems/kattis/reverse/sol.cpp)|[![Kattis](https://open.kattis.com/favicon)](https://open.kattis.com/problems/reverse)|
 |reversebinary|[![C++](.github/icons/c++.svg)](problems/kattis/reversebinary/sol.cpp)|[![Kattis](https://open.kattis.com/favicon)](https://open.kattis.com/problems/reversebinary)|
 |reverserot|[![C++](.github/icons/c++.svg)](problems/kattis/reverserot/sol.cpp)|[![Kattis](https://open.kattis.com/favicon)](https://open.kattis.com/problems/reverserot)|
 |rijeci|[![C++](.github/icons/c++.svg)](problems/kattis/rijeci/sol.cpp)|[![Kattis](https://open.kattis.com/favicon)](https://open.kattis.com/problems/rijeci)|
+|roberthood|[![C++](.github/icons/c++.svg)](problems/kattis/roberthood/sol.cpp)|[![Kattis](https://open.kattis.com/favicon)](https://open.kattis.com/problems/roberthood)|
 |romans|[![C++](.github/icons/c++.svg)](problems/kattis/romans/sol.cpp)|[![Kattis](https://open.kattis.com/favicon)](https://open.kattis.com/problems/romans)|
 |runlengthencodingrun|[![C++](.github/icons/c++.svg)](problems/kattis/runlengthencodingrun/sol.cpp)|[![Kattis](https://open.kattis.com/favicon)](https://open.kattis.com/problems/runlengthencodingrun)|
 |sacredtexts|[![Python](.github/icons/python.svg)](problems/kattis/sacredtexts/sol.py)|[![Kattis](https://open.kattis.com/favicon)](https://open.kattis.com/problems/sacredtexts)|
@@ -490,13 +518,16 @@ Note: Not all source code offers a valid solution (yet). Most code does.
 |shatteredcake|[![C++](.github/icons/c++.svg)](problems/kattis/shatteredcake/sol.cpp)|[![Kattis](https://open.kattis.com/favicon)](https://open.kattis.com/problems/shatteredcake)|
 |shopaholic|[![C++](.github/icons/c++.svg)](problems/kattis/shopaholic/sol.cpp)|[![Kattis](https://open.kattis.com/favicon)](https://open.kattis.com/problems/shopaholic)|
 |shoppinglisteasy|[![Python](.github/icons/python.svg)](problems/kattis/shoppinglisteasy/sol.py)|[![Kattis](https://open.kattis.com/favicon)](https://open.kattis.com/problems/shoppinglisteasy)|
+|shortestcompositesum|[![Python](.github/icons/python.svg)](problems/kattis/shortestcompositesum/sol.py)|[![Kattis](https://open.kattis.com/favicon)](https://open.kattis.com/problems/shortestcompositesum)|
 |shortestpath1|[![C++](.github/icons/c++.svg)](problems/kattis/shortestpath1/sol.cpp)|[![Kattis](https://open.kattis.com/favicon)](https://open.kattis.com/problems/shortestpath1)|
 |sibice|[![C++](.github/icons/c++.svg)](problems/kattis/sibice/sol.cpp)|[![Kattis](https://open.kattis.com/favicon)](https://open.kattis.com/problems/sibice)|
 |sifferprodukt|[![Python](.github/icons/python.svg)](problems/kattis/sifferprodukt/sol.py)|[![Kattis](https://open.kattis.com/favicon)](https://open.kattis.com/problems/sifferprodukt)|
+|silverstarstandsalone|[![Python](.github/icons/python.svg)](problems/kattis/silverstarstandsalone/sol.py)|[![Kattis](https://open.kattis.com/favicon)](https://open.kattis.com/problems/silverstarstandsalone)|
 |sim|[![C++](.github/icons/c++.svg)](problems/kattis/sim/sol.cpp)|[![Kattis](https://open.kattis.com/favicon)](https://open.kattis.com/problems/sim)|
 |simon|[![C++](.github/icons/c++.svg)](problems/kattis/simon/sol.cpp)|[![Kattis](https://open.kattis.com/favicon)](https://open.kattis.com/problems/simon)|
 |simonsays|[![C++](.github/icons/c++.svg)](problems/kattis/simonsays/sol.cpp)|[![Kattis](https://open.kattis.com/favicon)](https://open.kattis.com/problems/simonsays)|
 |simpleaddition|[![C++](.github/icons/c++.svg)](problems/kattis/simpleaddition/sol.cpp)|[![Kattis](https://open.kattis.com/favicon)](https://open.kattis.com/problems/simpleaddition)|
+|simplepolygon|[![Python](.github/icons/python.svg)](problems/kattis/simplepolygon/sol.py)|[![Kattis](https://open.kattis.com/favicon)](https://open.kattis.com/problems/simplepolygon)|
 |simplysudoku|[![Python](.github/icons/python.svg)](problems/kattis/simplysudoku/sol.py)|[![Kattis](https://open.kattis.com/favicon)](https://open.kattis.com/problems/simplysudoku)|
 |sjecista|[![C++](.github/icons/c++.svg)](problems/kattis/sjecista/sol.cpp)|[![Kattis](https://open.kattis.com/favicon)](https://open.kattis.com/problems/sjecista)|
 |skener|[![C++](.github/icons/c++.svg)](problems/kattis/skener/sol.cpp)|[![Kattis](https://open.kattis.com/favicon)](https://open.kattis.com/problems/skener)|
@@ -504,6 +535,7 @@ Note: Not all source code offers a valid solution (yet). Most code does.
 |skruop|[![Python](.github/icons/python.svg)](problems/kattis/skruop/sol.py)|[![Kattis](https://open.kattis.com/favicon)](https://open.kattis.com/problems/skruop)|
 |smil|[![C++](.github/icons/c++.svg)](problems/kattis/smil/sol.cpp)|[![Kattis](https://open.kattis.com/favicon)](https://open.kattis.com/problems/smil)|
 |snapperhard|[![Python](.github/icons/python.svg)](problems/kattis/snapperhard/sol.py)|[![Kattis](https://open.kattis.com/favicon)](https://open.kattis.com/problems/snapperhard)|
+|socialdistancing2|[![Python](.github/icons/python.svg)](problems/kattis/socialdistancing2/sol.py)|[![Kattis](https://open.kattis.com/favicon)](https://open.kattis.com/problems/socialdistancing2)|
 |sodaslurper|[![C++](.github/icons/c++.svg)](problems/kattis/sodaslurper/sol.cpp)|[![Kattis](https://open.kattis.com/favicon)](https://open.kattis.com/problems/sodaslurper)|
 |sok|[![C++](.github/icons/c++.svg)](problems/kattis/sok/sol.cpp)|[![Kattis](https://open.kattis.com/favicon)](https://open.kattis.com/problems/sok)|
 |somesum|[![Python](.github/icons/python.svg)](problems/kattis/somesum/sol.py)|[![Kattis](https://open.kattis.com/favicon)](https://open.kattis.com/problems/somesum)|
@@ -561,6 +593,7 @@ Note: Not all source code offers a valid solution (yet). Most code does.
 |vectorfunctions|[![C++](.github/icons/c++.svg)](problems/kattis/vectorfunctions/sol.cpp)|[![Kattis](https://open.kattis.com/favicon)](https://open.kattis.com/problems/vectorfunctions)|
 |volim|[![C++](.github/icons/c++.svg)](problems/kattis/volim/sol.cpp)|[![Kattis](https://open.kattis.com/favicon)](https://open.kattis.com/problems/volim)|
 |vote|[![C++](.github/icons/c++.svg)](problems/kattis/vote/sol.cpp)|[![Kattis](https://open.kattis.com/favicon)](https://open.kattis.com/problems/vote)|
+|watersheds|[![Python](.github/icons/python.svg)](problems/kattis/watersheds/sol.py)|[![Kattis](https://open.kattis.com/favicon)](https://open.kattis.com/problems/watersheds)|
 |weakvertices|[![C++](.github/icons/c++.svg)](problems/kattis/weakvertices/sol.cpp)|[![Kattis](https://open.kattis.com/favicon)](https://open.kattis.com/problems/weakvertices)|
 |wertyu|[![C++](.github/icons/c++.svg)](problems/kattis/wertyu/sol.cpp)|[![Kattis](https://open.kattis.com/favicon)](https://open.kattis.com/problems/wertyu)|
 |whatdoesthefoxsay|[![C++](.github/icons/c++.svg)](problems/kattis/whatdoesthefoxsay/sol.cpp)|[![Kattis](https://open.kattis.com/favicon)](https://open.kattis.com/problems/whatdoesthefoxsay)|
@@ -568,6 +601,7 @@ Note: Not all source code offers a valid solution (yet). Most code does.
 |whichisgreater|[![Python](.github/icons/python.svg)](problems/kattis/whichisgreater/sol.py)|[![Kattis](https://open.kattis.com/favicon)](https://open.kattis.com/problems/whichisgreater)|
 |yinyangstones|[![C++](.github/icons/c++.svg)](problems/kattis/yinyangstones/sol.cpp)|[![Kattis](https://open.kattis.com/favicon)](https://open.kattis.com/problems/yinyangstones)|
 |yoda|[![C++](.github/icons/c++.svg)](problems/kattis/yoda/sol.cpp)|[![Kattis](https://open.kattis.com/favicon)](https://open.kattis.com/problems/yoda)|
+|youbethejudge2|[![Python](.github/icons/python.svg)](problems/kattis/youbethejudge2/sol.py)|[![Kattis](https://open.kattis.com/favicon)](https://open.kattis.com/problems/youbethejudge2)|
 |zamka|[![C++](.github/icons/c++.svg)](problems/kattis/zamka/sol.cpp)|[![Kattis](https://open.kattis.com/favicon)](https://open.kattis.com/problems/zamka)|
 |zanzibar|[![C++](.github/icons/c++.svg)](problems/kattis/zanzibar/sol.cpp)|[![Kattis](https://open.kattis.com/favicon)](https://open.kattis.com/problems/zanzibar)|
 |zoo|[![C++](.github/icons/c++.svg)](problems/kattis/zoo/sol.cpp)|[![Kattis](https://open.kattis.com/favicon)](https://open.kattis.com/problems/zoo)|
