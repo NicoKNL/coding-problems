@@ -1,48 +1,22 @@
 import sys
+from collections import defaultdict
 
-MAP = {".": 0, "#": 1}
-SIZE = 100
-TIMESTEPS = 100
-
-
-def adjacent(r, c):
-    positions = []
-    for ro in [-1, 0, 1]:
-        for co in [-1, 0, 1]:
-            if ro == 0 and co == 0:
-                continue
-            if r + ro < 0 or r + ro >= SIZE:
-                continue
-            if c + co < 0 or c + co >= SIZE:
-                continue
-            positions.append((r + ro, c + co))
-    return positions
-
+MAP = defaultdict(list)
 
 if __name__ == "__main__":
     lines = [l.strip() for l in sys.stdin]
-    GRID = []
-    for line in lines:
-        GRID.append([MAP[c] for c in line])
+    lines = [l for l in lines if l]
 
-    for _ in range(TIMESTEPS):
-        NEXT_GRID = [[0 for _ in range(SIZE)] for __ in range(SIZE)]
-        for r in range(SIZE):
-            for c in range(SIZE):
-                total = 0
-                for ro, co in adjacent(r, c):
-                    total += GRID[ro][co]
+    word = lines[-1]
+    for line in lines[:-1]:
+        s, t = line.split(" => ")
+        MAP[s].append(t)
 
-                if GRID[r][c]:
-                    if total == 2 or total == 3:
-                        NEXT_GRID[r][c] = 1
-                else:
-                    if total == 3:
-                        NEXT_GRID[r][c] = 1
+    molecules = set()
+    for k in MAP.keys():
+        for i in range(len(word) - len(k) + 1):
+            if word[i : i + len(k)] == k:
+                for v in MAP[k]:
+                    molecules.add(word[:i] + v + word[i + len(k) :])
 
-        GRID = NEXT_GRID
-
-    total = 0
-    for row in GRID:
-        total += sum(row)
-    print(total)
+    print(len(molecules))

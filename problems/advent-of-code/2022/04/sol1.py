@@ -6,17 +6,17 @@ if __name__ == "__main__":
     fully_contained = 0
 
     for line in lines:
-        elf1, elf2 = line.split(",")
-        elf1 = list(map(int, elf1.split("-")))
-        elf2 = list(map(int, elf2.split("-")))
+        range1, range2 = line.split(",")
+        range1 = list(map(int, range1.split("-")))
+        range2 = list(map(int, range2.split("-")))
 
-        r1 = elf1[1] - elf1[0]
-        r2 = elf2[1] - elf2[0]
+        len1 = range1[1] - range1[0]
+        len2 = range2[1] - range2[0]
 
-        if r1 < r2:
-            elf1, elf2 = elf2, elf1
+        if len1 < len2:
+            range1, range2 = range2, range1
 
-        if elf1[0] <= elf2[0] and elf2[1] <= elf1[1]:
+        if range1[0] <= range2[0] and range2[1] <= range1[1]:
             fully_contained += 1
 
     print(fully_contained)

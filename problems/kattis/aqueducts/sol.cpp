@@ -158,6 +158,17 @@ int main()
         }
     }
 
+    for (int u = 0; u < n_hills; ++u)
+    {
+        for (int v = 0; v < n_hills; ++v)
+        {
+            if (u != v && dist[u][v] < INF)
+            {
+                cout << u << " -> " << v << ": " << dist[u][v] << endl;
+            }
+        }
+    }
+
     // Perform all pairs shortests paths
     for (int k = 0; k < n_hills; k++)
         for (int i = 0; i < n_hills; i++)

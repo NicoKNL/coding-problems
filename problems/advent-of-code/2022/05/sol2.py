@@ -26,10 +26,10 @@ def parseStacks(count, data):
     stacks = [[] for _ in range(count)]
 
     for row in data:
-        print(row)
         for i, c in enumerate(range(1, len(row), 4)):
             if row[c].strip():
                 stacks[i].append(row[c])
+
     stacks = [stack[::-1] for stack in stacks]
     return stacks
 

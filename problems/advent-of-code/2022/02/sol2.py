@@ -1,10 +1,9 @@
 import sys
 
-OPPONENT = "ABC"
-ME = "XYZ"
-T = ["ROCK", "PAPER", "SCISSORS"]
 
 if __name__ == "__main__":
+    OPPONENT = "ABC"
+    ME = "XYZ"
     score = 0
 
     for line in sys.stdin:
@@ -19,10 +18,9 @@ if __name__ == "__main__":
         else:  # v == "Z":
             me = (opp + 1) % 3
 
-        delta = me - opp
-        print(T[opp], T[me], delta)
+        delta = (me - opp + 3) % 3
 
-        if delta == 1 or delta == -2:
+        if delta == 1:
             score += 6
         elif delta == 0:
             score += 3

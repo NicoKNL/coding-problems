@@ -1,57 +1,52 @@
 import sys
+from collections import defaultdict
 
-MAP = {".": 0, "#": 1}
-SIZE = 100
-TIMESTEPS = 100
-
-
-def adjacent(r, c):
-    positions = []
-    for ro in [-1, 0, 1]:
-        for co in [-1, 0, 1]:
-            if ro == 0 and co == 0:
-                continue
-            if r + ro < 0 or r + ro >= SIZE:
-                continue
-            if c + co < 0 or c + co >= SIZE:
-                continue
-            positions.append((r + ro, c + co))
-    return positions
-
-
-def forceCorners(GRID):
-    GRID[0][0] = 1
-    GRID[0][SIZE - 1] = 1
-    GRID[SIZE - 1][0] = 1
-    GRID[SIZE - 1][SIZE - 1] = 1
-
+MAP = dict()
 
 if __name__ == "__main__":
     lines = [l.strip() for l in sys.stdin]
-    GRID = []
-    for line in lines:
-        GRID.append([MAP[c] for c in line])
+    lines = [l for l in lines if l]
 
-    for _ in range(TIMESTEPS):
-        forceCorners(GRID)
-        NEXT_GRID = [[0 for _ in range(SIZE)] for __ in range(SIZE)]
-        for r in range(SIZE):
-            for c in range(SIZE):
-                total = 0
-                for ro, co in adjacent(r, c):
-                    total += GRID[ro][co]
+    WORD = lines[-1]
+    values = []
+    for line in lines[:-1]:
+        s, t = line.split(" => ")
+        values.append(t)
+        MAP[t] = s
 
-                if GRID[r][c]:
-                    if total == 2 or total == 3:
-                        NEXT_GRID[r][c] = 1
-                else:
-                    if total == 3:
-                        NEXT_GRID[r][c] = 1
+    values.sort(key=lambda x: len(x))
+    steps = 0
+    while WORD != "e":
+        print(WORD)
+        for v in values:
+            if v in WORD:
+                steps += 1
+                WORD = WORD.replace(v, MAP[v])
+    print(steps)
+    exit(0)
+    queue = [("e", 0)]
+    qi = 0
+    best = 10e9
+    while qi < len(queue):
+        word, depth = queue[qi]
+        print(depth, word)
+        qi += 1
 
-        GRID = NEXT_GRID
+        if word in MEMO and MEMO[word] <= depth:
+            continue
+        else:
+            MEMO[word] = depth
 
-    forceCorners(GRID)
-    total = 0
-    for row in GRID:
-        total += sum(row)
-    print(total)
+        if len(word) > len(WORD):
+            continue
+        elif len(word) == len(WORD) and word == WORD:
+            best = min(depth, best)
+            continue
+
+        for k in MAP.keys():
+            for i in range(len(word) - len(k) + 1):
+                if word[i : i + len(k)] == k:
+                    for v in MAP[k]:
+                        queue.append((word[:i] + v + word[i + len(k) :], depth + 1))
+
+    print(best)
