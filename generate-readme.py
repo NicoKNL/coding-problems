@@ -28,11 +28,11 @@ class Problem:
 
         self.language_icon = ""
         if self.language == ".py":
-            self.language_icon = (
-                "<img src='.github/icons/python.svg' width='24' height='24'>"
-            )
+            self.language_icon = "<img src='.github/icons/python.svg' width='24' height='24' style='max-width: 24px'>"
         elif self.language == ".cpp":
-            self.language_icon = f"![C++](.github/icons/c++.svg)"
+            self.language_icon = (
+                "<img src='.github/icons/c++.svg' width='24' height='24'>"
+            )
 
     def getHeader(self):
         return markdownRow(self.header)
@@ -50,7 +50,7 @@ class Problem:
 class AdventOfCodeProblem(Problem):
     def __init__(self, location1: Path, location2: Path):
         super().__init__(location1)
-        self.location1 = f"[{self.language_icon}]({location1.parents[0]})"
+        self.location1 = f"<a href={location1.parents[0]}>{self.language_icon}</a>"
         self.year = location1.parts[-3]
         self.day = location1.parts[-2]
         self.url = f"https://adventofcode.com/{self.year}/day/{self.day.lstrip('0')}"
@@ -185,29 +185,36 @@ def problemsAsTable(section, problems):
 
 
 def generateAdventOfCodeTable(problems):
-    days = list(map(str, range(1, 26)))
     SECTION = "# Advent of Code"
-    HEADER = f"|year|{'|'.join(days)}|"
-    DIVIDER = "|:-:" * 26 + "|"
-    table = [SECTION, HEADER, DIVIDER]
+
     years = list(set([p.year for p in problems]))
     years.sort()
+
     problem_table = [["x" for _ in range(26)] for _ in range(len(years))]
-    print(HEADER)
-    # print(problems)
+    table = [SECTION]
     for p in problems:
         problem_table[years.index(p.year)][int(p.day)] = p
-    print(problem_table)
+
+    table.append("<table>")
+    table.append("<thead>")
+    table.append("<tr>")
+    table.append("<th style='text-align:center'>year</th>")
+    for day in range(1, 26):
+        table.append(f"<th style='text-align:center; width: 24px!important'>{day}</th>")
+
+    table.append("</tr>")
+    table.append("</thead>")
+    table.append("<tbody>")
+
     for i, year in enumerate(years):
-        table.append(
-            markdownRow(
-                [year]
-                + [
-                    p.location1 if isinstance(p, Problem) else " "
-                    for p in problem_table[i][1:]
-                ]
-            )
-        )
+        table.append("<tr>")
+        table.append(f"<td>{year}</td>")
+        for p in problem_table[i][1:]:
+            table.append(f"<td>{p.location1 if isinstance(p, Problem) else 'x'}</td>")
+        table.append("</tr>")
+    table.append("</tbody>")
+    table.append("</table>")
+    table.append("")
     return "\n".join(table)
 
 
