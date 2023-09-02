@@ -48,8 +48,7 @@ class Problem:
 class AdventOfCodeProblem(Problem):
     def __init__(self, location1: Path, location2: Path):
         super().__init__(location1)
-        self.location1 = f"[{self.language_icon}]({location1})"
-        self.location2 = f"[{self.language_icon}]({location2})" if location2 else "N/A"
+        self.location1 = f"[{self.language_icon}]({location1.parents[0]})"
         self.year = location1.parts[-3]
         self.day = location1.parts[-2]
         self.url = f"https://adventofcode.com/{self.year}/day/{self.day.lstrip('0')}"
@@ -183,6 +182,33 @@ def problemsAsTable(section, problems):
     return "\n".join(table)
 
 
+def generateAdventOfCodeTable(problems):
+    days = list(map(str, range(1, 26)))
+    SECTION = "# Advent of Code"
+    HEADER = f"|year|{'|'.join(days)}|"
+    DIVIDER = "|:-:" * 26 + "|"
+    table = [SECTION, HEADER, DIVIDER]
+    years = list(set([p.year for p in problems]))
+    years.sort()
+    problem_table = [["x" for _ in range(26)] for _ in range(len(years))]
+    print(HEADER)
+    # print(problems)
+    for p in problems:
+        problem_table[years.index(p.year)][int(p.day)] = p
+    print(problem_table)
+    for i, year in enumerate(years):
+        table.append(
+            markdownRow(
+                [year]
+                + [
+                    p.location1 if isinstance(p, Problem) else " "
+                    for p in problem_table[i][1:]
+                ]
+            )
+        )
+    return "\n".join(table)
+
+
 def generateStatistics(problems, keys):
     HEADER = "|Provider|Problem count|"
     DIVIDER = "|-|-|"
@@ -200,7 +226,7 @@ def generate():
     content = [
         INTRODUCTION,
         generateStatistics(problems, ["advent-of-code", "codechef", "kattis"]),
-        problemsAsTable("Advent of Code", problems["advent-of-code"]),
+        generateAdventOfCodeTable(problems["advent-of-code"]),
         problemsAsTable("Codechef", problems["codechef"]),
         problemsAsTable("Kattis", problems["kattis"]),
         "",
