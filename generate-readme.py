@@ -28,7 +28,9 @@ class Problem:
 
         self.language_icon = ""
         if self.language == ".py":
-            self.language_icon = f"![Python](.github/icons/python.svg)"
+            self.language_icon = (
+                "<img src='.github/icons/python.svg' width='24' height='24'>"
+            )
         elif self.language == ".cpp":
             self.language_icon = f"![C++](.github/icons/c++.svg)"
 
