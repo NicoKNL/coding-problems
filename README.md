@@ -13,15 +13,15 @@ Note: Not all source code offers a valid solution (yet). Most code does.
 <thead>
 <tr>
 <th style='text-align:center'>year</th>
-<th style='text-align:center; width: 24px!important'>1</th>
-<th style='text-align:center; width: 24px!important'>2</th>
-<th style='text-align:center; width: 24px!important'>3</th>
-<th style='text-align:center; width: 24px!important'>4</th>
-<th style='text-align:center; width: 24px!important'>5</th>
-<th style='text-align:center; width: 24px!important'>6</th>
-<th style='text-align:center; width: 24px!important'>7</th>
-<th style='text-align:center; width: 24px!important'>8</th>
-<th style='text-align:center; width: 24px!important'>9</th>
+<th style='text-align:center; width: 24px!important'>01</th>
+<th style='text-align:center; width: 24px!important'>02</th>
+<th style='text-align:center; width: 24px!important'>03</th>
+<th style='text-align:center; width: 24px!important'>04</th>
+<th style='text-align:center; width: 24px!important'>05</th>
+<th style='text-align:center; width: 24px!important'>06</th>
+<th style='text-align:center; width: 24px!important'>07</th>
+<th style='text-align:center; width: 24px!important'>08</th>
+<th style='text-align:center; width: 24px!important'>09</th>
 <th style='text-align:center; width: 24px!important'>10</th>
 <th style='text-align:center; width: 24px!important'>11</th>
 <th style='text-align:center; width: 24px!important'>12</th>
