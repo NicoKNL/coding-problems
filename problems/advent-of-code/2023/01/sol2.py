@@ -2,8 +2,16 @@ from string import ascii_lowercase
 import sys
 
 NUMBERS = [
-    ".", "one", "two", "three", "four",
-    "five", "six", "seven", "eight", "nine",
+    ".",
+    "one",
+    "two",
+    "three",
+    "four",
+    "five",
+    "six",
+    "seven",
+    "eight",
+    "nine",
 ]
 
 
@@ -27,7 +35,8 @@ def getRightMostNumber(s: str) -> int:
                     return NUMBERS.index(num)
 
 
-lines = [line.strip() for line in sys.stdin]
+# lines = [line.strip() for line in sys.stdin]
+lines = ["two1nine"]
 
 total = 0
 
