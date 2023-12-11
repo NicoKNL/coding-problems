@@ -8,7 +8,7 @@ def distance(a: Pos, b: Pos) -> int:
     return abs(b[0] - a[0]) + abs(b[1] - a[1])
 
 
-def getEmptyRows(grid: list[str]) -> set[int]:
+def getRowOffsets(grid: list[str]) -> set[int]:
     empty_rows = [0]
     for r in range(ROWS):
         is_empty = True
@@ -24,10 +24,10 @@ def getEmptyRows(grid: list[str]) -> set[int]:
     return empty_rows[1:]
 
 
-def getEmptyColumns(grid: list[str]) -> set[int]:
-    # rotate 90 degrees clockwise
+def getColumnOffsets(grid: list[str]) -> set[int]:
+    # rotate 90 counter degrees clockwise
     rotated_grid = [list(row) for row in zip(*grid)]
-    return getEmptyRows(rotated_grid)
+    return getRowOffsets(rotated_grid)
 
 
 def getGalaxyPositions(
@@ -48,17 +48,20 @@ def getGalaxyPositions(
     return positions
 
 
+def computeTotalDistance(positions: list[Pos]) -> int:
+    for i in range(len(positions)):
+        for ii in range(i + 1, len(positions)):
+            total_distance += distance(positions[i], positions[ii])
+
+
 grid = [list(line.strip()) for line in sys.stdin]
 ROWS = len(grid)
 COLS = len(grid[0])
 
-empty_rows = getEmptyRows(grid)
-empty_cols = getEmptyColumns(grid)
-positions = getGalaxyPositions(grid, empty_rows, empty_cols)
+empty_rows = getRowOffsets(grid)
+empty_cols = getColumnOffsets(grid)
 
-total_distance = 0
-for i in range(len(positions)):
-    for ii in range(i + 1, len(positions)):
-        total_distance += distance(positions[i], positions[ii])
+positions = getGalaxyPositions(grid, empty_rows, empty_cols)
+total_distance = computeTotalDistance(positions)
 
 print(total_distance)
