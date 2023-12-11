@@ -9,7 +9,7 @@ def distance(a: Pos, b: Pos) -> int:
 
 
 def getRowOffsets(grid: list[str]) -> set[int]:
-    empty_rows = [0]
+    offsets = [0]
     for r in range(ROWS):
         is_empty = True
         for c in range(COLS):
@@ -18,10 +18,10 @@ def getRowOffsets(grid: list[str]) -> set[int]:
                 break
 
         if is_empty:
-            empty_rows.append(empty_rows[-1] + 999999)
+            offsets.append(offsets[-1] + 1)
         else:
-            empty_rows.append(empty_rows[-1])
-    return empty_rows[1:]
+            offsets.append(offsets[-1])
+    return offsets[1:]
 
 
 def getColumnOffsets(grid: list[str]) -> set[int]:
@@ -31,7 +31,7 @@ def getColumnOffsets(grid: list[str]) -> set[int]:
 
 
 def getGalaxyPositions(
-    grid: list[str], empty_rows: list[int], empty_cols: list[int]
+    grid: list[str], row_offsets: list[int], col_offsets: list[int]
 ) -> list[Pos]:
     positions = []
 
@@ -58,10 +58,10 @@ grid = [list(line.strip()) for line in sys.stdin]
 ROWS = len(grid)
 COLS = len(grid[0])
 
-empty_rows = getRowOffsets(grid)
-empty_cols = getColumnOffsets(grid)
+row_offsets = getRowOffsets(grid)
+col_offsets = getColumnOffsets(grid)
 
-positions = getGalaxyPositions(grid, empty_rows, empty_cols)
+positions = getGalaxyPositions(grid, row_offsets, col_offsets)
 total_distance = computeTotalDistance(positions)
 
 print(total_distance)

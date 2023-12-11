@@ -31,15 +31,15 @@ def getColumnOffsets(grid: list[str]) -> set[int]:
 
 
 def getGalaxyPositions(
-    grid: list[str], empty_rows: list[int], empty_cols: list[int]
+    grid: list[str], row_offsets: list[int], col_offsets: list[int]
 ) -> list[Pos]:
     positions = []
 
     for row in range(ROWS):
         for col in range(COLS):
             if grid[row][col] == "#":
-                row_offset = empty_rows[row]
-                col_offset = empty_cols[col]
+                row_offset = row_offsets[row]
+                col_offset = col_offsets[col]
 
                 actual_position = (row + row_offset, col + col_offset)
 
@@ -58,10 +58,10 @@ grid = [list(line.strip()) for line in sys.stdin]
 ROWS = len(grid)
 COLS = len(grid[0])
 
-empty_rows = getRowOffsets(grid)
-empty_cols = getColumnOffsets(grid)
+row_offsets = getRowOffsets(grid)
+col_offsets = getColumnOffsets(grid)
 
-positions = getGalaxyPositions(grid, empty_rows, empty_cols)
+positions = getGalaxyPositions(grid, row_offsets, col_offsets)
 total_distance = computeTotalDistance(positions)
 
 print(total_distance)
