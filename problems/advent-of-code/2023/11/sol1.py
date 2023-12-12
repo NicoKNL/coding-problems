@@ -25,7 +25,7 @@ def getRowOffsets(grid: list[str]) -> set[int]:
 
 
 def getColumnOffsets(grid: list[str]) -> set[int]:
-    # rotate 90 counter degrees clockwise
+    # rotate 90 degrees counter clockwise
     rotated_grid = [list(row) for row in zip(*grid)]
     return getRowOffsets(rotated_grid)
 

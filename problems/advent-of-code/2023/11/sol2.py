@@ -18,14 +18,14 @@ def getRowOffsets(grid: list[str]) -> set[int]:
                 break
 
         if is_empty:
-            offsets.append(offsets[-1] + 1)
+            offsets.append(offsets[-1] + 999999)
         else:
             offsets.append(offsets[-1])
     return offsets[1:]
 
 
 def getColumnOffsets(grid: list[str]) -> set[int]:
-    # rotate 90 counter degrees clockwise
+    # rotate 90 degrees counter clockwise
     rotated_grid = [list(row) for row in zip(*grid)]
     return getRowOffsets(rotated_grid)
 
@@ -38,8 +38,8 @@ def getGalaxyPositions(
     for row in range(ROWS):
         for col in range(COLS):
             if grid[row][col] == "#":
-                row_offset = empty_rows[row]
-                col_offset = empty_cols[col]
+                row_offset = row_offsets[row]
+                col_offset = col_offsets[col]
 
                 actual_position = (row + row_offset, col + col_offset)
 
