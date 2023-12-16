@@ -35,8 +35,7 @@ def getRightMostNumber(s: str) -> int:
                     return NUMBERS.index(num)
 
 
-# lines = [line.strip() for line in sys.stdin]
-lines = ["two1nine"]
+lines = [line.strip() for line in sys.stdin]
 
 total = 0
 

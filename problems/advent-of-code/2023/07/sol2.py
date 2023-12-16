@@ -35,7 +35,6 @@ def determineHandType(cards: str) -> HandType:
         card_counts[0] = card_counts[0] + jokers
 
     if card_counts[0] == 5:
-        # ...
         return HandType.FIVE_OF_A_KIND
     elif card_counts[0] == 4:
         return HandType.FOUR_OF_A_KIND

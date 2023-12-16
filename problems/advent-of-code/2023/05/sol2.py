@@ -19,23 +19,6 @@ class SegmentMap:
         return (self.target + offset_start, self.target + offset_end)
 
 
-class SegmentMap:
-    # ...
-    def __contains__(self, seed_range: tuple[int, int]) -> bool:
-        return (
-            self.source <= seed_range[0] < self.source + self.length
-            or self.source <= seed_range[1] < self.source + self.length
-        )
-
-
-class SegmentMap:
-    # ...
-    def translate(self, seed_range: tuple[int, int]) -> tuple[int, int]:
-        offset_start = seed_range[0] - self.source
-        offset_end = seed_range[1] - self.source
-        return (self.target + offset_start, self.target + offset_end)
-
-
 def parseSeeds(s: str) -> list[int]:
     return list(map(int, s.split(":")[-1].strip().split(" ")))
 
