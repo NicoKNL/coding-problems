@@ -39,7 +39,7 @@ if __name__ == "__main__":
         PLACES[s].adj[t] = dist
         PLACES[t].adj[s] = dist
 
-    optimal = -INF
+    optimal = 0
     for ordering in permutations(PLACES.keys()):
         optimal = max(optimal, travel(ordering))
 

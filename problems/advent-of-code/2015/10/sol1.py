@@ -1,7 +1,6 @@
 def split(s):
     segments = []
     seg = s[0]
-    cur = ""
     for i in range(1, len(s)):
         if s[i] != seg[-1]:
             segments.append(seg)

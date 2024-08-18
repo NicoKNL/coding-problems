@@ -9,7 +9,6 @@ if __name__ == "__main__":
     for line in lines:
         newline = []
         i = 0
-        count = 0
         while i < len(line):
             if line[i] == "\\":
                 newline.append("\\")
