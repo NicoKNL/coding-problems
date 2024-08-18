@@ -1,12 +1,3 @@
-from typing import Optional
-
-
-class ListNode:
-    def __init__(self, val=0, next=None):
-        self.val = val
-        self.next = next
-
-
 def getValues(c):
     values = []
     while c.next:
@@ -20,7 +11,6 @@ class Solution:
     def mergeTwoLists(
         self, list1: Optional[ListNode], list2: Optional[ListNode]
     ) -> Optional[ListNode]:
-        # TODO: Do actual merging instead of this.
         if not list1 and not list2:
             return
 
@@ -41,10 +31,3 @@ class Solution:
             u = u.next
 
         return root
-
-
-s = Solution()
-a = ListNode(val=1, next=ListNode(2, next=ListNode(4)))
-b = ListNode(val=1, next=ListNode(3, next=ListNode(4)))
-
-c = s.mergeTwoLists(a, b)

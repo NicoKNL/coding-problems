@@ -5,7 +5,7 @@ Note: Not all source code offers a valid solution (yet). Most code does.
 
 |Provider|Problem count|
 |-|-|
-|[advent-of-code](#advent-of-code)|107|
+|[advent-of-code](#advent-of-code)|110|
 |[codechef](#codechef)|51|
 |[kattis](#kattis)|497|
 # Advent of Code
@@ -194,9 +194,9 @@ Note: Not all source code offers a valid solution (yet). Most code does.
 <td><a href=problems/advent-of-code/2023/09><img src='.github/icons/python.svg' width='24' height='24' style='max-width: 24px'></a></td>
 <td><a href=problems/advent-of-code/2023/10><img src='.github/icons/python.svg' width='24' height='24' style='max-width: 24px'></a></td>
 <td><a href=problems/advent-of-code/2023/11><img src='.github/icons/python.svg' width='24' height='24' style='max-width: 24px'></a></td>
-<td>x</td>
-<td>x</td>
-<td>x</td>
+<td><a href=problems/advent-of-code/2023/12><img src='.github/icons/python.svg' width='24' height='24' style='max-width: 24px'></a></td>
+<td><a href=problems/advent-of-code/2023/13><img src='.github/icons/python.svg' width='24' height='24' style='max-width: 24px'></a></td>
+<td><a href=problems/advent-of-code/2023/14><img src='.github/icons/python.svg' width='24' height='24' style='max-width: 24px'></a></td>
 <td>x</td>
 <td>x</td>
 <td>x</td>
@@ -323,8 +323,8 @@ Note: Not all source code offers a valid solution (yet). Most code does.
 |beavergnaw|[<img src='.github/icons/c++.svg' width='24' height='24'>](problems/kattis/beavergnaw/sol.cpp)|[![Kattis](https://open.kattis.com/favicon)](https://open.kattis.com/problems/beavergnaw)|
 |beehives|[<img src='.github/icons/python.svg' width='24' height='24' style='max-width: 24px'>](problems/kattis/beehives/sol.py)|[![Kattis](https://open.kattis.com/favicon)](https://open.kattis.com/problems/beehives)|
 |beekeeper|[<img src='.github/icons/python.svg' width='24' height='24' style='max-width: 24px'>](problems/kattis/beekeeper/sol.py)|[![Kattis](https://open.kattis.com/favicon)](https://open.kattis.com/problems/beekeeper)|
-|beepcode|[<img src='.github/icons/python.svg' width='24' height='24' style='max-width: 24px'>](problems/kattis/beepcode/sol2.py)|[![Kattis](https://open.kattis.com/favicon)](https://open.kattis.com/problems/beepcode)|
 |beepcode|[<img src='.github/icons/python.svg' width='24' height='24' style='max-width: 24px'>](problems/kattis/beepcode/sol.py)|[![Kattis](https://open.kattis.com/favicon)](https://open.kattis.com/problems/beepcode)|
+|beepcode|[<img src='.github/icons/python.svg' width='24' height='24' style='max-width: 24px'>](problems/kattis/beepcode/sol2.py)|[![Kattis](https://open.kattis.com/favicon)](https://open.kattis.com/problems/beepcode)|
 |beeproblem|[<img src='.github/icons/c++.svg' width='24' height='24'>](problems/kattis/beeproblem/sol.cpp)|[![Kattis](https://open.kattis.com/favicon)](https://open.kattis.com/problems/beeproblem)|
 |bela|[<img src='.github/icons/c++.svg' width='24' height='24'>](problems/kattis/bela/sol.cpp)|[![Kattis](https://open.kattis.com/favicon)](https://open.kattis.com/problems/bela)|
 |bestrelayteam|[<img src='.github/icons/c++.svg' width='24' height='24'>](problems/kattis/bestrelayteam/sol.cpp)|[![Kattis](https://open.kattis.com/favicon)](https://open.kattis.com/problems/bestrelayteam)|
@@ -595,8 +595,8 @@ Note: Not all source code offers a valid solution (yet). Most code does.
 |overdraft|[<img src='.github/icons/python.svg' width='24' height='24' style='max-width: 24px'>](problems/kattis/overdraft/sol.py)|[![Kattis](https://open.kattis.com/favicon)](https://open.kattis.com/problems/overdraft)|
 |ovissa|[<img src='.github/icons/python.svg' width='24' height='24' style='max-width: 24px'>](problems/kattis/ovissa/sol.py)|[![Kattis](https://open.kattis.com/favicon)](https://open.kattis.com/problems/ovissa)|
 |owlandfox|[<img src='.github/icons/python.svg' width='24' height='24' style='max-width: 24px'>](problems/kattis/owlandfox/sol.py)|[![Kattis](https://open.kattis.com/favicon)](https://open.kattis.com/problems/owlandfox)|
-|pagelayout|[<img src='.github/icons/python.svg' width='24' height='24' style='max-width: 24px'>](problems/kattis/pagelayout/tmp.py)|[![Kattis](https://open.kattis.com/favicon)](https://open.kattis.com/problems/pagelayout)|
 |pagelayout|[<img src='.github/icons/python.svg' width='24' height='24' style='max-width: 24px'>](problems/kattis/pagelayout/sol.py)|[![Kattis](https://open.kattis.com/favicon)](https://open.kattis.com/problems/pagelayout)|
+|pagelayout|[<img src='.github/icons/python.svg' width='24' height='24' style='max-width: 24px'>](problems/kattis/pagelayout/tmp.py)|[![Kattis](https://open.kattis.com/favicon)](https://open.kattis.com/problems/pagelayout)|
 |paintball|[<img src='.github/icons/python.svg' width='24' height='24' style='max-width: 24px'>](problems/kattis/paintball/sol.py)|[![Kattis](https://open.kattis.com/favicon)](https://open.kattis.com/problems/paintball)|
 |palindromicpassword|[<img src='.github/icons/python.svg' width='24' height='24' style='max-width: 24px'>](problems/kattis/palindromicpassword/sol.py)|[![Kattis](https://open.kattis.com/favicon)](https://open.kattis.com/problems/palindromicpassword)|
 |parking|[<img src='.github/icons/c++.svg' width='24' height='24'>](problems/kattis/parking/sol.cpp)|[![Kattis](https://open.kattis.com/favicon)](https://open.kattis.com/problems/parking)|
