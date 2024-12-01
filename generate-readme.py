@@ -214,7 +214,7 @@ def generateAdventOfCodeTable(problems):
         table.append("<tr>")
         table.append(f"<td>{year}</td>")
         for p in problem_table[i][1:]:
-            table.append(f"<td>{p.location1 if isinstance(p, Problem) else 'x'}</td>")
+            table.append(f"<td>{p.location1 if isinstance(p, Problem) else ''}</td>")
         table.append("</tr>")
     table.append("</tbody>")
     table.append("</table>")
