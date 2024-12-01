@@ -192,7 +192,7 @@ def generateAdventOfCodeTable(problems):
     years = list(set([p.year for p in problems]))
     years.sort()
 
-    problem_table = [["x" for _ in range(26)] for _ in range(len(years))]
+    problem_table = [["" for _ in range(26)] for _ in range(len(years))]
     table = [SECTION]
     for p in problems:
         problem_table[years.index(p.year)][int(p.day)] = p
