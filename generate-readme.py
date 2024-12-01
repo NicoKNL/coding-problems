@@ -12,7 +12,7 @@ ROOTS = {
     "codechef": Path("./problems/codechef"),
     "kattis": Path("./problems/kattis"),
 }
-LANGUAGES = ["cpp", "py"]
+LANGUAGES = ["cpp", "py", "go"]
 
 
 def markdownRow(cells):
