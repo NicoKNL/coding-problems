@@ -5,7 +5,7 @@ Note: Not all source code offers a valid solution (yet). Most code does.
 
 |Provider|Problem count|
 |-|-|
-|[advent-of-code](#advent-of-code)|127|
+|[advent-of-code](#advent-of-code)|131|
 |[codechef](#codechef)|51|
 |[kattis](#kattis)|522|
 # Advent of Code
@@ -76,6 +76,34 @@ Note: Not all source code offers a valid solution (yet). Most code does.
 <td><a href=problems/advent-of-code/2016/03><img src='.github/icons/python.svg' width='24' height='24' style='max-width: 24px'></a></td>
 <td><a href=problems/advent-of-code/2016/04><img src='.github/icons/python.svg' width='24' height='24' style='max-width: 24px'></a></td>
 <td><a href=problems/advent-of-code/2016/05><img src='.github/icons/python.svg' width='24' height='24' style='max-width: 24px'></a></td>
+<td>x</td>
+<td>x</td>
+<td>x</td>
+<td>x</td>
+<td>x</td>
+<td>x</td>
+<td>x</td>
+<td>x</td>
+<td>x</td>
+<td>x</td>
+<td>x</td>
+<td>x</td>
+<td>x</td>
+<td>x</td>
+<td>x</td>
+<td>x</td>
+<td>x</td>
+<td>x</td>
+<td>x</td>
+<td>x</td>
+</tr>
+<tr>
+<td>2017</td>
+<td><a href=problems/advent-of-code/2017/01><img src='.github/icons/go.svg' width='24' height='24' style='max-width: 24px'></a></td>
+<td><a href=problems/advent-of-code/2017/02><img src='.github/icons/go.svg' width='24' height='24' style='max-width: 24px'></a></td>
+<td><a href=problems/advent-of-code/2017/03><img src='.github/icons/go.svg' width='24' height='24' style='max-width: 24px'></a></td>
+<td>x</td>
+<td>x</td>
 <td>x</td>
 <td>x</td>
 <td>x</td>
@@ -236,6 +264,34 @@ Note: Not all source code offers a valid solution (yet). Most code does.
 <td><a href=problems/advent-of-code/2023/23><img src='.github/icons/python.svg' width='24' height='24' style='max-width: 24px'></a></td>
 <td><a href=problems/advent-of-code/2023/24><img src='.github/icons/python.svg' width='24' height='24' style='max-width: 24px'></a></td>
 <td><a href=problems/advent-of-code/2023/25><img src='.github/icons/python.svg' width='24' height='24' style='max-width: 24px'></a></td>
+</tr>
+<tr>
+<td>2024</td>
+<td><a href=problems/advent-of-code/2024/01><img src='.github/icons/go.svg' width='24' height='24' style='max-width: 24px'></a></td>
+<td>x</td>
+<td>x</td>
+<td>x</td>
+<td>x</td>
+<td>x</td>
+<td>x</td>
+<td>x</td>
+<td>x</td>
+<td>x</td>
+<td>x</td>
+<td>x</td>
+<td>x</td>
+<td>x</td>
+<td>x</td>
+<td>x</td>
+<td>x</td>
+<td>x</td>
+<td>x</td>
+<td>x</td>
+<td>x</td>
+<td>x</td>
+<td>x</td>
+<td>x</td>
+<td>x</td>
 </tr>
 </tbody>
 </table>
