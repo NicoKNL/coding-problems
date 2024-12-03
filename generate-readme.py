@@ -144,7 +144,7 @@ def collectCodeChefProblems():
 def collectAdventOfCodeProblems():
     problems = []
     for language in LANGUAGES:
-        problems_in_language = ROOTS["advent-of-code"].glob(f"**/*.{language}")
+        problems_in_language = ROOTS["advent-of-code"].glob(f"**/sol*.{language}")
         grouped_problems = {}
         for p in problems_in_language:
             root = p.parent
