@@ -5,7 +5,7 @@ Note: Not all source code offers a valid solution (yet). Most code does.
 
 |Provider|Problem count|
 |-|-|
-|[advent-of-code](#advent-of-code)|137|
+|[advent-of-code](#advent-of-code)|139|
 |[codechef](#codechef)|51|
 |[kattis](#kattis)|522|
 # Advent of Code
@@ -76,8 +76,8 @@ Note: Not all source code offers a valid solution (yet). Most code does.
 <td><a href=problems/advent-of-code/2016/03><img src='.github/icons/python.svg' width='24' height='24' style='max-width: 24px'></a></td>
 <td><a href=problems/advent-of-code/2016/04><img src='.github/icons/python.svg' width='24' height='24' style='max-width: 24px'></a></td>
 <td><a href=problems/advent-of-code/2016/05><img src='.github/icons/python.svg' width='24' height='24' style='max-width: 24px'></a></td>
-<td></td>
-<td></td>
+<td><a href=problems/advent-of-code/2016/06><img src='.github/icons/python.svg' width='24' height='24' style='max-width: 24px'></a></td>
+<td><a href=problems/advent-of-code/2016/07><img src='.github/icons/python.svg' width='24' height='24' style='max-width: 24px'></a></td>
 <td></td>
 <td></td>
 <td></td>
