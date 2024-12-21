@@ -61,6 +61,34 @@ func IntsFromPattern(input string, pattern string) []int {
 	return result
 }
 
+func ReadNumberGrid(input_file string) [][]int {
+	strings := ReadLines(input_file)
+	// Create a 2D slice of integers
+	var grid [][]int
+
+	// Iterate through each string
+	for _, str := range strings {
+		var row []int
+		for _, char := range str {
+			// Convert each rune to an integer
+			num, _ := strconv.Atoi(string(char))
+			row = append(row, num)
+		}
+		grid = append(grid, row)
+	}
+
+	return grid
+}
+
+func PrintNumberGrid(grid [][]int) {
+	for _, row := range grid {
+		for _, num := range row {
+			fmt.Print(num, " ") // Print numbers with a space
+		}
+		fmt.Println() // Move to the next line after each row
+	}
+}
+
 func ReadRuneGrid(input_file string) [][]rune {
 	strings := ReadLines(input_file)
 	// Create a 2D slice of runes
@@ -82,6 +110,26 @@ func PrintRuneGrid(grid [][]rune) {
 		}
 		fmt.Println() // Move to the next line after each row
 	}
+}
+
+func RotateNumberGrid(grid [][]int) [][]int {
+	rows := len(grid)
+	cols := len(grid[0])
+
+	// Create a new grid with swapped rows and columns
+	rotated := make([][]int, cols)
+	for i := range rotated {
+		rotated[i] = make([]int, rows)
+	}
+
+	// Perform the 90-degree rotation
+	for r := 0; r < rows; r++ {
+		for c := 0; c < cols; c++ {
+			rotated[c][rows-1-r] = grid[r][c]
+		}
+	}
+
+	return rotated
 }
 
 type Set struct {
