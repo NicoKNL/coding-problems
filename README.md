@@ -5,7 +5,7 @@ Note: Not all source code offers a valid solution (yet). Most code does.
 
 |Provider|Problem count|
 |-|-|
-|[advent-of-code](#advent-of-code)|141|
+|[advent-of-code](#advent-of-code)|146|
 |[codechef](#codechef)|51|
 |[kattis](#kattis)|522|
 # Advent of Code
@@ -276,11 +276,11 @@ Note: Not all source code offers a valid solution (yet). Most code does.
 <td><a href=problems/advent-of-code/2024/07><img src='.github/icons/go.svg' width='24' height='24' style='max-width: 24px'></a></td>
 <td><a href=problems/advent-of-code/2024/08><img src='.github/icons/go.svg' width='24' height='24' style='max-width: 24px'></a></td>
 <td><a href=problems/advent-of-code/2024/09><img src='.github/icons/go.svg' width='24' height='24' style='max-width: 24px'></a></td>
-<td></td>
-<td></td>
-<td></td>
-<td></td>
-<td></td>
+<td><a href=problems/advent-of-code/2024/10><img src='.github/icons/go.svg' width='24' height='24' style='max-width: 24px'></a></td>
+<td><a href=problems/advent-of-code/2024/11><img src='.github/icons/go.svg' width='24' height='24' style='max-width: 24px'></a></td>
+<td><a href=problems/advent-of-code/2024/12><img src='.github/icons/go.svg' width='24' height='24' style='max-width: 24px'></a></td>
+<td><a href=problems/advent-of-code/2024/13><img src='.github/icons/go.svg' width='24' height='24' style='max-width: 24px'></a></td>
+<td><a href=problems/advent-of-code/2024/14><img src='.github/icons/go.svg' width='24' height='24' style='max-width: 24px'></a></td>
 <td></td>
 <td></td>
 <td></td>
@@ -697,8 +697,8 @@ Note: Not all source code offers a valid solution (yet). Most code does.
 |overdraft|[<img src='.github/icons/python.svg' width='24' height='24' style='max-width: 24px'>](problems/kattis/overdraft/sol.py)|[![Kattis](https://open.kattis.com/favicon)](https://open.kattis.com/problems/overdraft)|
 |ovissa|[<img src='.github/icons/python.svg' width='24' height='24' style='max-width: 24px'>](problems/kattis/ovissa/sol.py)|[![Kattis](https://open.kattis.com/favicon)](https://open.kattis.com/problems/ovissa)|
 |owlandfox|[<img src='.github/icons/python.svg' width='24' height='24' style='max-width: 24px'>](problems/kattis/owlandfox/sol.py)|[![Kattis](https://open.kattis.com/favicon)](https://open.kattis.com/problems/owlandfox)|
-|pagelayout|[<img src='.github/icons/python.svg' width='24' height='24' style='max-width: 24px'>](problems/kattis/pagelayout/tmp.py)|[![Kattis](https://open.kattis.com/favicon)](https://open.kattis.com/problems/pagelayout)|
 |pagelayout|[<img src='.github/icons/python.svg' width='24' height='24' style='max-width: 24px'>](problems/kattis/pagelayout/sol.py)|[![Kattis](https://open.kattis.com/favicon)](https://open.kattis.com/problems/pagelayout)|
+|pagelayout|[<img src='.github/icons/python.svg' width='24' height='24' style='max-width: 24px'>](problems/kattis/pagelayout/tmp.py)|[![Kattis](https://open.kattis.com/favicon)](https://open.kattis.com/problems/pagelayout)|
 |paintball|[<img src='.github/icons/python.svg' width='24' height='24' style='max-width: 24px'>](problems/kattis/paintball/sol.py)|[![Kattis](https://open.kattis.com/favicon)](https://open.kattis.com/problems/paintball)|
 |palindromicpassword|[<img src='.github/icons/python.svg' width='24' height='24' style='max-width: 24px'>](problems/kattis/palindromicpassword/sol.py)|[![Kattis](https://open.kattis.com/favicon)](https://open.kattis.com/problems/palindromicpassword)|
 |parking|[<img src='.github/icons/c++.svg' width='24' height='24'>](problems/kattis/parking/sol.cpp)|[![Kattis](https://open.kattis.com/favicon)](https://open.kattis.com/problems/parking)|
