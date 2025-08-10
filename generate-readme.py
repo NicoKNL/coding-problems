@@ -12,7 +12,7 @@ ROOTS = {
     "codechef": Path("./problems/codechef"),
     "kattis": Path("./problems/kattis"),
 }
-LANGUAGES = ["cpp", "py", "go"]
+LANGUAGES = ["cpp", "py", "go", "rs"]
 
 
 def markdownRow(cells):
@@ -35,6 +35,8 @@ class Problem:
             )
         elif self.language == ".go":
             self.language_icon = "<img src='.github/icons/go.svg' width='24' height='24' style='max-width: 24px'>"
+        elif self.language == ".rs":
+            self.language_icon = "<img src='.github/icons/rust.svg' width='24' height='24' style='max-width: 24px'>"
 
     def getHeader(self):
         return markdownRow(self.header)
