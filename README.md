@@ -5,7 +5,7 @@ Note: Not all source code offers a valid solution (yet). Most code does.
 
 |Provider|Problem count|
 |-|-|
-|[advent-of-code](#advent-of-code)|152|
+|[advent-of-code](#advent-of-code)|153|
 |[codechef](#codechef)|51|
 |[kattis](#kattis)|522|
 # Advent of Code
@@ -326,7 +326,7 @@ Note: Not all source code offers a valid solution (yet). Most code does.
 <td><a href=problems/advent-of-code/2025/01><img src='.github/icons/rust.svg' width='24' height='24' style='max-width: 24px'></a></td>
 <td></td>
 <td><a href=problems/advent-of-code/2025/03><img src='.github/icons/rust.svg' width='24' height='24' style='max-width: 24px'></a></td>
-<td></td>
+<td><a href=problems/advent-of-code/2025/04><img src='.github/icons/rust.svg' width='24' height='24' style='max-width: 24px'></a></td>
 <td></td>
 <td></td>
 <td></td>
